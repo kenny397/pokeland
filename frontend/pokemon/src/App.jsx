@@ -1,10 +1,14 @@
 import './App.css';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+
 
 function App() {
   return (
-    <div>
-      <h1>hello 포켓몬 world!</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
