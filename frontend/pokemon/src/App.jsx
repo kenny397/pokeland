@@ -26,7 +26,7 @@ export default function App() {
       {showHeader 
         ?
         <>
-          <h1>Nav Bar</h1>
+          <div>Nav Bar</div>
           <div className="container">
             <Router />
           </div>
