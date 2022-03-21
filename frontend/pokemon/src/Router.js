@@ -1,17 +1,16 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
+
+import IntroPage from './IntroPage';
+import SupportPage from './SupportPage';
 
 const Router = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" />
-        <Route path="/" />
-        <Route path="/" />
-        <Route path="/" />
-      </Routes>
-    </BrowserRouter>
-  );
+  let element = useRoutes([
+    { path: "/", element: <IntroPage /> },
+    { path: "/support", element: <SupportPage /> },
+  ]);
+
+  return element;
 };
 
 export default Router;
