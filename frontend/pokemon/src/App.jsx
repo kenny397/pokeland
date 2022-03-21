@@ -5,18 +5,16 @@ import { routers, Router } from './Router';
 import './App.css';
 
 export default function App() {
-  const routerNow = window.location.pathname;
+  const currentPath = window.location.pathname;
+  const isNotIntro = currentPath !=='/';
+  const isNotTutorial = currentPath !=='/tutorial';
 
   // Header(Nav Bar)가 안 보여야 하는 페이지 분기를 위함 ex) NotFound, Intro, Tutorial
   let showHeader = false;
   for (let { path } of routers){
-    if(routerNow === path){
-      if (routerNow !== '/' && routerNow !== '/tutorial') {
-        showHeader = true;
-        break;
-      }
-    } else {
-      showHeader = false;
+    if(currentPath === path && isNotIntro && isNotTutorial){
+      showHeader = true;
+      break;
     }
   }
 
