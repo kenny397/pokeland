@@ -2,15 +2,20 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 
 import IntroPage from './IntroPage';
-import SupportPage from './SupportPage';
+import MainPage from './MainPage';
+import TutorialPage from './TutorialPage';
+import SupportPage from './support/SupportPage';
+import NotFound from './NotFound';
 
-const Router = () => {
-  let element = useRoutes([
-    { path: "/", element: <IntroPage /> },
-    { path: "/support", element: <SupportPage /> },
-  ]);
+export const routers = [
+  { path: "/", element: <IntroPage /> },
+  { path: "/main", element: <MainPage /> },
+  { path: "/tutorial", element: <TutorialPage /> },
+  { path: "/support", element: <SupportPage /> },
+  { path: "*", element: <NotFound /> }
+];
 
+export const Router = () => {
+  let element = useRoutes(routers);
   return element;
 };
-
-export default Router;

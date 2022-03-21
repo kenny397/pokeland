@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function SupportPage() {
+export default function TutorialPage() {
   return (
     <div>
-      SupportPage
+     TutorialPage
     </div>
   );
 }
