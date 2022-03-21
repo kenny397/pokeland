@@ -6,7 +6,10 @@ import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
 
-import store from './store';
+import store from './redux/store';
+
+// ant design
+import 'antd/dist/antd.min.css';
 
 ReactDOM.render(
   <Provider store = { store }>
