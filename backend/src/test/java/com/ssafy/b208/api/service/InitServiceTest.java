@@ -19,8 +19,8 @@ class InitServiceTest {
 
     @Test
     public void Test() throws Exception{
-        initService.minting("ipfs://QmY72pGHXwT3y6cDjAvkqVKZKggdCA8Nmsx8jT2wr9FtDs");
-        initService.test("0xDF547496C8880cC654155F594Dda189165C3AF15");
+        initService.minting();
+       // initService.test("0xDF547496C8880cC654155F594Dda189165C3AF15");
 
     }
 }

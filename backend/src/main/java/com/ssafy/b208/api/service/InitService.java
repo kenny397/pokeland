@@ -16,17 +16,27 @@ import org.web3j.abi.FunctionReturnDecoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.*;
 import org.web3j.abi.datatypes.generated.Uint256;
+
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.*;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.RawTransactionManager;
+import org.web3j.tx.TransactionManager;
+import org.web3j.tx.gas.ContractGasProvider;
+import org.web3j.tx.gas.DefaultGasProvider;
+import org.web3j.tx.response.PollingTransactionReceiptProcessor;
+import org.web3j.tx.response.TransactionReceiptProcessor;
 import org.web3j.utils.Strings;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -37,16 +47,13 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class InitService {
 
-    private String from = "0xDF547496C8880cC654155F594Dda189165C3AF15";
-    private String contract = "0xCfCdf694956D7b121D6d0f1D1B5bb29278271b19";//0xBF5C8587bF6936412c69e9346B7014d367621Ef6
-    private String pwd = "0xfb353a7ff8ad8fcd9f0cd1a8f3726747fe2dfd61a2a8bc5b23186467e7a0dee3";
+    private String from = "0x79A96922007a3bC5eC83c922148C0826D05995e6";
+    private String contract = "0x6C927304104cdaa5a8b3691E0ADE8a3ded41a333";//0xBF5C8587bF6936412c69e9346B7014d367621Ef6
+    private String pwd = "4d44a3ae3ab73187d1c0cd504c40fb63ce6d24cf08e4a0beca6be54d7430ff4e";
+    long CHAIN_ID = 31221;
+    private Web3j web3j = Web3j.build(new HttpService("http://20.196.209.2:8545")); // default server : http://localhost:8545
+    private Credentials credential = Credentials.create(pwd);
 
-    private Admin web3j = null;
-
-    public InitService()
-    {
-        web3j = Admin.build(new HttpService("http://localhost:8545")); // default server : http://localhost:8545
-    }
 
     public ResponseEntity<String> upLoadIpfs() {
         File imageFile = new File("C:/Users/multicampus/Documents/erd.PNG");
@@ -71,17 +78,34 @@ public class InitService {
         return response;
     }
 
-    public void minting(String ipfsHash)throws IOException, ExecutionException, InterruptedException{
-        Function function = new Function("create",
-                Arrays.asList(new Utf8String(ipfsHash)),
-                Arrays.asList(new TypeReference<Uint256>() {}));
-        PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount(from,pwd).send();
-        if (personalUnlockAccount.accountUnlocked()) { // unlock 일때
+    public void minting()throws Exception{
+        List<Type> params = new ArrayList<Type>();
+        params.add(new Address("0x79A96922007a3bC5eC83c922148C0826D05995e6"));
+        params.add(new Uint256(new BigInteger("15")));
+        List<TypeReference<?>> returnTypes = Collections.<TypeReference<?>>emptyList();
+        Function function = new Function("transfer",
+            params,returnTypes);
+        System.out.println(web3j.web3ClientVersion().send().getWeb3ClientVersion());
+       // PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount(from,pwd).send();
+      //  if (personalUnlockAccount.accountUnlocked()) { // unlock 일때
+        String txData=FunctionEncoder.encode(function);
+        TransactionReceiptProcessor receiptProcessor = new PollingTransactionReceiptProcessor(web3j, 5000L, 3);
+        TransactionManager manager = new RawTransactionManager(web3j, credential);
+        ContractGasProvider gasProvider = new DefaultGasProvider();
 
-            EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
-                    from, DefaultBlockParameterName.LATEST).sendAsync().get();
+        String txHash = manager.sendTransaction(
+                DefaultGasProvider.GAS_PRICE,
+                DefaultGasProvider.GAS_LIMIT,
+                contract,
+                txData,
+                BigInteger.ZERO
+        ).getTransactionHash();
+        System.out.println(txData);
+        System.out.println(txHash);
+        TransactionReceipt receipt = receiptProcessor.waitForTransactionReceipt(txHash);
+        System.out.println(receipt.getStatus());
 
-            BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+       /* BigInteger nonce = ethGetTransactionCount.getTransactionCount();
             System.out.println("nonce "+ FunctionEncoder.encode(function));
             //3. Transaction값 제작
             Transaction transaction = Transaction.createFunctionCallTransaction(from, nonce,
@@ -99,13 +123,13 @@ public class InitService {
             System.out.println("tra = " + transactionHash);
             TransactionReceipt receipt = getReceipt(transactionHash);
             System.out.println("receipt = " + receipt);
-           // System.out.println("log"+receipt.getLogs().get(0).getTopics().get(0));
+           // System.out.println("log"+receipt.getLogs().get(0).getTopics().get(0));*/
 
-        }
-        else
-        {
+       // }
+     //  else
+     //  {
 
-        }
+     //  }
     }
 
     public TransactionReceipt getReceipt(String transactionHash) throws IOException {
@@ -124,12 +148,12 @@ public class InitService {
 
         return transactionReceipt.getResult();
     }
-    public void test(String address) throws Exception{
+    /*public void test(String address) throws Exception{
         // 1. 호출하고자 하는 function 세팅[functionName, parameters]
         Function function = new Function("balanceOf",
                 Arrays.asList(new Address(address)),
                 Arrays.asList(new TypeReference<Uint256>() {}));
-        PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount(from, pwd).send();
+        //PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount(from, pwd).send();
 
         if (personalUnlockAccount.accountUnlocked()) { // unlock 일때
 
@@ -157,7 +181,7 @@ public class InitService {
         {
 
         }
-    }
+    }*/
 
 
 }
