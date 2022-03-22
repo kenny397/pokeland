@@ -1,27 +1,22 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { routers, Router } from './Router';
+import { Router } from './Router';
+import { useSelector } from 'react-redux';
 
 import './App.css';
 
 export default function App() {
-  const currentPath = window.location.pathname;
-  const isNotIntro = currentPath !=='/';
-  const isNotTutorial = currentPath !=='/tutorial';
-
-  // Header(Nav Bar)가 안 보여야 하는 페이지 분기를 위함 ex) NotFound, Intro, Tutorial
-  let showHeader = false;
-  for (let { path } of routers){
-    if(currentPath === path && isNotIntro && isNotTutorial){
-      showHeader = true;
-      break;
-    }
-  }
-
+  
+  //window.location.pathname
+  // 최초에 uri값에 직접 support나 header값을 들고오는 페이지를 입력할 경우 생각해서 app에서는 다른 컴포를 하나 호출해야되나 생각중입니다...
+  const { showHeader } = useSelector((state) => ({
+    showHeader: state.showHeader,
+  }));
+  console.log(showHeader);
   // 모든 path - 우리가 설정한 path => NotFoundPage
   return (
     <BrowserRouter>
-      {showHeader 
+      {showHeader
         ?
         <>
           <div>Nav Bar</div>
