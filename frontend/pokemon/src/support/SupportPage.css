@@ -1,0 +1,117 @@
+div {
+  padding: 0.5rem;
+}
+
+p {
+  margin: 0.5rem 0;
+  padding: 0 0.1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+span {
+  margin: 0.2rem 0;
+}
+
+label {
+  padding: 0 0.1rem;
+}
+
+select, input {
+  width: 96%;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: dark;
+}
+
+input::placeholder, textarea::placeholder {
+  font-size: 0.5rem;
+}
+
+select {
+  width: 40%;
+}
+
+input:focus, select:focus {
+  border-color: #005FC6;
+}
+
+.header {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.sub-title {
+  font-size: 0.67rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.token {
+  font-weight: 700;
+  color:#005FC6;
+}
+
+.form-item {
+  padding: 0.3rem;
+  margin: 1rem 0.5rem;
+}
+
+.form-item-title {
+  margin: 0.7rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+
+.asterisk {
+  color: #FF0000;
+}
+
+textarea {
+  width: 96%;
+}
+
+textarea:focus {
+  border-color: aqua;
+}
+
+.feedback-input:focus {
+  border: solid 2px #005FC6;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin: 0 0.3rem;
+  width: 3rem;
+  height: 2rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-style: hidden;
+  border-radius: 0.25rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #AA2C2C;
+}
+
+.cancel-button:hover {
+  background-color: #c45c5c;
+}
+
+.submit-button {
+  background-color: #005FC6;
+}
+
+.submit-button:hover {
+  background-color: #4784c5;
+}
