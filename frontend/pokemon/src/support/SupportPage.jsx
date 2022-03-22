@@ -1,9 +1,5 @@
 import React from "react";
-
-// antd
-import { Button, Input, Select } from "antd";
-const { TextArea } = Input;
-const { Option } = Select;
+import './SupportPage.css';
 
 export default function SupportPage() {
   // 이건 보고나서 지우겠습니다.
@@ -45,29 +41,40 @@ export default function SupportPage() {
   
   return (
     <div>
-      <h1>고객센터</h1>
-      <p>개발자에게 서비스 피드백을 보내주시면 500SSF를 드립니다!</p>
-      <p>카테고리</p>
-      <Select name="categories" id="category-select" defaultValue="defaultOption" style={{ width: 120 }} onChange={(e) => onChangeSelectCategory(e)}>
-        <Option value="defaultOption">--카테고리를 선택해주세요--</Option>
-        <Option value="review">리뷰</Option>
-        <Option value="suggestion">건의사항</Option>
-        <Option value="question">문의사항</Option>
-      </Select>
+      <h1 className="header">고객센터</h1>
+      <div className="sub-title">
+        <span >개발자에게 서비스 피드백을 보내주시면 </span><span className="token">500SSF</span><span>를 드립니다!</span>
+      </div>
+      <div className="form-item">
+        <label htmlFor="category-select" className="form-item-title">카테고리</label><span className="asterisk">*</span><br />
+        <select name="categories" id="category-select" defaultValue="review" onChange={(e) => onChangeSelectCategory(e)}>
+          <option value="review">리뷰</option>
+          <option value="suggestion">건의사항</option>
+          <option value="question">문의사항</option>
+        </select>
+      </div>
       
-      <p>답변 받을 이메일</p>
-      <Input type="text" name="" id="" onChange={e => onChangeEmail(e)} placeholder="이메일을 입력해주세요" />
+      <div className="form-item">
+        <label htmlFor="support-email" className="form-item-title">답변 받을 이메일</label><span className="asterisk">*</span><br />
+        <input type="text" name="" id="support-email" onChange={e => onChangeEmail(e)} placeholder="이메일을 입력해주세요" />
+      </div>
 
-      <p>제목</p>
-      <Input type="text" name="" id="title" placeholder="문의 제목을 입력해주세요" onChange={(e) => onChangeTitle(e)} />
+      <div className="form-item">
+        <label htmlFor="support-title" className="form-item-title">제목</label><span className="asterisk">*</span>
+        <input type="text" name="" id="support-title" placeholder="문의 제목을 입력해주세요" onChange={(e) => onChangeTitle(e)} />
+      </div>
+  
+      <div className="form-item">
+        <label className="form-item-title">내용 입력</label><span className="asterisk">*</span>
+        <p>아래 내용을 기입해주세요</p>
+        <textarea name="" className="feedback-input" id="" cols="30" rows="10" placeholder="내용을 입력해주세요" onChange={(e) => onChangeContent(e)} >
+        </textarea>
+      </div>
       
-      <p>내용 입력</p>
-      <p>아래 내용을 기입해주세요</p>
-      <TextArea name="" id="" cols="30" rows="10" placeholder="내용을 입력해주세요" onChange={(e) => onChangeContent(e)} >
-        
-      </TextArea>
-      <Button>취소</Button>
-      <Button onClick={onClickSubmitSupport}>제출</Button>
+      <div className="buttons">
+        <button className="cancel-button">취소</button>
+        <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
+      </div>
     </div>
   );
 }
