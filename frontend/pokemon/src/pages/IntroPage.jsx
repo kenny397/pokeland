@@ -1,21 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { changeHeaderDisplay } from "../headerDisplay";
+import { Link } from "react-router-dom";
 
 export default function IntroPage() {
-  const navigate = useNavigate();
-  
-  const routerBtnClick = function () {
-    changeHeaderDisplay('/support');
-    navigate('/support');
-  };
   return (
     <>
       <div>
         IntroPage
       </div>
       <div>
-        <button className="submit-button" onClick={routerBtnClick}>main으로</button>
+        <Link to="/main">
+          <button className="submit-button">main으로</button>
+        </Link>
       </div>
     </>
   );
