@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
 import { useSelector } from 'react-redux';
+
 import NavBar from './NavBar';
+
 import './App.css';
 // js
 import { decideHeaderDisplay } from './headerDisplay';
