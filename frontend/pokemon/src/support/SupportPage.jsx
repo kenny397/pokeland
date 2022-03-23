@@ -1,19 +1,12 @@
 import React from "react";
 import './SupportPage.css';
-import { routerTo } from '../routerTo';
-import { useNavigate } from "react-router-dom";
+// import { decideHeaderDisplay, changeHeaderDisplay } from '../headerDisplay';
+// import { useNavigate } from "react-router-dom";
 
 export default function SupportPage() {
   
   let category, email, title, content;
   
-  // 이런식으로 해야되나 잘 모르겠습니다.. navigate도 js파일안에 넣어버리고싶은데 어떻게 넣을지 모르겠어요
-  const navigate = useNavigate();
-  const routerBtnClick = function () {
-    routerTo('/');
-    navigate('/');
-  };
-
   const onClickSubmitSupport = function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
     console.log(category);
@@ -74,10 +67,6 @@ export default function SupportPage() {
       <div className="buttons">
         <button className="cancel-button">취소</button>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
-      </div>
-
-      <div>
-        <button className="submit-button" onClick={routerBtnClick}>main으로</button>
       </div>
 
     </div>

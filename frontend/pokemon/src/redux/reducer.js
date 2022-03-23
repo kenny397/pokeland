@@ -1,13 +1,13 @@
 const initialState = {
-  showHeader : false,
+  headerDisplay : false,
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'updateShowHeader') {
+  if (action.type === 'updateHeaderDisplay') {
     return {
       ...state,
       // TODO : 바뀐값 넣기
-      showHeader: action.payload.showHeader
+      headerDisplay: action.payload.headerDisplay
     };
   }
 

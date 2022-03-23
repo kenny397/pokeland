@@ -1,8 +1,8 @@
-export function updateShowHeader(showHeader) {
+export function updateHeaderDisplay(headerDisplay) {
   return {
-    type: 'updateShowHeader',
+    type: 'updateHeaderDisplay',
     payload: {
-      showHeader,
+      headerDisplay,
     },
   };
 }

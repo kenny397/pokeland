@@ -30,11 +30,31 @@ body {
   color: #61dafb;
 }
 
-.container {
-  margin: 0 auto;
-  height: 95vh;
-  width: 50vw;
-  background: white;
+@media (max-width: 480px) {
+  .container {
+    margin: 0 auto;
+    height: 95vh;
+    width: 95vw;
+    background: white;
+  }
+}
+/* 태블릿일때 */
+@media (max-width:1030px) {
+  .container {
+    margin: 0 auto;
+    height: 95vh;
+    width: 95vw;
+    background: white;
+  }
+}
+/* pc버전일때 */
+@media (min-width:1030px) {
+  .container {
+    margin: 0 auto;
+    height: 95vh;
+    width: 1030px;
+    background: white;
+  }
 }
 
 @keyframes App-logo-spin {
