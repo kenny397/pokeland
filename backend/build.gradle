@@ -29,6 +29,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
 	implementation ('org.web3j:core:4.8.7')
+	implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 }
 
 tasks.named('test') {
