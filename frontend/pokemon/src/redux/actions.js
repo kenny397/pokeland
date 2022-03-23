@@ -1,8 +1,8 @@
-// export function updateSupportTitle(supportTitle) {
-//   return {
-//     type: 'updateSupportTitle',
-//     payload: {
-//       supportTitle,
-//     },
-//   };
-// }
+export function updateHeaderDisplay(headerDisplay) {
+  return {
+    type: 'updateHeaderDisplay',
+    payload: {
+      headerDisplay,
+    },
+  };
+}

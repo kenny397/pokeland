@@ -1,19 +1,12 @@
 import React from "react";
 import './SupportPage.css';
+// import { decideHeaderDisplay, changeHeaderDisplay } from '../headerDisplay';
+// import { useNavigate } from "react-router-dom";
 
 export default function SupportPage() {
-  // 이건 보고나서 지우겠습니다.
-  // const { category, email, title, content } = useSelector((state) => ({
-  //   category: state.supportCategory,
-  //   email: state.contactEmail,
-  //   title: state.supportTitle,
-  //   content: state.supportContent,
-  // }));
-
-  // const dispatch = useDispatch();
-
+  
   let category, email, title, content;
-
+  
   const onClickSubmitSupport = function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
     console.log(category);
@@ -75,6 +68,7 @@ export default function SupportPage() {
         <button className="cancel-button">취소</button>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
       </div>
+
     </div>
   );
 }
