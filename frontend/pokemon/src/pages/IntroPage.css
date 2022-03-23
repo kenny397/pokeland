@@ -1,0 +1,27 @@
+.intro-container {
+  display: grid;
+  grid-template-columns: 1fr 428px 1fr;
+  background-color: #EBEBEB;
+  height: 100vh;
+  justify-content: center;
+}
+
+.intro-contents {
+  background-color: white;
+  grid-column: 2/3;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.header {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  color: red;
+}
+
+.button {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  width: 6rem;
+}
