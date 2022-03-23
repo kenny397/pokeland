@@ -1,10 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import './SupportPage.css';
-// import { decideHeaderDisplay, changeHeaderDisplay } from '../headerDisplay';
-// import { useNavigate } from "react-router-dom";
 
 export default function SupportPage() {
-  
   let category, email, title, content;
   
   const onClickSubmitSupport = function () {
@@ -65,7 +64,9 @@ export default function SupportPage() {
       </div>
       
       <div className="buttons">
-        <button className="cancel-button">취소</button>
+        <Link to="/main">
+          <button className="cancel-button">취소</button>
+        </Link>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
       </div>
 
