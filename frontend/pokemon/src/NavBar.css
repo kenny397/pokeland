@@ -1,4 +1,6 @@
 .navbar-container {
-  background: red;
-  height:3vh;
+  background: gray;
+  height:5vh;
+  border-bottom: 1px solid black;
+  
 }

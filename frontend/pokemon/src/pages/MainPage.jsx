@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 import { changeHeaderDisplay } from "../headerDisplay";
-import { Link } from 'react-router-dom';
 import './MainPage.css';
-import mainImage from '../assets/images/mainPageImage.png';
+import mainImage from '../assets/images/mainPageImageDskVer.png';
+import pokeDex from '../assets/images/image 68.png';
+import pokeGatcha from '../assets/images/image 69.png';
 
 export default function MainPage() {
   useEffect(() => {
@@ -13,16 +14,18 @@ export default function MainPage() {
   return (
     <div>
       <img src={ mainImage } alt="" className="main-image"/>
-      <Link to="/support">
-        <button>
-          Support page
-        </button>
-      </Link>
-      <Link to="/pokedex">
-        <button>
-          도감
-        </button>
-      </Link>
+      <div className="menu-container">
+        <div className="menu menu1">
+          <p>포켓몬 도감</p>
+          <img src={ pokeDex } alt="" className="pokedex-image"/>
+        </div>
+        <div className="menu menu2">
+          <p>뽑기 하러가기</p>
+          <img src={ pokeGatcha } alt="" className="g1"/>
+        </div>
+        <div className="menu menu3"><p>고객센터</p></div>
+        <div className="menu menu4"><p>지갑설정</p></div>
+      </div>
     </div>
   );
 }
