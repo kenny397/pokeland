@@ -15,7 +15,7 @@ export default function MainPage() {
     <div>
       <img src={ '/images/static/mainPageImageDskVer.png' } alt="" className="main-image"/>
       <div className="menu-container">
-        <Link to={'/'} className="menu menu1">
+        <Link to={'/pokedex'} className="menu menu1">
           <p>포켓몬 도감</p>
           <img src={ '/images/static/pokedex.png' } alt="" className="h12 pokedex-image"/>
         </Link>
