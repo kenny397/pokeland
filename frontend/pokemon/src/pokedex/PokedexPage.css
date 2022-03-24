@@ -1,5 +1,7 @@
 .pokemon-list {
-  margin: 1.5rem 3rem;
+  width: 85vw;
+  height: 81vh;
+  margin: 1.5rem auto;
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,7 +48,7 @@
 
 .pokemon-name {
   height: 0.9rem;
-  padding: 0.05rem 0.1rem;
+  padding: 0rem 0.1rem 0.06rem;
   background-color: #9B9B9B;
   border-radius: 0.8rem;
 }
@@ -70,16 +72,24 @@
   transform: scale(0.8);
 }
 
+.empty-grid-item {
+  width: 6.25rem;
+  height: 9.92rem;
+  margin: 0.25rem auto;
+}
+
 h1 {
   text-align: center;
 }
 
-.navigation-btns {
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-}
-
 button {
   width: 3.5rem;
+}
+
+.prev-btn {
+  margin: 0 auto 0 0.25rem;
+}
+
+.next-btn {
+  margin: 0 0.25rem 0 auto;
 }
