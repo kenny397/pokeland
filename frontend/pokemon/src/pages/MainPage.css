@@ -23,23 +23,23 @@
   background : #D2D2D2;
 }
 
-
 .menu-container img{
   margin-right: 15px;
-  float: right;
-  
+  float: right; 
 }
+
 .pokedex-image{
   margin-top: 1vh;
-  height: 11vh;
 }
-.g1 {
+.h15 {
   height:15vh;
-  
+}
+.h12 {
+  height: 12vh;
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 1030px) {
   .menu-container {
     /* 세로 */
     grid-template-rows: repeat(4, 1fr);
@@ -48,7 +48,7 @@
   }
   
   .menu {
-    height: 12vh;
+    height: 13.5vh;
     border-top: 1px solid #C8C8C8;
   }
   .menu:last-child {
@@ -60,7 +60,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1030px) {
   .menu-container {
     /* 세로 */
     grid-template-rows: repeat(2, 1fr);
@@ -70,5 +70,6 @@
   }
   .menu {
     margin: 1vh 3%;
+    border : 1px solid #C8C8C8;
   }
 }
