@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PokemonList from "./PokemonList";
+import "./PokedexPage.css";
 
 export default function PokedexPage() {
   const [page, setPage] = useState(1);
@@ -21,11 +22,13 @@ export default function PokedexPage() {
   return (
     <>
       <h1>Pokedex</h1>
-      <PokemonList 
+      <PokemonList
         page={page}
       />
-      <button onClick={onClickGoToPrev}>왼쪽</button>
-      <button onClick={onClickGoToNext}>오른쪽</button>
+      <div className="navigation-btns">
+        <button onClick={onClickGoToPrev}>왼쪽</button>
+        <button onClick={onClickGoToNext}>오른쪽</button>
+      </div>
     </>
   );
 }
