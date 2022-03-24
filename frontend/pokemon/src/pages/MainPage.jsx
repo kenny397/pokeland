@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import { changeHeaderDisplay } from "../headerDisplay";
-import './MainPage.css';
 import { Link } from "react-router-dom";
+import { changeHeaderDisplay } from "../headerDisplay";
+
+import './MainPage.css';
 
 export default function MainPage() {
 

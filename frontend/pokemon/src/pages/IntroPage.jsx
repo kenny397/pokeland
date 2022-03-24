@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./IntroPage.css";
 
 export default function IntroPage() {
   return (
