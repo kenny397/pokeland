@@ -20,8 +20,7 @@ export default function PokedexPage() {
   };
 
   return (
-    <>
-      <h1>Pokedex</h1>
+    <div>
       <PokemonList
         page={page}
       />
@@ -29,6 +28,6 @@ export default function PokedexPage() {
         <button onClick={onClickGoToPrev}>왼쪽</button>
         <button onClick={onClickGoToNext}>오른쪽</button>
       </div>
-    </>
+    </div>
   );
 }

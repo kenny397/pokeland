@@ -8,8 +8,16 @@ export default function PokemonItem({ item: { id, name } }) {
 
   return (
     <div className="pokemon-item">
-      <p>NO. {pokemonNum} {name}</p>
-      <img src={pokemonShadowImgPath} alt="pokemonImg" width="100px" />
+      <div className="pokemon-title">
+        <div className="pokemon-num">
+          <p>NO. {pokemonNum}</p>
+        </div>
+        <div className="pokemon-name">
+          <p>{name}</p>
+        </div>
+      </div>
+      <img className="pokemon-img" src={pokemonShadowImgPath} alt="pokemonImg" />
+      <div className="pokemon-copyright">ⓒ1997 Nintendo/Pokémon.</div>
     </div>
   );
 }
