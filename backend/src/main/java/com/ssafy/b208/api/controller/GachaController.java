@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/v1/gacha")
@@ -17,7 +19,8 @@ public class GachaController {
     private final GachaServiceImpl gachaService;
 
     @PostMapping()
-    public ResponseEntity<BaseResponseBody>getNft(@RequestBody WalletRequestDto walletDto){
+    public ResponseEntity<BaseResponseBody>getNft(@RequestBody WalletRequestDto walletDto)throws Exception {
+        gachaService.getNft(walletDto);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200,"뽑기 성공"));
     }
 

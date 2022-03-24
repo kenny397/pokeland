@@ -31,10 +31,10 @@ class GachaControllerTest {
     GachaController gachaController= new GachaController(gachaService);
 
     @Test
-    public void 성공시_200상태코드를_반환된다(){
+    public void 성공시_200상태코드를_반환된다() throws Exception{
         //given
         WalletRequestDto walletDto=new WalletRequestDto();
-
+        walletDto.setWalletId("0x88Ddf3a4AB3094792004E209Be528252CA1c4a40");
         //when
         ResponseEntity<BaseResponseBody> responseEntity=gachaController.getNft(walletDto);
         BaseResponseBody responseBody=responseEntity.getBody();
