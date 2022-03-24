@@ -19,7 +19,8 @@ class InitServiceTest {
 
     @Test
     public void Test() throws Exception{
-        initService.minting();
+        initService.createWallet();
+      // initService.minting2();
        // initService.test("0xDF547496C8880cC654155F594Dda189165C3AF15");
 
     }
