@@ -2,13 +2,12 @@ package com.ssafy.b208.api.controller;
 
 
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
-import com.ssafy.b208.api.dto.request.WalletRequestDto;
-import com.ssafy.b208.api.service.GachaServiceImpl;
+import com.ssafy.b208.api.dto.response.GachaResponseDto;
+import com.ssafy.b208.api.service.GachaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 
 @RestController
@@ -16,13 +15,18 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class GachaController {
 
-    private final GachaServiceImpl gachaService;
+    private final GachaService gachaService;
 
-    @PostMapping()
-    public ResponseEntity<BaseResponseBody>getNft(@RequestBody WalletRequestDto walletDto)throws Exception {
-        gachaService.getNft(walletDto);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"뽑기 성공"));
+
+    // spring security
+    // ipfs반환하고 민팅정보 저장
+    @PostMapping("")
+    public ResponseEntity<GachaResponseDto> gacha(Authentication authentication){
+
+        GachaResponseDto gachaResponseDto=new GachaResponseDto();
+        return ResponseEntity.status(200).body(gachaResponseDto);
     }
+
 
 
 }

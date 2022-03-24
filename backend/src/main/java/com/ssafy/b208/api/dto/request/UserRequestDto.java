@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WalletRequestDto {
-
-
-    String walletId;
-
+public class UserRequestDto {
+    String email;
+    String password;
 }
