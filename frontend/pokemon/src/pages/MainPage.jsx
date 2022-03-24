@@ -18,6 +18,11 @@ export default function MainPage() {
           Support page
         </button>
       </Link>
+      <Link to="/pokedex">
+        <button>
+          도감
+        </button>
+      </Link>
     </div>
   );
 }

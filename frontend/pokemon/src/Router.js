@@ -5,6 +5,7 @@ import IntroPage from './pages/IntroPage';
 import MainPage from './pages/MainPage';
 import TutorialPage from './TutorialPage';
 import SupportPage from './support/SupportPage';
+import PokedexPage from './pokedex/PokedexPage';
 import NotFound from './pages/NotFound';
 
 export const routers = [
@@ -12,6 +13,7 @@ export const routers = [
   { path: "/main", element: <MainPage /> },
   { path: "/tutorial", element: <TutorialPage /> },
   { path: "/support", element: <SupportPage /> },
+  { path: "/pokedex", element: <PokedexPage /> },
   { path: "*", element: <NotFound /> }
 ];
 
