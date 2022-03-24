@@ -2,6 +2,7 @@ import React from "react";
 import './NavBar.css';
 import SideBar from "./SideBar";
 import { useMediaQuery } from 'react-responsive';
+import { Link } from "react-router-dom";
 
 function NavBar(){
   const isDeskTop = useMediaQuery({
@@ -15,7 +16,9 @@ function NavBar(){
         <SideBar/>
         :
         <>
-          <div>logo</div>
+          <Link to={'/main'}>
+            <div>logo</div>
+          </Link>
           
           <div className="navbar-right-wrapper">
             <div className="navbar-menu-wrapper">
