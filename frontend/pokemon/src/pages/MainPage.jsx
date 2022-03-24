@@ -14,7 +14,6 @@ export default function MainPage() {
   return (
     <div>
       <img src={ mainImage } alt="" className="main-image"/>
-      
       <div className="menu-container">
         <div className="menu menu1">
           <p>포켓몬 도감</p>
