@@ -9,7 +9,7 @@ export default function PokemonList({ page }) {
   const paginatedPokemonList = pokemonList.slice(start, end);
 
   return (
-    <>
+    <div className="pokemon-list">
       {paginatedPokemonList.map((item) => (
         <PokemonItem
           page={page}
@@ -17,6 +17,6 @@ export default function PokemonList({ page }) {
           key={item['id']}
         />
       ))}
-    </>
+    </div>
   );
 }
