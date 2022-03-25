@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
 import { useSelector } from 'react-redux';
 
-import NavBar from './NavBar';
+import NavBar from './mainpage/NavBar';
 
 import './App.css';
 // js
