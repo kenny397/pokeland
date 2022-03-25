@@ -11,6 +11,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   for (let i = 0; i < paginatedPokemonList.length; i++) {
     emptyGridItems.pop();
   }
+  
   return (
     <div className="pokemon-list">
       {paginatedPokemonList.map((item) => (

@@ -7,7 +7,7 @@ import TutorialPage from './tutorial/TutorialPage';
 import SupportPage from './support/SupportPage';
 import PokedexPage from './pokedex/PokedexPage';
 import NotFound from './pages/NotFound';
-import GachaPage from "./gacha/GachaPage";
+import GachaContainer from "./gacha/GachaContainer";
 
 export const routers = [
   { path: "/", element: <IntroPage /> },
@@ -15,7 +15,7 @@ export const routers = [
   { path: "/tutorial", element: <TutorialPage /> },
   { path: "/support", element: <SupportPage /> },
   { path: "/pokedex", element: <PokedexPage /> },
-  { path: "/gacha", element: <GachaPage/> },
+  { path: "/gacha", element: <GachaContainer/> },
   { path: "*", element: <NotFound /> }
 ];
 

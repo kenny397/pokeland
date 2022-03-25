@@ -1,29 +1,15 @@
 import React from "react";
-import { useState } from "react";
 import getImgPath from "../utils/getImgPath";
-import pokemonList from "../fixtures/pokemonList";
 
 import "./GachaPage.css";
 
-export default function GachaPage() {
-  const [pokeballDisplay, setPokeballDisplay] = useState(false);
-  const [drawnPokemon, setDrawnPokemon] = useState(null);
-
-  const handleClickGetPokemon = () => {
-    setPokeballDisplay(true);
-  };
-  
-  const handleClickOpenPokeball = () => {
-    const randomIdx = Math.round(Math.random() * 10000) % 151;
-    console.log(randomIdx);
-    setPokeballDisplay(false);
-    setDrawnPokemon(pokemonList[randomIdx]);
-  };
-
-  const handleClickGoBackToGacha = () => {
-    setDrawnPokemon(null);
-  };
-
+export default function GachaPage({
+  pokeballDisplay,
+  drawnPokemon,
+  onClickGetPokemon,
+  onClickOpenPokeball,
+  onClickGoBackToGacha
+}) {
   let pokemonImgPath = null;
   if (drawnPokemon) {
     const { id, name } = drawnPokemon;
@@ -41,12 +27,12 @@ export default function GachaPage() {
             <img className="pokeball-img" src="/images/static/pokeball.png" alt="몬스터볼" />
           }
           {!pokeballDisplay && 
-            <button onClick={handleClickGetPokemon}>포켓몬 뽑기</button>
+            <button onClick={onClickGetPokemon}>포켓몬 뽑기</button>
           }
           {pokeballDisplay &&
             <button 
               className="open-pokeball-btn" 
-              onClick={handleClickOpenPokeball}
+              onClick={onClickOpenPokeball}
             >
               몬스터볼 열기
             </button>
@@ -59,7 +45,7 @@ export default function GachaPage() {
         <div className="gacha-container">
           <img className="drawn-pokemon-img" src={pokemonImgPath} alt="뽑은 포켓몬 이미지" />
           <h2>{drawnPokemon.name}</h2>
-          <button onClick={handleClickGoBackToGacha}>다시 뽑기</button>
+          <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
         </div>
       }
     </>
