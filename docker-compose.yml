@@ -14,7 +14,7 @@ services:
   backend:
     container_name: backend
     build: 
-      context: ./backend/a105
+      context: ./backend/b105
     ports: 
       - 8080:8080
     networks:
