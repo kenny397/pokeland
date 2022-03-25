@@ -24,6 +24,8 @@ public class UserController {
     public ResponseEntity<? extends BaseResponseBody> register(@RequestBody UserRequestDto userRequestDto)throws Exception {
         userService.register(userRequestDto);
         //있는 email이면 에러 발생 시켜야됨
+        //회원가입 email인증
+
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
@@ -38,6 +40,7 @@ public class UserController {
         //틀리면 에러
         return ResponseEntity.status(200).body(publicWalletResponseDto);
     }
+    //자산, 유저가 가지고있는 NFT , 상세조회 , 고객센터 email
 
 
 

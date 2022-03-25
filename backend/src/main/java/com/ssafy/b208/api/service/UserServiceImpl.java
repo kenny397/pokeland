@@ -5,7 +5,6 @@ import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
-import com.ssafy.b208.api.dto.response.PublicWalletResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
