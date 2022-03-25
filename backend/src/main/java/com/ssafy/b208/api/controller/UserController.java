@@ -4,10 +4,11 @@ package com.ssafy.b208.api.controller;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
-import com.ssafy.b208.api.dto.response.PublicWalletResponseDto;
+import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-
+    private final PasswordEncoder passwordEncoder;
     @PostMapping("/register")
     public ResponseEntity<? extends BaseResponseBody> register(@RequestBody UserRequestDto userRequestDto)throws Exception {
         userService.register(userRequestDto);
@@ -30,15 +31,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<PublicWalletResponseDto> login(@RequestBody UserRequestDto userRequestDto)throws Exception {
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserRequestDto userRequestDto)throws Exception {
         String email = userRequestDto.getEmail();
         String password = userRequestDto.getPassword();
         UserDto userDto =userService.getUserByUserEmail(email);
-        //맞으면 토큰도 줘야함
-        PublicWalletResponseDto publicWalletResponseDto= new PublicWalletResponseDto();
-        publicWalletResponseDto.setPublicKey(userDto.getPublicKey());
-        //틀리면 에러
-        return ResponseEntity.status(200).body(publicWalletResponseDto);
+
+        UserLoginResponseDto userloginResponseDto= new UserLoginResponseDto();
+        if(passwordEncoder.matches(password, userDto.getPassword())){
+            userloginResponseDto.setPublicKey(userDto.getPublicKey());
+            return ResponseEntity.status(200).body(userloginResponseDto);
+        }else{
+            return ResponseEntity.status(401).body(userloginResponseDto);
+        }
+
     }
     //자산, 유저가 가지고있는 NFT , 상세조회 , 고객센터 email
 
