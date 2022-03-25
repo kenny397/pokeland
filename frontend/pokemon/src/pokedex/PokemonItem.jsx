@@ -1,10 +1,9 @@
 import React from "react";
+import { getImgPath, getPokemonNum } from "../utils/pokemonNum";
 
 export default function PokemonItem({ item: { id, name } }) {
-  const str = "" + id;
-  const pad = "000";
-  const pokemonNum = pad.substring(0, pad.length - str.length) + str;
-  const pokemonShadowImgPath =  `/images/shadows/NO. ${pokemonNum}${name}.jpg`;
+  const pokemonShadowImgPath = getImgPath(id, name);
+  const pokemonNum = getPokemonNum(id);
 
   return (
     <div className="pokemon-item">
