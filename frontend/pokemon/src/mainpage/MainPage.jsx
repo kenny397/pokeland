@@ -21,7 +21,7 @@ export default function MainPage() {
         </Link>
         <Link to={'/gacha'} className="menu menu2">
           <p>포켓몬 뽑기</p>
-          <img src={ '/images/static/gatcha.png' } alt="" className="h15"/>
+          <img src={ '/images/static/gacha.png' } alt="" className="h15"/>
         </Link>
         <Link to={'/support'} className="menu menu3">
           <p>고객센터</p>
