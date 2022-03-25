@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { getImgPath } from "../utils/pokemonNum";
+import getImgPath from "../utils/getImgPath";
 import pokemonList from "../fixtures/pokemonList";
 
 import "./GachaPage.css";
