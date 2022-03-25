@@ -27,14 +27,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public void register(UserRequestDto registerRequestDto) {
         //회원가입이 된경우
-        Optional<User>user =userRepository.findUserByUserEmail(registerRequestDto.getEmail());
+        Optional<User>user =userRepository.findUserByEmail(registerRequestDto.getEmail());
 
         //회원가입이 안된경우
     }
 
     @Override
     public UserDto getUserByUserEmail(String email) {
-        Optional<User>user =userRepository.findUserByUserEmail(email);
+        Optional<User>user =userRepository.findUserByEmail(email);
         UserDto userDto=new UserDto();
         //빌더 사용해보기
         return userDto;

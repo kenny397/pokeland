@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class User extends BaseEntity {
 
-    private String account;
+    private String email;
     private String password;
     private String publicKey;
     private String privateKey;
