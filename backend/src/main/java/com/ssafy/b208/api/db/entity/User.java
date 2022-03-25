@@ -1,24 +1,28 @@
 package com.ssafy.b208.api.db.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 public class User extends BaseEntity {
 
     private String account;
+    private String password;
+    private String publicKey;
+    private String privateKey;
+    private Long money;
+    private String mail;  // 메일 인증 여부?
     private LocalDateTime createdDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<UserPokemon> pokemonList = new ArrayList<>();
+    private List<UserPokemon> userPokemonList = new ArrayList<>();
 
     @PrePersist
     public void createdAt(){
