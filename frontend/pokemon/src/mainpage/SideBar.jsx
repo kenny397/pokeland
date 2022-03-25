@@ -8,7 +8,7 @@ export default function SideBar() {
         포켓몬 도감
       </Link>
 
-      <Link to={'/gatcha'}>
+      <Link to={'/gacha'}>
         포켓몬 뽑기
       </Link>
 

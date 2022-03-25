@@ -19,7 +19,7 @@ export default function MainPage() {
           <p>포켓몬 도감</p>
           <img src={ '/images/static/pokedex.png' } alt="" className="h12 pokedex-image"/>
         </Link>
-        <Link to={'/gatcha'} className="menu menu2">
+        <Link to={'/gacha'} className="menu menu2">
           <p>포켓몬 뽑기</p>
           <img src={ '/images/static/gatcha.png' } alt="" className="h15"/>
         </Link>

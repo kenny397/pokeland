@@ -15,8 +15,8 @@ function NavBar(){
         ?
         <>
           <SideBar/>
-          <Link to={'/main'} className="pokemon-logo">
-            <img src={ '/images/static/pokemonLogo.png' } />
+          <Link to={'/main'} >
+            <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
           </Link>
         </>
         :
