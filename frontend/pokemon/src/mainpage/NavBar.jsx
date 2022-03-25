@@ -13,11 +13,16 @@ function NavBar(){
     <div className="navbar-container">
       {!isDeskTop 
         ?
-        <SideBar/>
+        <>
+          <SideBar/>
+          <Link to={'/main'} >
+            <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
+          </Link>
+        </>
         :
         <>
           <Link to={'/main'}>
-            <div>logo</div>
+            <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
           </Link>
           
           <div className="navbar-right-wrapper">

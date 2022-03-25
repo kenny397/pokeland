@@ -2,11 +2,12 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 
 import IntroPage from './pages/IntroPage';
-import MainPage from './pages/MainPage';
-import TutorialPage from './TutorialPage';
+import MainPage from './mainpage/MainPage';
+import TutorialPage from './tutorial/TutorialPage';
 import SupportPage from './support/SupportPage';
 import PokedexPage from './pokedex/PokedexPage';
 import NotFound from './pages/NotFound';
+import Gacha from "./gacha/Gacha";
 
 export const routers = [
   { path: "/", element: <IntroPage /> },
@@ -14,6 +15,7 @@ export const routers = [
   { path: "/tutorial", element: <TutorialPage /> },
   { path: "/support", element: <SupportPage /> },
   { path: "/pokedex", element: <PokedexPage /> },
+  { path: "/gacha", element: <Gacha/> },
   { path: "*", element: <NotFound /> }
 ];
 

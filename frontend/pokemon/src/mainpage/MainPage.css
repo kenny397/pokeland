@@ -8,9 +8,14 @@
   display:grid;
 }
 
+.menu-container img {
+  opacity: 0.8;
+}
+
 .menu {
   cursor: pointer;
   background: white;
+  overflow: hidden;
 }
 
 .menu p {
@@ -21,11 +26,6 @@
 
 .menu:hover {
   background : #D2D2D2;
-}
-
-.menu-container img{
-  margin-right: 15px;
-  float: right; 
 }
 
 .pokedex-image{
@@ -58,6 +58,11 @@
     margin-top: 1vh;
     margin-left: 3%;
   }
+  .menu-container img{
+    margin-right: 15px;
+    float: right; 
+
+  }
 }
 
 @media (min-width: 1030px) {
@@ -69,7 +74,17 @@
     margin: 4vh 60px;
   }
   .menu {
+    height: 24vh;
     margin: 1vh 3%;
     border : 1px solid #C8C8C8;
+    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.322);
+  }
+  .menu p {
+    margin-top: 1vh;
+    margin-left: 3%;
+  }
+  .menu-container img:not(img:first-child) {
+    position: absolute; 
+    height: 20vh;
   }
 }

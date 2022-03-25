@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 export default function SideBar() {
   return (
     <Menu>
-      <Link to={'/'}>
+      <Link to={'/pokedex'}>
         포켓몬 도감
       </Link>
 
-      <Link to={'/'}>
-        포켓몬 도감
+      <Link to={'/gacha'}>
+        포켓몬 뽑기
       </Link>
 
-      <Link to={'/'}>
-        포켓몬 도감
+      <Link to={'/support'}>
+        고객센터
       </Link>
 
-      <Link to={'/'}>
-        포켓몬 도감
+      <Link to={'/main'}>
+        메인
       </Link>
     </Menu>
   );
