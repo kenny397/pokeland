@@ -93,6 +93,12 @@ button {
   border-radius: 0.25rem;
 }
 
+button > a {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 button:hover {
   cursor: pointer;
 }
