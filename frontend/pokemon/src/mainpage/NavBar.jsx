@@ -27,13 +27,13 @@ function NavBar(){
           
           <div className="navbar-right-wrapper">
             <div className="navbar-menu-wrapper">
-              <div>포켓몬 도감</div>
-              <div>포켓몬 뽑기</div>
-              <div>고객센터</div>
+              <Link to={'/pokedex'} >포켓몬 도감</Link>
+              <Link to={'/gacha'} >포켓몬 뽑기</Link>
+              <Link to={'/support'} >고객센터</Link>
             </div>
             <div className="navbar-asset-wrapper">
-              <div>내 자산: </div>  
-              <div>500.0SSF</div>
+              <div>내 자산:</div>
+              <div className="asset-box">500.0SSF</div>
             </div>
           </div>
         </>
