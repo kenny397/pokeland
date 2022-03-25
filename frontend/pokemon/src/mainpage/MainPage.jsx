@@ -19,14 +19,14 @@ export default function MainPage() {
           <p>포켓몬 도감</p>
           <img src={ '/images/static/pokedex.png' } alt="" className="h12 pokedex-image"/>
         </Link>
-        <div className="menu menu2">
+        <Link to={'/gatcha'} className="menu menu2">
           <p>포켓몬 뽑기</p>
           <img src={ '/images/static/gatcha.png' } alt="" className="h15"/>
-        </div>
-        <div className="menu menu3">
+        </Link>
+        <Link to={'/support'} className="menu menu3">
           <p>고객센터</p>
           <img src={ '/images/static/nurse.png' } alt="" className="h15"/>
-        </div>
+        </Link>
         <div className="menu menu4">
           <p>지갑설정</p>
           <img src={ '/images/static/metamask.png' } alt="" className="h12"/>
