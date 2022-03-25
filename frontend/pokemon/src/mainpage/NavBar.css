@@ -11,6 +11,9 @@
 }
 
 @media(min-width: 1030px) {
+  .pokemon-logo {
+    margin-left: 0.8rem;
+  }
   .navbar-container {
     display:flex;
     justify-content: space-between;
@@ -26,8 +29,9 @@
     justify-content: space-between;
   }
   .navbar-menu-wrapper a {
-    margin-right: 35px;
-    font-size: 15px;
+    margin-right: 50px;
+    font-size: 1.07rem;
+    font-weight: 600;
   }
   .navbar-asset-wrapper {
     display:flex;
@@ -44,8 +48,6 @@
   }
 
 }
-
-
 
 /* 버거버튼 */
 /* Individual item */

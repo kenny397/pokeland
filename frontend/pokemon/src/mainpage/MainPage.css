@@ -9,7 +9,7 @@
 }
 
 .menu-container img {
-  opacity: 0.6;
+  filter: brightness(80%); 
 }
 
 .menu {
@@ -24,7 +24,11 @@
 }
 
 .menu:hover {
-  background : #D2D2D2;
+  background : #f0f0f0;
+}
+
+.menu:hover img{
+  filter: brightness(100%); 
 }
 
 .pokedex-image{
