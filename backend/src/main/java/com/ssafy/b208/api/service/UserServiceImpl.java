@@ -1,8 +1,11 @@
 package com.ssafy.b208.api.service;
 
 import com.ssafy.b208.api.db.entity.User;
+import com.ssafy.b208.api.db.entity.UserPokemon;
+import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.UserDto;
+import com.ssafy.b208.api.dto.UserPokemonDto;
 import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final UserPokemonRepository userPokemonRepository;
 
     @Override
     public void register(UserRequestDto registerRequestDto) {
@@ -39,6 +43,14 @@ public class UserServiceImpl implements UserService{
         //빌더 사용해보기
         return userDto;
     }
+
+//    @Override
+//    public User getNft(String email) {
+//        User user = userRepository.findUserByEmail(email).get();
+//        Optional<UserPokemon> userPokemon = userPokemonRepository.findUserPokemonByUser(user);
+//        UserPokemonDto userPokemonDto = new UserPokemonDto();
+//        // 빌더
+//    }
 
 
     public void createWallet(){
