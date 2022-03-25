@@ -9,4 +9,5 @@ public class UserDto {
     String email;
     String password;
     String publicKey;
+    Long Money;
 }
