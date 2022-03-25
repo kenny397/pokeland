@@ -5,14 +5,14 @@ import "./PokedexPage.css";
 export default function PokedexPage() {
   const [page, setPage] = useState(1);
   
-  const onClickGoToPrev = () => {
+  const handleClickGoToPrev = () => {
     setPage(page - 1);
     if (page <= 1) {
       setPage(1);
     }
   };
 
-  const onClickGoToNext = () => {
+  const handleClickGoToNext = () => {
     setPage(page + 1);
     if (page >= 26) {
       setPage(26);
@@ -23,11 +23,10 @@ export default function PokedexPage() {
     <div>
       <PokemonList
         page={page}
+        onClickGoToPrev={handleClickGoToPrev}
+        onClickGoToNext={handleClickGoToNext}
       />
-      <div className="navigation-btns">
-        <button onClick={onClickGoToPrev}>왼쪽</button>
-        <button onClick={onClickGoToNext}>오른쪽</button>
-      </div>
+
     </div>
   );
 }
