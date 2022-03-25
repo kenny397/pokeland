@@ -1,6 +1,7 @@
 package com.ssafy.b208.api.db.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Getter
-@Table(name = "userPokemon")  // 테이블 이름 카멜 케이스?
+@Setter
 public class UserPokemon extends BaseEntity{
     private Long tokenId;
     private String ipfsUri;
@@ -19,6 +20,5 @@ public class UserPokemon extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PokeDex pokemon;
-
 
 }

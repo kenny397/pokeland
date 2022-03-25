@@ -1,6 +1,7 @@
 package com.ssafy.b208.api.db.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "PokeDex")  // 테이블 이름 카멜 케이스?
+@Setter
 public class PokeDex extends BaseEntity{
     private String name;
     private String type;
