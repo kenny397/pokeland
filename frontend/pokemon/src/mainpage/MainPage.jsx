@@ -2,10 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { changeHeaderDisplay } from "../headerDisplay";
-
+import { useMediaQuery } from "react-responsive";
 import './MainPage.css';
 
 export default function MainPage() {
+
+  const isDeskTop = useMediaQuery({
+    query: "(min-width: 1030px)"
+  });
 
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
@@ -13,7 +17,12 @@ export default function MainPage() {
 
   return (
     <div>
-      <img src={ '/images/static/mainPageImageDskVer.png' } alt="" className="main-image"/>
+      { !isDeskTop 
+        ?
+        <img src={ '/images/static/mainPageImage.png' } alt="" className="main-image"/>
+        :
+        <img src={ '/images/static/mainPageImageDsk.png' } alt="" className="main-image"/>
+      }
       <div className="menu-container">
         <Link to={'/pokedex'} className="menu menu1">
           <p>포켓몬 도감</p>
