@@ -1,12 +1,12 @@
 FROM node:latest
 
-WORKDIR /frontend
+WORKDIR /app
 
-COPY ./package*.json /frontend
+COPY ./package*.json /app
 
 RUN npm install
 
-COPY / /frontend
+COPY / /app
 
 RUN npm run build
 
