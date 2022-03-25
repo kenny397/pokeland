@@ -13,7 +13,9 @@ import javax.persistence.Table;
 @Setter
 public class UserPokemon extends BaseEntity{
     private Long tokenId;
-    private String ipfsUri;
+    private String ipfsMetaUri;
+    private String ipfsImageUri;
+    private String grade;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
