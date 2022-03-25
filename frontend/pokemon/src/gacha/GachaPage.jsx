@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { getImgPath } from "../utils/pokemonNum";
+import pokemonList from "../fixtures/pokemonList";
 
 import "./GachaPage.css";
 
@@ -13,17 +14,10 @@ export default function GachaPage() {
   };
   
   const handleClickOpenPokeball = () => {
+    const randomIdx = Math.round(Math.random() * 10000) % 151;
+    console.log(randomIdx);
     setPokeballDisplay(false);
-    setDrawnPokemon({
-      "id": 127,
-      "name": "쁘사이저",
-      "type": "벌레",
-      "height": "1.5m",
-      "category": "뿔집게포켓몬",
-      "gender": "",
-      "weight": "55.0kg",
-      "abilities": "괴력집게"
-    });
+    setDrawnPokemon(pokemonList[randomIdx]);
   };
 
   const handleClickGoBackToGacha = () => {
