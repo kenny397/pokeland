@@ -7,7 +7,7 @@ services:
     ports: 
       - 5000:5000
     networks:
-      - b208
+      - pokeworld
     restart: unless-stopped
     depends_on:
       - backend
@@ -18,7 +18,8 @@ services:
     ports: 
       - 8080:8080
     networks:
-      - b208
+      - pokeworld
     restart: unless-stopped
+    
 networks: 
-  b208:
+  pokeworld:
