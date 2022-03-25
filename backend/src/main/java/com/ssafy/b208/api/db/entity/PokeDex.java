@@ -3,23 +3,22 @@ package com.ssafy.b208.api.db.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class PokeDex extends BaseEntity{
+public class PokeDex {
+    @Id
+    private long id;
     private String name;
     private String type;
-    private Double height;
+    private String height;
     private String category;
     private String gender;
-    private Double weight;
+    private String weight;
     private String abilities;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pokemon")
