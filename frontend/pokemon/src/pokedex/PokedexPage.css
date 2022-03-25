@@ -26,7 +26,7 @@
 
 .pokemon-title {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin: 0.5rem 0.2rem 0;
   transform: translateX(-3px);
   width: 100%;
