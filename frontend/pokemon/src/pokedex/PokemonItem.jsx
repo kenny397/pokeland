@@ -2,7 +2,7 @@ import React from "react";
 import { getImgPath, getPokemonNum } from "../utils/pokemonNum";
 
 export default function PokemonItem({ item: { id, name } }) {
-  const pokemonShadowImgPath = getImgPath(id, name);
+  const pokemonShadowImgPath = getImgPath(id, name, 'shadow');
   const pokemonNum = getPokemonNum(id);
 
   return (

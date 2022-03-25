@@ -1,6 +1,7 @@
 .gacha-container {
   display: grid;
   justify-content: center;
+  text-align: center;
   height: 90vh;
 }
 
@@ -27,4 +28,8 @@ button {
 
 .balance-div {
   margin: 0 auto;
+}
+
+.drawn-pokemon-img {
+  margin: 10vh auto 3vh;
 }

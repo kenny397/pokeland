@@ -5,8 +5,8 @@ export function getPokemonNum(id) {
   return pokemonNum;
 }
 
-export function getImgPath(id, name) {
+export function getImgPath(id, name, option) {
   const pokemonNum = getPokemonNum(id);
-  const pokemonShadowImgPath =  `/images/shadows/NO. ${pokemonNum}${name}.jpg`;
-  return pokemonShadowImgPath;  
+  const pokemonShadowImgPath =  `/images/${option}s/NO. ${pokemonNum}${name}.jpg`;
+  return pokemonShadowImgPath;
 }

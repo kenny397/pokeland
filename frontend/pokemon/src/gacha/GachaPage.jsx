@@ -26,10 +26,14 @@ export default function GachaPage() {
     });
   };
 
+  const handleClickGoBackToGacha = () => {
+    setDrawnPokemon(null);
+  };
+
   let pokemonImgPath = null;
   if (drawnPokemon) {
     const { id, name } = drawnPokemon;
-    pokemonImgPath = getImgPath(id, name);
+    pokemonImgPath = getImgPath(id, name, 'pokemon');
   }
 
   return (
@@ -58,9 +62,10 @@ export default function GachaPage() {
           </div>
         </div>
         :
-        <div>
-          <img src={pokemonImgPath} alt="뽑은 포켓몬 이미지" />
-          <p>{drawnPokemon.name}</p>
+        <div className="gacha-container">
+          <img className="drawn-pokemon-img" src={pokemonImgPath} alt="뽑은 포켓몬 이미지" />
+          <h2>{drawnPokemon.name}</h2>
+          <button onClick={handleClickGoBackToGacha}>다시 뽑기</button>
         </div>
       }
     </>
