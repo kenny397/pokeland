@@ -13,31 +13,8 @@ a:hover, a:active { text-decoration: none; }
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@media (max-width: 767px) {
+/* 모바일 버전 */
+@media (max-width: 1030px) {
   .container {
     margin: 0 auto;
     height: 94vh;
@@ -47,30 +24,14 @@ a:hover, a:active { text-decoration: none; }
   }
 }
 
-@media (min-width: 768px) {
-  .container {
-    margin: 0 auto;
-    height: 100vh;
-    width: 100vw;
-    background: white;
-  }
-}
-
 /* pc버전일때 */
 @media (min-width:1030px) {
   .container {
-    margin: 0 auto;
-    height: 95vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 94vh;
     width: 1030px;
     background: white;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
