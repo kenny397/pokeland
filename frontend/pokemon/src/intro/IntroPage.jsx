@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./IntroPage.css";
-import LoginModal from "./components/LoginModal";
-import BodyBlackoutStyle from "./components/BodyBlackoutStyle";
+
+// 모달
+import Modal from "../components/Modal";
+import BodyBlackoutStyle from "../components/BodyBlackoutStyle";
+import LoginDialog from "./components/LoginDialog";
 
 export default function IntroPage() {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
@@ -33,8 +36,8 @@ export default function IntroPage() {
       </div>
 
       {/* 모달 컴포넌트 */}
-      { isLoginModalVisible && <LoginModal setIsLoginModalVisible= {setIsLoginModalVisible}/> }
-      { isLoginModalVisible && <BodyBlackoutStyle onSetIsLoginModalVisible= {onSetIsLoginModalVisible}/> }
+      { isLoginModalVisible && <Modal setIsVisible={setIsLoginModalVisible} InnerComponent={LoginDialog}/> }
+      { isLoginModalVisible && <BodyBlackoutStyle setIsModalVisible= {setIsLoginModalVisible}/> }
     </div>
   );
 }
