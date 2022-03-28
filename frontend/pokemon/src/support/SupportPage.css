@@ -118,3 +118,7 @@ button:hover {
 .submit-button:hover {
   background-color: #4784c5;
 }
+
+select option[value=""][disabled] {
+	display: none;
+}
