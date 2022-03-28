@@ -49,6 +49,24 @@ public class PokedexServiceImpl implements PokedexService {
     }
 
     @Override
+    public List<NfpDetailDto> getNfpList(Long userId, Long pokedexId) {
+        List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
+                .orElseGet(() -> new ArrayList<>());
+        List<NfpDetailDto> nftList= new ArrayList<>();
+        for (UserPokemon userPokemon : userPokemons) {
+            NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
+                    .tokenId(userPokemon.getTokenId())
+                    .pokedexId(userPokemon.getPokemon().getId())
+                    .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                    .ipfsImageUri(userPokemon.getIpfsImageUri())
+                    .grade(userPokemon.getGrade())
+                    .build();
+            nftList.add(nfpDetailDto);
+        }
+        return nftList;
+    }
+
+    @Override
     public UserPokemon getNfpDetail(Long id) {
         UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
                 .orElseGet(() -> new UserPokemon());

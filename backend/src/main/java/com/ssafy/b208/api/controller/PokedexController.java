@@ -59,6 +59,16 @@ public class PokedexController {
         return ResponseEntity.status(200).body(pokeInfo);
     }
 
+    // 보유 NFP 리스트 by 한 포켓몬 조회
+    @GetMapping("/nfp/{userId}/{pokedexId}")
+    public ResponseEntity<HashMap> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
+
+        List<NfpDetailDto> nfpList = pokedexService.getNfpList(userId, pokedexId);
+        HashMap<String, List<NfpDetailDto>> nfpListMap = new HashMap<>();
+        nfpListMap.put("nfplist", nfpList);
+        return ResponseEntity.status(200).body(nfpListMap);
+    }
+
     // NFP 상세조회
     @GetMapping("/nfp/detail/{tokenId}")
     public ResponseEntity<NfpDetailDto> getNfpDetail(@PathVariable Long tokenId) throws Exception {

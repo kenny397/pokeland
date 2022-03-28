@@ -15,5 +15,7 @@ public interface PokedexService {
 
     public PokeDex getPokeInfo(Long id);
 
+    public List<NfpDetailDto> getNfpList(Long userId, Long pokedexId);
+
     public UserPokemon getNfpDetail(Long id);
 }
