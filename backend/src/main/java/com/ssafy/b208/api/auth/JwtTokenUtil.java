@@ -1,4 +1,4 @@
-package com.ssafy.b208.api.Auth;
+package com.ssafy.b208.api.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -15,8 +15,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class JwtTokenUtil {
-    private static String secretKey;
-    private static Integer expirationTime;
+    private static String secretKey="nfp";
+    private static Integer expirationTime=10000;
 
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
@@ -37,6 +37,7 @@ public class JwtTokenUtil {
         return JWT
                 .require(Algorithm.HMAC512(secretKey.getBytes()))
                 .withIssuer(ISSUER)
+                .acceptExpiresAt(10000)
                 .build();
     }
 
@@ -68,9 +69,11 @@ public class JwtTokenUtil {
         JWTVerifier verifier = JWT
                 .require(Algorithm.HMAC512(secretKey.getBytes()))
                 .withIssuer(ISSUER)
+                .acceptExpiresAt(10000)
                 .build();
 
         try {
+            System.out.println("handle"+" "+verifier);
             verifier.verify(token.replace(TOKEN_PREFIX, ""));
         } catch (AlgorithmMismatchException ex) {
             throw ex;

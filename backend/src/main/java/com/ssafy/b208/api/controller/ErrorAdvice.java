@@ -12,6 +12,6 @@ public class ErrorAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AddressNotFoundException.class)
     public void handleNotFound(){
-        //
+        System.out.println("asdSAD?");
     }
 }

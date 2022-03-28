@@ -1,7 +1,6 @@
-package com.ssafy.b208.api.Auth;
+package com.ssafy.b208.api.auth;
 
 import com.ssafy.b208.api.db.entity.User;
-import com.ssafy.b208.api.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
