@@ -8,6 +8,7 @@ export default function IntroPage() {
       <div>
         IntroPage
       </div>
+      <img src='/images/static/introPage/introRunning.gif' alt="" />
       <div>
         <Link to="/main">
           <button className="submit-button">main으로</button>
