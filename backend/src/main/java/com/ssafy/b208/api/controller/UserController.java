@@ -1,6 +1,7 @@
 package com.ssafy.b208.api.controller;
 
 
+import com.ssafy.b208.api.db.entity.User;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
