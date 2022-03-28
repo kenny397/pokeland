@@ -14,6 +14,7 @@ import java.util.List;
 public class User extends BaseEntity {
 
     private String email;
+    private String nickname;
     private String password;
     private String publicKey;
     private String privateKey;

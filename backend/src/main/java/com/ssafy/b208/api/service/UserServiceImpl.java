@@ -9,6 +9,8 @@ import com.ssafy.b208.api.dto.UserPokemonDto;
 import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.web3j.crypto.ECKeyPair;
@@ -24,22 +26,34 @@ import java.util.UUID;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final UserPokemonRepository userPokemonRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override
     public void register(UserRequestDto registerRequestDto) {
         //회원가입이 된경우
-        Optional<User>user =userRepository.findUserByEmail(registerRequestDto.getEmail());
+
+        User user = new User();
+        user.setEmail(registerRequestDto.getEmail());
+        user.setMoney(500L);
+        user.setMail("x");
+        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
+        WalletDto walletDto = createWallet();
+        user.setPublicKey(walletDto.getPublicKey());
+        user.setPrivateKey(walletDto.getPrivateKey());
+        Optional<User> users = Optional.ofNullable(userRepository.findUserByEmail(registerRequestDto.getEmail())
+                .orElseGet(() -> userRepository.save(user)));
 
         //회원가입이 안된경우
     }
 
     @Override
     public UserDto getUserByUserEmail(String email) {
-        Optional<User>user =userRepository.findUserByEmail(email);
-        UserDto userDto=new UserDto();
+        Optional<User> user = userRepository.findUserByEmail(email);
+        UserDto userDto = new UserDto();
         //빌더 사용해보기
         return userDto;
     }
@@ -53,26 +67,30 @@ public class UserServiceImpl implements UserService{
 //    }
 
 
-    public void createWallet(){
+    public WalletDto createWallet() {
         String seed = UUID.randomUUID().toString();
         System.out.println(seed);
+        WalletDto walletDto = new WalletDto();
         try {
             ECKeyPair ecKeyPair = Keys.createEcKeyPair();
 
             BigInteger privateKeyInDec = ecKeyPair.getPrivateKey();
 
-            String privKey = "0x" +privateKeyInDec.toString(16);
+            String privKey = "0x" + privateKeyInDec.toString(16);
 
             WalletFile aWallet = Wallet.createLight(seed, ecKeyPair);
 
             String address = "0x" + aWallet.getAddress();
 
-            WalletDto walletDto = new WalletDto();
+
             walletDto.setPublicKey(address);
             walletDto.setPrivateKey(privKey);
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
+        return walletDto;
     }
 
 
