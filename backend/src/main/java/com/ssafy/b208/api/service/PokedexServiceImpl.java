@@ -1,11 +1,14 @@
 package com.ssafy.b208.api.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ssafy.b208.api.db.entity.PokeDex;
 import com.ssafy.b208.api.db.entity.User;
+import com.ssafy.b208.api.db.entity.UserPokemon;
 import com.ssafy.b208.api.db.repository.PokeDexRepository;
 import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
+import com.ssafy.b208.api.dto.response.NfpDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,33 +30,12 @@ public class PokedexServiceImpl implements PokedexService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Override
-//    public List<Object[]> getPokemonList(UserRequestDto userRequestDto) {
-//        String email = userRequestDto.getEmail();
-//        Optional<User> optional = userRepository.findUserByEmail(email);
-//        User user;
-//        if (optional.isPresent()) {
-//            user = optional.get();
-//        } else {
-//            user = new User();
-//        }
-//        List<Object[]> pokemonList = userPokemonRepository.findPokemonList(user);
-//        System.out.println(pokemonList);
-//        return pokemonList;
-//    }
     @Override
     public List<Long> getPokemonList(UserRequestDto userRequestDto) {
         String email = userRequestDto.getEmail();
-//        Optional<User> optional = userRepository.findUserByEmail(email);
-//        User user;
-//        if (optional.isPresent()) {
-//            user = optional.get();
-//        } else {
-//            user = new User();
-//        }
         User user = Optional.ofNullable(userRepository.findUserByEmail(email).get())
                 .orElseGet(() -> new User());
-        List<Long> pokemonList = Optional.ofNullable(userPokemonRepository.findPokemonList2(user.getId()).get())
+        List<Long> pokemonList = Optional.ofNullable(userPokemonRepository.findPokemonList(user.getId()).get())
                 .orElseGet(() -> new ArrayList<>());
         System.out.println(pokemonList);
         return pokemonList;
@@ -64,6 +46,13 @@ public class PokedexServiceImpl implements PokedexService {
         PokeDex pokeDex = Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
                 .orElseGet(() -> new PokeDex());
         return pokeDex;
+    }
+
+    @Override
+    public UserPokemon getNfpDetail(Long id) {
+        UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
+                .orElseGet(() -> new UserPokemon());
+        return userPokemon;
     }
 
 }

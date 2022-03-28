@@ -1,7 +1,9 @@
 package com.ssafy.b208.api.controller;
 
 import com.ssafy.b208.api.db.entity.PokeDex;
+import com.ssafy.b208.api.db.entity.UserPokemon;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
+import com.ssafy.b208.api.dto.response.NfpDetailDto;
 import com.ssafy.b208.api.dto.response.PokeInfoDto;
 import com.ssafy.b208.api.service.PokedexService;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +57,21 @@ public class PokedexController {
         HashMap<String, PokeInfoDto> pokeInfo = new HashMap<>();
         pokeInfo.put("pokeInfo", pokeInfoDto);
         return ResponseEntity.status(200).body(pokeInfo);
+    }
+
+    // NFP 상세조회
+    @GetMapping("/nfp/detail/{tokenId}")
+    public ResponseEntity<NfpDetailDto> getNfpDetail(@PathVariable Long tokenId) throws Exception {
+
+        UserPokemon userPokemon = pokedexService.getNfpDetail(tokenId);
+        NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
+                .tokenId(userPokemon.getTokenId())
+                .pokedexId(userPokemon.getPokemon().getId())
+                .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                .ipfsImageUri(userPokemon.getIpfsImageUri())
+                .grade(userPokemon.getGrade())
+                .build();
+        return ResponseEntity.status(200).body(nfpDetailDto);
     }
 
 }
