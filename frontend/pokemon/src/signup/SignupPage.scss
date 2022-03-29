@@ -1,0 +1,56 @@
+body {
+  background: white;
+}
+.SignupPage {
+  text-align: center;
+  
+  .signup-header p {
+    font-size: 33px;
+    font-weight: bold;
+  }
+
+  .picachu-img {
+    height: 10vh;
+    position: absolute;
+    right: 10vw;
+    top: 0.5vh;
+  }
+
+  input {
+    padding: 5px 10px;
+    width: 67vw;
+    height: 50px;
+    border: 1px solid #CDCDCD;
+    border-radius: 4px;
+    font-size: 17px;
+  }
+
+  .form-container {
+    margin-top: 7vh;
+  }
+
+  input::placeholder {
+    color: #A7A7A7;
+    font-size: 15px;
+  }
+
+  .form-container div {
+    margin: 0 auto;
+    width: calc(67vw + 20px);
+  }
+
+  .form-container p {
+    margin-bottom: 7px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 19px;
+  }
+
+  .submit-btn {
+    margin-top: 5vh;
+    height: 50px;
+    width: calc(67vw + 20px);
+    font-size: 17px;
+  }
+
+}

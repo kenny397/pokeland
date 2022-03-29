@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./IntroPage.scss";
 
 // 모달
@@ -36,7 +35,14 @@ export default function IntroPage() {
       </div>
 
       {/* 모달 컴포넌트 */}
-      { isLoginModalVisible && <Modal setIsVisible={setIsLoginModalVisible} InnerComponent={LoginDialog}/> }
+      { isLoginModalVisible && 
+        <Modal 
+          setIsVisible={setIsLoginModalVisible} 
+          InnerComponent={LoginDialog}
+          width='90vw'
+          height='60vh'
+        /> 
+      }
       { isLoginModalVisible && <BodyBlackoutStyle setIsModalVisible= {setIsLoginModalVisible}/> }
     </div>
   );
