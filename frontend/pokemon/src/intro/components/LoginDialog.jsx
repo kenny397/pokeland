@@ -1,21 +1,51 @@
 import React, { useState } from "react";
 import "./LoginDialog.scss";
+import axios from "axios";
 
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginDialog({ handleClickCloseModal }) {
-  const [ inputs, setInputs ] = useState({
+  const navigate = useNavigate();
+
+  const [ userInfo, setUserInfo ] = useState({
     email: '',
     password: ''
   });
 
   const onChangeInputs = (e) => {
     const { value, name } = e.target;
-    setInputs({
-      ...inputs,
+    setUserInfo({
+      ...userInfo,
       [name]: value
     });
   };
+
+  async function onClickSubmitBtn() {
+    const { email, password } = userInfo;
+    
+    try {
+      const response = await axios.post(
+        'https://j6b208.p.ssafy.io/api/v1/users/login',
+        { 
+          email,
+          password
+        });
+      
+      const { accessToken, publicKey } = response.data;
+
+      localStorage.setItem("jwtToken", accessToken);
+      localStorage.setItem("publicKey", publicKey);
+
+      if (accessToken !== null) {
+        navigate('/main');
+        handleClickCloseModal();
+      }
+    } catch(err) {
+      alert('아이디나 비밀번호가 틀립니다.');
+    }
+    
+  }
 
   return (
     <div className="LoginDialog">
@@ -41,15 +71,13 @@ export default function LoginDialog({ handleClickCloseModal }) {
 
       <button 
         className="login-btn"
-        onClick={() => handleClickCloseModal()}
+        onClick={() => onClickSubmitBtn()}
       >
         로그인
       </button>
+      <br />
       <Link to="/signup">
         <p className="to-signup">아직 회원이 아니신가요?</p>
-      </Link>
-      <Link to="/main">
-        <button>메인임시버튼</button>
       </Link>
     </div>
   );
