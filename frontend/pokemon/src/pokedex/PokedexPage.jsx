@@ -26,7 +26,6 @@ export default function PokedexPage() {
         onClickGoToPrev={handleClickGoToPrev}
         onClickGoToNext={handleClickGoToNext}
       />
-
     </div>
   );
 }
