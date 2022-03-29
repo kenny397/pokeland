@@ -1,5 +1,4 @@
 .PokedexPage {
-
   .pokemon-list {
     width: 85vw;
     height: 81vh;
@@ -39,7 +38,7 @@
     margin: 0.5rem 0.2rem 0;
     // transform: translateX(-3px);
     width: 100%;
-    font-size: 0.014vh;
+    font-size: 10px;
     font-weight: 600;
   }
 
@@ -73,7 +72,7 @@
 
   .pokemon-copyright {
     text-align: end;
-    font-size: 0.014vh;
+    font-size: 10px;
     font-weight: 500;
     // transform: translateX(8px);
   }
