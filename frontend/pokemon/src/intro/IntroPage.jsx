@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./IntroPage.css";
+import "./IntroPage.scss";
 
 // 모달
 import Modal from "../components/Modal";

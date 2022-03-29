@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { changeHeaderDisplay } from "../headerDisplay";
 import { useMediaQuery } from "react-responsive";
-import './MainPage.css';
+import './MainPage.scss';
 
 export default function MainPage() {
 

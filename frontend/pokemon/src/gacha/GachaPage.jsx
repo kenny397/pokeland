@@ -1,7 +1,7 @@
 import React from "react";
 import getImgPath from "../utils/getImgPath";
 
-import "./GachaPage.css";
+import "./GachaPage.scss";
 
 export default function GachaPage({
   pokeballDisplay,
@@ -17,7 +17,7 @@ export default function GachaPage({
   }
 
   return (
-    <>
+    <div className="GachaPage">
       {!drawnPokemon ?
         <div className="gacha-container">
           
@@ -48,6 +48,6 @@ export default function GachaPage({
           <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
         </div>
       }
-    </>
+    </div>
   );
 }
