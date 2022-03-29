@@ -5,12 +5,16 @@ import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
 import com.ssafy.b208.api.dto.response.GachaResponseDto;
 import com.ssafy.b208.api.service.GachaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-
+@Api(value = "뽑기페이지 API", tags = {"gacha-controller"})
 @RestController
 @RequestMapping("/api/v1/gacha")
 @RequiredArgsConstructor
@@ -21,6 +25,12 @@ public class GachaController {
 
     // spring security
     // ipfs반환하고 민팅정보 저장
+    @ApiOperation(value = "모든 회원에 대한 랭킹 페이지 정보 반환")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 401, message = "인증 실패"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
     @PostMapping("")
     public ResponseEntity<GachaResponseDto> gacha(Authentication authentication){
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
