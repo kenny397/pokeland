@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface UserPokemonRepository extends JpaRepository<UserPokemon,Long> {
 
+    List<UserPokemon> findUserPokemonByUserIsNull();
     @Query(value = "SELECT DISTINCT pokemon_id FROM user_pokemon WHERE user_id = :id", nativeQuery = true)
     Optional<List<Long>> findPokemonList(@Param("id") Long id);
 
