@@ -1,3 +1,39 @@
-.login-dialog-logo {
-  height: 10vh;
+.LoginDialog {
+
+  input {
+    padding: 5px;
+    width: 65vw;
+    height: 40px;
+    margin: 10px 0;
+    border: 1px solid #CDCDCD;
+    border-radius: 4px;
+    font-size: 17px;
+  }
+
+  input::placeholder {
+    color: #A7A7A7;
+    font-size: 17px;
+  }
+
+  .login-logo {
+    margin: 4vh 0;
+    height: 12vh;
+  }
+
+  .to-signup {
+    cursor: pointer;
+    color: #A7A7A7;
+    font-size: 14px;
+  }
+
+  .to-signup:hover {
+    color: black;
+  }
+
+  .login-btn {
+    height: 40px;
+    margin: 3vh 0 2vh 0;
+    width: calc(65vw + 12px);
+  }
+
 }

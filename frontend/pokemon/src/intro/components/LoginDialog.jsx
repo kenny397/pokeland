@@ -18,15 +18,36 @@ export default function LoginDialog({ handleClickCloseModal }) {
   };
 
   return (
-    <div className="login-dialog-container">
+    <div className="LoginDialog">
       <div>
-        <img src="/images/static/introPage/logoLg.png" alt="" className="login-dialog-logo"/>
+        <img src="/images/static/introPage/logoLg.png" alt="" className="login-logo"/>
       </div>
-      <input name="email" type="text" onChange={(e) => onChangeInputs(e)}/>
-      <input name="password" type="password" onChange={(e) => onChangeInputs(e)}/>
+      <div>
+        <input 
+          name="email" 
+          type="text" 
+          placeholder=" 이메일"
+          onChange={(e) => onChangeInputs(e)}
+        />
+      </div>
+      <div>
+        <input 
+          name="password"
+          type="password"
+          placeholder=" 비밀번호"
+          onChange={ (e) => onChangeInputs(e) }
+        />
+      </div>
 
-      <button onClick={() => handleClickCloseModal()}>로그인</button>
-      <p>아직 회원이 아니신가요?</p>
+      <button 
+        className="login-btn"
+        onClick={() => handleClickCloseModal()}
+      >
+        로그인
+      </button>
+      <Link to="/signup">
+        <p className="to-signup">아직 회원이 아니신가요?</p>
+      </Link>
       <Link to="/main">
         <button>메인임시버튼</button>
       </Link>
