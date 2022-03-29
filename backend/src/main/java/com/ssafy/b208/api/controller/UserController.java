@@ -24,6 +24,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(value = "유저 API", tags = {"user-controller"})
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class UserController {
 
