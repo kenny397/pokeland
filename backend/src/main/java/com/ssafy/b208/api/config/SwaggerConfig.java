@@ -1,4 +1,4 @@
-/*
+
 package com.ssafy.b208.api.config;
 
 import org.springframework.context.annotation.Bean;
@@ -64,4 +64,4 @@ public class SwaggerConfig {
                 .operationsSorter(METHOD)
                 .build();
     }
-}*/
+}
