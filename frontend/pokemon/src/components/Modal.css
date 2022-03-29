@@ -11,3 +11,10 @@
   height: 500px;
   border-radius: 10px;
 }
+
+.modal-container .modal-close-handler {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
