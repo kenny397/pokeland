@@ -19,7 +19,7 @@ public class SupportController {
     private final SupportService supportService;
 
     @PostMapping("/")
-    @ApiOperation(value = "고객센터 글 쓰기", notes = "고객센터에 글을 작성하고 그 내용을 메일로 발송한다.")
+    @ApiOperation(value = "고객센터 글 쓰기", notes = "고객센터에 글을 작성하고 그 내용을 관리자의 메일주소로 발송한다.")
     public void sendMail(@RequestBody MailDto mailDto) {
         supportService.mailSend(mailDto);
     }

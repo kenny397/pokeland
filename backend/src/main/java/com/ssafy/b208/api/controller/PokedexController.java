@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -33,8 +34,8 @@ public class PokedexController {
     // (가진 포켓몬 번호 조회)
     // 원래 Request는 header에 jwtToken
     @GetMapping("/pokedex")
-    @ApiOperation(value = "도감 조회", notes = "사용자의 도감을 조회한다.")
-    public ResponseEntity<PokemonListDto> getPokemonList(Authentication authentication) throws Exception {
+    @ApiOperation(value = "도감 조회", notes = "응답으로 사용자가 가진 포켓몬의 pokedex_id들이 담긴 리스트가 나온다. jwt토큰 필요")
+    public ResponseEntity<PokemonListDto> getPokemonList(@ApiIgnore Authentication authentication) throws Exception {
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
         String email=nftUserDetail.getUsername();
 
@@ -69,7 +70,7 @@ public class PokedexController {
 
     // 보유 NFP 리스트 by 한 포켓몬 조회
     @GetMapping("/nfp/{userId}/{pokedexId}")
-    @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "user id와 pokedex id로 유저가 가진 특정 포켓몬의 NFP를 조회한다.")
+    @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "user id와 pokedex id로 유저가 가진 특정 포켓몬의 NFP들을 조회한다.")
     public ResponseEntity<NfpListDto> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
 
         List<NfpDetailDto> nfpList = pokedexService.getNfpList(userId, pokedexId);
