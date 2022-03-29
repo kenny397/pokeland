@@ -12,8 +12,8 @@ export default function GachaPage({
 }) {
   let pokemonImgPath = null;
   if (drawnPokemon) {
-    const { id, name } = drawnPokemon;
-    pokemonImgPath = getImgPath(id, name, 'pokemon');
+    const { id } = drawnPokemon;
+    pokemonImgPath = getImgPath(id, 'colored');
   }
 
   return (
