@@ -8,8 +8,8 @@ export default function PokemonItemContainer({ item }) {
   const { id, name } = item;
   const hasNfps = useSelector(state => state.nfps)[id];
   
-  const pokemonShadowImgPath = getImgPath(id, name, 'shadow');
-  const pokemonColorImgPath = getImgPath(id, name, 'pokemon');
+  const pokemonShadowImgPath = getImgPath(id, 'shadow');
+  const pokemonColorImgPath = getImgPath(id, 'colored');
   const pokemonNum = (id + "").padStart(3, '0');
 
   return (

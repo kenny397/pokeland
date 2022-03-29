@@ -1,5 +1,4 @@
-export default function getImgPath(id, name, option) {
-  const pokemonNum = (id + "").padStart(3, '0');
-  const pokemonShadowImgPath =  `/images/${option}s/NO. ${pokemonNum}${name}.jpg`;
-  return pokemonShadowImgPath;
+export default function getImgPath(id, option) {
+  const pokemonImgPath =  `/images/pokemonImg/${option}/no.${id}_${option}.jpg`;
+  return pokemonImgPath;
 }
