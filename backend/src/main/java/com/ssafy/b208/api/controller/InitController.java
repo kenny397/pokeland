@@ -21,7 +21,7 @@ public class InitController {
     private final UserPokemonRepository userPokemonRepository;
 
     private final String jsonIpfs="https://gateway.pinata.cloud/ipfs/QmPXLaCos9u9SCDnwhyz8CHZnVpkkutJ4QfzCtKjtm6CcJ/";
-    @PostMapping("/poketmon")
+    @PostMapping("/pokemon")
     public ResponseEntity<BaseResponseBody>setPokeDex(@RequestBody PokeDex[] pokeDexs){
         try{
             for(int i=0; i<pokeDexs.length; i++){
