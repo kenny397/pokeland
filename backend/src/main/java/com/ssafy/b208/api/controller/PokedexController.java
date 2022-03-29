@@ -4,10 +4,7 @@ import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.db.entity.PokeDex;
 import com.ssafy.b208.api.db.entity.UserPokemon;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
-import com.ssafy.b208.api.dto.response.NfpDetailDto;
-import com.ssafy.b208.api.dto.response.PokeInfoDto;
-import com.ssafy.b208.api.dto.response.PokeInfoOuterDto;
-import com.ssafy.b208.api.dto.response.PokemonListDto;
+import com.ssafy.b208.api.dto.response.*;
 import com.ssafy.b208.api.service.PokedexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,8 +39,6 @@ public class PokedexController {
         String email=nftUserDetail.getUsername();
 
         List<Long> pokemonList = pokedexService.getPokemonList(email);
-//        HashMap<String, List<Long>> pokeInfo = new HashMap<>();
-//        pokeInfo.put("pokeInfo", pokemonList);
         PokemonListDto pokemonListDto = PokemonListDto.builder()
                 .pokemonList(pokemonList)
                 .build();
@@ -75,12 +70,13 @@ public class PokedexController {
     // 보유 NFP 리스트 by 한 포켓몬 조회
     @GetMapping("/nfp/{userId}/{pokedexId}")
     @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "user id와 pokedex id로 유저가 가진 특정 포켓몬의 NFP를 조회한다.")
-    public ResponseEntity<HashMap> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
+    public ResponseEntity<NfpListDto> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
 
         List<NfpDetailDto> nfpList = pokedexService.getNfpList(userId, pokedexId);
-        HashMap<String, List<NfpDetailDto>> nfpListMap = new HashMap<>();
-        nfpListMap.put("nfplist", nfpList);
-        return ResponseEntity.status(200).body(nfpListMap);
+        NfpListDto nfpListDto = NfpListDto.builder()
+                .nfpList(nfpList)
+                .build();
+        return ResponseEntity.status(200).body(nfpListDto);
     }
 
     // NFP 상세조회
