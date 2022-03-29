@@ -1,6 +1,8 @@
 import React from "react";
 import pokemonList from "../fixtures/pokemonList";
-import PokemonItem from "./PokemonItem";
+import { Link } from "react-router-dom";
+
+import PokemonItemContainer from "./PokemonItemContainer";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
   const start = (page - 1) * 6;
@@ -11,16 +13,19 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   for (let i = 0; i < paginatedPokemonList.length; i++) {
     emptyGridItems.pop();
   }
-  
+
   return (
     <div className="pokemon-list">
       {paginatedPokemonList.map((item) => (
-        <PokemonItem
-          page={page}
-          item={item}
-          key={item['id']}
-        />
+        <Link 
+          to={`nfps/${item.id}`}
+          key={item.id}>
+          <PokemonItemContainer
+            item={item}
+          />
+        </Link>
       ))}
+
       {emptyGridItems.map((ele) => (
         <div className="empty-grid-item" key={ele}> </div>
       ))}

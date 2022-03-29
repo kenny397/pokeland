@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath }) {
+export default function NfpItem({ pokemonNum, pokemonName, nfpImgPath }) {
 
   return (
     <div className="pokemon-item">
@@ -12,7 +12,7 @@ export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath })
           <p>{pokemonName}</p>
         </div>
       </div>
-      <img className="pokemon-img" src={pokemonImgPath} alt="pokemonImg" />
+      <img className="pokemon-img" src={nfpImgPath} alt="pokemonImg" />
       <div className="pokemon-copyright"><p>ⓒPokémon</p></div>
     </div>
   );

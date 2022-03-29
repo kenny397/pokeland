@@ -26,6 +26,13 @@
     border-radius: 0.5rem;
   }
 
+  .pokemon-item:hover {
+    cursor: pointer;
+    background-color: #fff5d5;
+    border-color: #e0d253;
+    // transform: scale(1.1);
+  };
+
   .pokemon-title {
     display: flex;
     justify-content: flex-start;

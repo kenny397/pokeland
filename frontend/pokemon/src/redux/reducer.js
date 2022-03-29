@@ -1,5 +1,11 @@
+import nfp from "../fixtures/nfp";
+
 const initialState = {
   headerDisplay : false,
+  nfps: {
+    "1": [nfp, nfp],
+    "2": [nfp],
+  },
 };
 
 export default function reducer(state = initialState, action) {
