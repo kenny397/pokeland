@@ -1,9 +1,6 @@
 import React from "react";
-import getImgPath from "../utils/getImgPath";
 
-export default function PokemonItem({ item: { id, name } }) {
-  const pokemonShadowImgPath = getImgPath(id, name, 'shadow');
-  const pokemonNum = (id + "").padStart(3, '0');
+export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath }) {
 
   return (
     <div className="pokemon-item">
@@ -12,10 +9,10 @@ export default function PokemonItem({ item: { id, name } }) {
           <p>{pokemonNum}</p>
         </div>
         <div className="pokemon-name">
-          <p>{name}</p>
+          <p>{pokemonName}</p>
         </div>
       </div>
-      <img className="pokemon-img" src={pokemonShadowImgPath} alt="pokemonImg" />
+      <img className="pokemon-img" src={pokemonImgPath} alt="pokemonImg" />
       <div className="pokemon-copyright"><p>ⓒPokémon</p></div>
     </div>
   );

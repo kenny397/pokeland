@@ -1,6 +1,7 @@
 import React from "react";
 import pokemonList from "../fixtures/pokemonList";
 import PokemonItem from "./PokemonItem";
+import getImgPath from "../utils/getImgPath";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
   const start = (page - 1) * 6;
@@ -14,13 +15,23 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   
   return (
     <div className="pokemon-list">
-      {paginatedPokemonList.map((item) => (
-        <PokemonItem
-          page={page}
-          item={item}
-          key={item['id']}
-        />
-      ))}
+      {paginatedPokemonList.map((item) => {
+        let hasNfps = false;
+        const { id, name } = item;
+        const pokemonShadowImgPath = getImgPath(id, name, 'shadow');
+        const pokemonColorImgPath = getImgPath(id, name, 'pokemon');
+        const pokemonNum = (id + "").padStart(3, '0');
+        return (
+          <PokemonItem
+            page={page}
+            pokemonNum={pokemonNum}
+            pokemonName={name}
+            pokemonImgPath={hasNfps ? pokemonColorImgPath : pokemonShadowImgPath}
+            key={item['id']}
+          />
+        );
+      })}
+
       {emptyGridItems.map((ele) => (
         <div className="empty-grid-item" key={ele}> </div>
       ))}
