@@ -2,11 +2,19 @@
   background: white;
   height:5.9vh;
   border-bottom: 1px solid black;
+  
 }
 
 @media(max-width: 1030px) {
+  .navbar-container {
+    line-height:5.9vh;
+  }
   .pokemon-logo {
+    height: 37px;
+    margin-top: calc(2.95vh - 20px);
     float:right;
+    
+    
   }
 }
 
@@ -18,7 +26,6 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    height: 5.9vh;
   }
   .navbar-right-wrapper {
     display:flex;
