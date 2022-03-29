@@ -37,7 +37,7 @@
     display: flex;
     justify-content: flex-start;
     margin: 0.5rem 0.2rem 0;
-    transform: translateX(-3px);
+    // transform: translateX(-3px);
     width: 100%;
     font-size: 0.014vh;
     font-weight: 600;
@@ -46,7 +46,7 @@
   .pokemon-title p {
     margin: 0;
     padding: 0;
-    transform: scale(0.7);
+    // transform: scale(0.7);
   }
 
   .pokemon-num {
@@ -75,12 +75,12 @@
     text-align: end;
     font-size: 0.014vh;
     font-weight: 500;
-    transform: translateX(8px);
+    // transform: translateX(8px);
   }
 
   .pokemon-copyright > p {
     margin: 0 0 0.72vh;
-    transform: scale(0.8);
+    // transform: scale(0.8);
   }
 
   .empty-grid-item {
