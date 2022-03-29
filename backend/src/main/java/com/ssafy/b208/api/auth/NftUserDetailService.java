@@ -1,8 +1,7 @@
-package com.ssafy.b208.api.Auth;
+package com.ssafy.b208.api.auth;
 
 import com.ssafy.b208.api.db.entity.User;
 import com.ssafy.b208.api.db.repository.UserRepository;
-import com.ssafy.b208.api.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

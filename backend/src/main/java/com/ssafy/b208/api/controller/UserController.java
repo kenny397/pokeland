@@ -1,10 +1,11 @@
 package com.ssafy.b208.api.controller;
 
 
-import com.ssafy.b208.api.db.entity.User;
+import com.ssafy.b208.api.auth.JwtTokenUtil;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
+import com.ssafy.b208.api.dto.response.CheckResponseDto;
 import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
 import com.ssafy.b208.api.service.UserService;
@@ -38,6 +39,7 @@ public class UserController {
         UserLoginResponseDto userloginResponseDto= new UserLoginResponseDto();
         if(passwordEncoder.matches(password, userDto.getPassword())){
             userloginResponseDto.setPublicKey(userDto.getPublicKey());
+            userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
             return ResponseEntity.status(200).body(userloginResponseDto);
         }else{
             return ResponseEntity.status(401).body(userloginResponseDto);
@@ -55,12 +57,25 @@ public class UserController {
         return ResponseEntity.status(200).body(userMoneyResponseDto);
     }
 
-//    // 가진 NFT 조회
-//    @GetMapping("/nft")
-//    public ResponseEntity<> getNft(@RequestBody UserRequestDto userRequestDto) throws Exception {
-//        String email = userRequestDto.getEmail();
-//        userService.getUserByUserEmail(email);
-//    }
+    @GetMapping("/check/nickname/{nickname}")
+    public ResponseEntity<CheckResponseDto> checkNickname(@PathVariable("nickname") String nickname){
+        CheckResponseDto checkResponseDto=new CheckResponseDto();
+
+        return ResponseEntity.status(200).body(checkResponseDto);
+    }
+
+
+    @GetMapping("/check/email/{email}")
+    public ResponseEntity<CheckResponseDto> checkEmail(@PathVariable String email){
+        CheckResponseDto checkResponseDto=new CheckResponseDto();
+        UserDto user = userService.getUserByUserEmail(email);
+        if(user!=null){
+            checkResponseDto.setFlag(1L);
+        }else{
+            checkResponseDto.setFlag(0L);
+        }
+        return ResponseEntity.status(200).body(checkResponseDto);
+    }
 
 
 

@@ -1,4 +1,4 @@
-package com.ssafy.b208.api.dto.response;
+package com.ssafy.b208.api.dto;
 
 import com.ssafy.b208.api.db.entity.PokeDex;
 import lombok.Getter;
@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GachaResponseDto {
+public class GachaDto {
     String tokenId;
-    String pokeDexId;
+    PokeDex pokeDex;
     String ipfsMetaUri;
     String ipfsImageUri;
     String grade;

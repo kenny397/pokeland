@@ -1,7 +1,9 @@
 package com.ssafy.b208.api.service;
 
 
-public interface GachaService {
+import com.ssafy.b208.api.dto.response.GachaResponseDto;
 
+public interface GachaService {
+    GachaResponseDto gacha(String email);
 
 }
