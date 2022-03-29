@@ -18,6 +18,7 @@ export const routers = [
   { path: "/pokedex", element: <PokedexPage /> },
   { path: "/gacha", element: <GachaContainer/> },
   { path: "/signup", element: <SignupPage/> },
+  { path: "/swagger-ui" },
   { path: "*", element: <NotFound /> }
 ];
 
