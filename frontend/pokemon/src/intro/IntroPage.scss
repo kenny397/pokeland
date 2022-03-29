@@ -1,0 +1,41 @@
+.intro-container {
+  text-align: center;
+}
+
+.intro-container .intro-logo {
+  width: 90vw;
+  height: 18vh;
+}
+
+.intro-container .intro-logo-desc {
+  height: 8vh;
+  margin: 5vh 0;
+}
+
+.intro-container .intro-monster-ball {
+  position: absolute;
+  height: 6vh;
+  left: 4vw;
+  top: 54vh;
+}
+
+.intro-container .intro-running {
+  height: 30vh;
+}
+.intro-container .intro-running-container {
+  z-index: 1;
+}
+
+.intro-container .intro-shadow {
+  height: 5vh;
+  position: relative;
+  margin-top: -20px;
+  z-index: -999;
+}
+
+.intro-container .intro-start-btn {
+  width: 30vw;
+  height: 7vh;
+  font-size: 20px;
+  margin-top: 10vh;
+}

@@ -1,5 +1,6 @@
 package com.ssafy.b208.api.dto;
 
+
 import lombok.Getter;
 import lombok.Setter;
 

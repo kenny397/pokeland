@@ -5,7 +5,7 @@ services:
     build: 
       context: ./frontend/pokemon
     ports: 
-      - 3000:3000
+      - 3000:80
     networks:
       - pokeworld
     restart: unless-stopped

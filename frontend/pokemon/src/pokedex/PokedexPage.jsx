@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PokemonList from "./PokemonList";
-import "./PokedexPage.css";
+import "./PokedexPage.scss";
 
 export default function PokedexPage() {
   const [page, setPage] = useState(1);
@@ -20,7 +20,7 @@ export default function PokedexPage() {
   };
 
   return (
-    <div>
+    <div className="PokedexPage">
       <PokemonList
         page={page}
         onClickGoToPrev={handleClickGoToPrev}

@@ -7,8 +7,6 @@ export function decideHeaderDisplay(to) {
   const isNotTutorial = to !=='/tutorial';
   let headerDisplay = false;
 
-  console.log(headerDisplay);
-
   for (let { path } of routers){
     if(to === path && isNotIntro && isNotTutorial){
       headerDisplay = true;
