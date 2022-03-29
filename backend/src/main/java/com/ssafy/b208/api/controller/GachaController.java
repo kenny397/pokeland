@@ -18,6 +18,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(value = "뽑기페이지 API", tags = {"gacha-controller"})
 @RestController
 @RequestMapping("/api/v1/gacha")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class GachaController {
 
