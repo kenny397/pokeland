@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath }) {
-
   return (
     <div className="pokemon-item">
       <div className="pokemon-title">
