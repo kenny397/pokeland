@@ -63,7 +63,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             // parse the token and validate it (decode)
             JWTVerifier verifier = JwtTokenUtil.getVerifier();
             JwtTokenUtil.handleError(token);
-            System.out.println(token);
             DecodedJWT decodedJWT = verifier.verify(token.replace(JwtTokenUtil.TOKEN_PREFIX, ""));
             String userId = decodedJWT.getSubject();
             System.out.println(userId);
@@ -73,7 +72,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             if (userId != null) {
                 // jwt 토큰에 포함된 계정 정보(userId) 통해 실제 디비에 해당 정보의 계정이 있는지 조회.
                 Optional<User> user = userRepository.findUserByEmail(userId);
-                System.out.println(user.isPresent());
                 if(user.isPresent()) {
                     // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
                     NftUserDetail userDetails = new NftUserDetail(user.get());
@@ -82,7 +80,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                     jwtAuthentication.setDetails(userDetails);
                     return jwtAuthentication;
                 }else{
-                    System.out.println("www");
                     throw new AddressNotFoundException(2L);
                 }
             }
