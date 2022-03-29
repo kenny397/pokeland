@@ -1,5 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import pokemonList from "../fixtures/pokemonList";
+
+import NfpItem from "./NfpItem";
 
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext }) {
   const nfpList = useSelector(state => state.nfps)[pokedexId+""];
@@ -7,7 +10,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   const start = (page - 1) * 6;
   const end = page * 6;
   
-  const paginatedNfpList = nfpList.slice(start, end);
+  const paginatedNfpList = nfpList ? nfpList.slice(start, end) : [];
   let emptyGridItems = [1, 2, 3, 4, 5, 6];
   for (let i = 0; i < paginatedNfpList.length; i++) {
     emptyGridItems.pop();
@@ -15,8 +18,18 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
   return (
     <div className="pokemon-list">
-      {paginatedNfpList.map((item) => 
-        JSON.stringify(item)
+      {paginatedNfpList.map(({ pokedexId, ipfsImageUri }) => {
+        let pokemonName = pokemonList[pokedexId - 1]["name"];
+        let pokemonNum = (pokedexId+"").padStart(3, '0');
+        return (
+          <NfpItem
+            pokemonNum={pokemonNum}
+            pokemonName={pokemonName}
+            nfpImgPath={ipfsImageUri}
+            key={ipfsImageUri}
+          />
+        );
+      }
       )}
 
       {emptyGridItems.map((ele) => (
