@@ -7,6 +7,8 @@ import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.NfpDetailDto;
 import com.ssafy.b208.api.dto.response.PokeInfoDto;
 import com.ssafy.b208.api.service.PokedexService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Api(value = "도감 API", tags = {"pokedex-controller"})
 public class PokedexController {
     @Autowired
     private final PokedexService pokedexService;
@@ -30,6 +33,7 @@ public class PokedexController {
     // (가진 포켓몬 번호 조회)
     // 원래 Request는 header에 jwtToken
     @GetMapping("/pokedex")
+    @ApiOperation(value = "도감 조회", notes = "사용자의 도감을 조회한다.")
     public ResponseEntity<Map<String, List<Long>>> getPokemonList(Authentication authentication) throws Exception {
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
         String email=nftUserDetail.getUsername();
@@ -42,6 +46,7 @@ public class PokedexController {
 
     // 포켓몬 1마리 상세조회(도감 정보)
     @GetMapping("/pokedex/{pokedexId}")
+    @ApiOperation(value = "포켓몬 도감 정보 상세 조회", notes = "pokedex id로 특정 포켓몬의 상세정보를 조회한다.")
     public ResponseEntity<HashMap> getPokeInfo(@PathVariable Long pokedexId) throws Exception {
 
         PokeDex pokeDex = pokedexService.getPokeInfo(pokedexId);
@@ -62,6 +67,7 @@ public class PokedexController {
 
     // 보유 NFP 리스트 by 한 포켓몬 조회
     @GetMapping("/nfp/{userId}/{pokedexId}")
+    @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "user id와 pokedex id로 유저가 가진 특정 포켓몬의 NFP를 조회한다.")
     public ResponseEntity<HashMap> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
 
         List<NfpDetailDto> nfpList = pokedexService.getNfpList(userId, pokedexId);
@@ -73,6 +79,7 @@ public class PokedexController {
     // NFP 상세조회
     //jwt
     @GetMapping("/nfp/detail/{tokenId}")
+    @ApiOperation(value = "NFP 상세 조회", notes = "token id로 NFP의 상세정보를 조회한다.")
     public ResponseEntity<NfpDetailDto> getNfpDetail(@PathVariable Long tokenId) throws Exception {
 
         UserPokemon userPokemon = pokedexService.getNfpDetail(tokenId);
