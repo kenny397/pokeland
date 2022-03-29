@@ -5,10 +5,11 @@ import store from "./redux/store";
 export function decideHeaderDisplay(to) {
   const isNotIntro = to !=='/';
   const isNotTutorial = to !=='/tutorial';
+  const isNotSignup = to !=='/signup';
   let headerDisplay = false;
 
   for (let { path } of routers){
-    if(to === path && isNotIntro && isNotTutorial){
+    if(to === path && isNotIntro && isNotTutorial && isNotSignup){
       headerDisplay = true;
       break;
     }
