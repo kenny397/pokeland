@@ -10,9 +10,9 @@ body {
   }
 
   .picachu-img {
-    height: 10vh;
+    height: 90px;
     position: absolute;
-    right: 10vw;
+    right: 9vw;
     top: 0.5vh;
   }
 
@@ -51,6 +51,34 @@ body {
     height: 50px;
     width: calc(67vw + 20px);
     font-size: 17px;
+  }
+
+  .dup-btn {
+    position: absolute;
+    right: 15vw;
+  }
+
+  .email-dup-btn {
+    top: calc(7vh + 125px);
+  }
+
+  .nickname-dup-btn {
+    top: calc(7vh + 240px);
+  }
+  
+  .btn-down {
+    top: calc(7vh + 254px);
+  }
+
+  .btn-dp-none {
+    display: none;
+  }
+
+  .dup-check-div {
+    text-align: left;
+    color: #2743A8;
+    font-weight: bold;
+    font-size: 12px;
   }
 
 }
