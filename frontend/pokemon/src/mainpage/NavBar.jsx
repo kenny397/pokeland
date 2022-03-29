@@ -1,5 +1,5 @@
 import React from "react";
-import './NavBar.css';
+import './NavBar.scss';
 import SideBar from "./SideBar";
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom";

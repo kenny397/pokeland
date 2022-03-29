@@ -1,11 +1,11 @@
 import React from "react";
+import './NotFound.scss';
 
 export default function NotFound() {
   return (
-    <>
-      <h1>
-        404 Fage Not Found
-      </h1>
-    </>
+    <div className="notFoundContainer">
+      <p>지원하지 않는 주소입니다.</p>
+      <img src='/images/static/pokemonStickerGif/picachucrying2.gif' alt="" />
+    </div>
   );
 }

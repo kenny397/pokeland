@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { changeHeaderDisplay } from "../headerDisplay";
 import { useMediaQuery } from "react-responsive";
-import './MainPage.css';
+import './MainPage.scss';
 
 export default function MainPage() {
 
@@ -19,9 +19,9 @@ export default function MainPage() {
     <div>
       { !isDeskTop 
         ?
-        <img src={ '/images/static/mainPageImage.png' } alt="" className="main-image"/>
+        <img src={ '/images/static/mainPage/mainPageImage.png' } alt="" className="main-image"/>
         :
-        <img src={ '/images/static/mainPageImageDsk.png' } alt="" className="main-image"/>
+        <img src={ '/images/static/mainPage/mainPageImageDsk.png' } alt="" className="main-image"/>
       }
       <div className="menu-container">
         <Link to={'/pokedex'} className="menu menu1">

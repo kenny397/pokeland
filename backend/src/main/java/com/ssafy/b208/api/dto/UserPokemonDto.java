@@ -12,15 +12,9 @@ import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
+@Builder
 public class UserPokemonDto {
     Long tokenId;
     String ipfsUri;
     PokeDex pokemon;
-
-    @Builder
-    public UserPokemonDto(Long tokenId, String ipfsUri, PokeDex pokemon) {
-        this.tokenId = tokenId;
-        this.ipfsUri = ipfsUri;
-        this.pokemon = pokemon;
-    }
 }

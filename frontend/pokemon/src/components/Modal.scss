@@ -1,0 +1,20 @@
+.modal-container {
+  position: fixed;
+  overflow-y: auto;
+  left: 50%;
+  top: 50%;
+  padding: 5px;
+  z-index: 1011;
+  transform: translate(-50%, -50%);
+  background:white;
+  width: 300px; 
+  height: 500px;
+  border-radius: 10px;
+}
+
+.modal-container .modal-close-handler {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}

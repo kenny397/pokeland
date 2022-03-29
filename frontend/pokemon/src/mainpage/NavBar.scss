@@ -69,10 +69,9 @@
 /* The rest copied directly from react-burger-menu docs */
 
 /* Position and sizing of burger button */
-.bm-burger-button {
-  position: fixed;
-  width: 30px;
-  height: 25px;
+.burger-btn {
+  position: absolute;
+  height: 4vh;
   left: 4px;
   top: 0.9vh;
 }
