@@ -7,6 +7,7 @@ import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.NfpDetailDto;
 import com.ssafy.b208.api.dto.response.PokeInfoDto;
 import com.ssafy.b208.api.dto.response.PokeInfoOuterDto;
+import com.ssafy.b208.api.dto.response.PokemonListDto;
 import com.ssafy.b208.api.service.PokedexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,14 +37,17 @@ public class PokedexController {
     // 원래 Request는 header에 jwtToken
     @GetMapping("/pokedex")
     @ApiOperation(value = "도감 조회", notes = "사용자의 도감을 조회한다.")
-    public ResponseEntity<Map<String, List<Long>>> getPokemonList(Authentication authentication) throws Exception {
+    public ResponseEntity<PokemonListDto> getPokemonList(Authentication authentication) throws Exception {
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
         String email=nftUserDetail.getUsername();
 
         List<Long> pokemonList = pokedexService.getPokemonList(email);
-        HashMap<String, List<Long>> pokeInfo = new HashMap<>();
-        pokeInfo.put("pokeInfo", pokemonList);
-        return ResponseEntity.status(200).body(pokeInfo);
+//        HashMap<String, List<Long>> pokeInfo = new HashMap<>();
+//        pokeInfo.put("pokeInfo", pokemonList);
+        PokemonListDto pokemonListDto = PokemonListDto.builder()
+                .pokemonList(pokemonList)
+                .build();
+        return ResponseEntity.status(200).body(pokemonListDto);
     }
 
     // 포켓몬 1마리 상세조회(도감 정보)
@@ -62,8 +66,6 @@ public class PokedexController {
                 .weight(pokeDex.getWeight())
                 .abilities(pokeDex.getAbilities())
                 .build();
-//        HashMap<String, PokeInfoDto> pokeInfo = new HashMap<>();
-//        pokeInfo.put("pokeInfo", pokeInfoDto);
         PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
                 .pokeInfo(pokeInfoDto)
                 .build();
