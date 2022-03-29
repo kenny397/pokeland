@@ -36,6 +36,7 @@ public class PokedexController {
     @GetMapping("/pokedex")
     @ApiOperation(value = "도감 조회", notes = "응답으로 사용자가 가진 포켓몬의 pokedex_id들이 담긴 리스트가 나온다. jwt토큰 필요")
     public ResponseEntity<PokemonListDto> getPokemonList(@ApiIgnore Authentication authentication) throws Exception {
+
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
         String email=nftUserDetail.getUsername();
 
