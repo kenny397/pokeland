@@ -1,5 +1,5 @@
 import React from "react";
-import "./BodyBlackoutStyle.css";
+import "./BodyBlackoutStyle.scss";
 
 export default function BodyBlackoutStyle({ setIsModalVisible }) {
 

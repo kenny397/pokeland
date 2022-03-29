@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import './SupportPage.css';
+import './SupportPage.scss';
 
 export default function SupportPage() {
   const [inputs, setInputs] = useState({
@@ -26,7 +26,7 @@ export default function SupportPage() {
   };
   
   return (
-    <div>
+    <div className="SupportPage">
       <h1 className="header">고객센터</h1>
       <div className="sub-title">
         <span >개발자에게 서비스 피드백을 보내주시면 </span><span className="token">500SSF</span><span>를 드립니다!</span>

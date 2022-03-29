@@ -1,0 +1,38 @@
+
+.GachaPage {
+  .gacha-container {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    height: 90vh;
+  }
+
+  .gacha-img {
+    margin: 0 auto;
+    width: 20vh;
+  }
+
+  .pokeball-img {
+    margin: 48vh 10vh 10vh 29.5vh;
+    position: absolute;
+    width: 7vh;
+  }
+
+  button {
+    margin: 0 auto;
+    width: 12vh;
+  }
+
+  .open-pokeball-btn {
+    background-color: #A51515;
+    width: 14vh;
+  }
+
+  .balance-div {
+    margin: 0 auto;
+  }
+
+  .drawn-pokemon-img {
+    margin: 10vh auto 3vh;
+  }
+}
