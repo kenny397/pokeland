@@ -25,7 +25,6 @@ public class GachaController {
     public ResponseEntity<GachaResponseDto> gacha(Authentication authentication){
         NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
         String email=nftUserDetail.getUsername();
-        System.out.println(email);
 
 
 

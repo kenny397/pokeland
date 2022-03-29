@@ -31,8 +31,7 @@ public class PokedexServiceImpl implements PokedexService {
     private UserRepository userRepository;
 
     @Override
-    public List<Long> getPokemonList(UserRequestDto userRequestDto) {
-        String email = userRequestDto.getEmail();
+    public List<Long> getPokemonList(String email) {
         User user = Optional.ofNullable(userRepository.findUserByEmail(email).get())
                 .orElseGet(() -> new User());
         List<Long> pokemonList = Optional.ofNullable(userPokemonRepository.findPokemonList(user.getId()).get())

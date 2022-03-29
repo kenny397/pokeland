@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public interface PokedexService {
-    public List<Long> getPokemonList(UserRequestDto userRequestDto);
+    public List<Long> getPokemonList(String email);
 
     public PokeDex getPokeInfo(Long id);
 

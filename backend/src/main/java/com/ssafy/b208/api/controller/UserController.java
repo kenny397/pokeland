@@ -2,6 +2,7 @@ package com.ssafy.b208.api.controller;
 
 
 import com.ssafy.b208.api.auth.JwtTokenUtil;
+import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
@@ -11,6 +12,7 @@ import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
 import com.ssafy.b208.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,10 +49,11 @@ public class UserController {
 
     }
     //자산, 유저가 가지고있는 NFT , 상세조회 , 고객센터 email
-    // 자산 조회
-    @GetMapping("/money")
-    public ResponseEntity<UserMoneyResponseDto> checkMoney(@RequestBody UserRequestDto userRequestDto) throws Exception {
-        String email = userRequestDto.getEmail();
+    // 자산 조회 jwt
+    @GetMapping("/balance")
+    public ResponseEntity<UserMoneyResponseDto> checkMoney(Authentication authentication) throws Exception {
+        NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
+        String email=nftUserDetail.getUsername();
         UserDto userDto = userService.getUserByUserEmail(email);
         UserMoneyResponseDto userMoneyResponseDto = new UserMoneyResponseDto();
         userMoneyResponseDto.setMoney(userDto.getMoney());

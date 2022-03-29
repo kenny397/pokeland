@@ -1,5 +1,6 @@
 package com.ssafy.b208.api.controller;
 
+import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.db.entity.PokeDex;
 import com.ssafy.b208.api.db.entity.UserPokemon;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
@@ -9,6 +10,7 @@ import com.ssafy.b208.api.service.PokedexService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +30,11 @@ public class PokedexController {
     // (가진 포켓몬 번호 조회)
     // 원래 Request는 header에 jwtToken
     @GetMapping("/pokedex")
-    public ResponseEntity<Map<String, List<Long>>> getPokemonList(HttpServletRequest req) throws Exception {
-        String email = req.getParameter("email");
-        String nickname = req.getParameter("nickname");
-        String password = req.getParameter("password");
-        UserRequestDto userRequestDto = new UserRequestDto(email, nickname, password);
-        List<Long> pokemonList = pokedexService.getPokemonList(userRequestDto);
+    public ResponseEntity<Map<String, List<Long>>> getPokemonList(Authentication authentication) throws Exception {
+        NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
+        String email=nftUserDetail.getUsername();
+
+        List<Long> pokemonList = pokedexService.getPokemonList(email);
         HashMap<String, List<Long>> pokeInfo = new HashMap<>();
         pokeInfo.put("pokeInfo", pokemonList);
         return ResponseEntity.status(200).body(pokeInfo);
@@ -70,6 +71,7 @@ public class PokedexController {
     }
 
     // NFP 상세조회
+    //jwt
     @GetMapping("/nfp/detail/{tokenId}")
     public ResponseEntity<NfpDetailDto> getNfpDetail(@PathVariable Long tokenId) throws Exception {
 

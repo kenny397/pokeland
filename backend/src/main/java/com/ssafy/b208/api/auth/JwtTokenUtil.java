@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class JwtTokenUtil {
     private static String secretKey="nfp";
-    private static Integer expirationTime=10000;
+    private static Integer expirationTime=1000*3600*24;
 
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
