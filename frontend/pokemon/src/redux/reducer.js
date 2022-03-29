@@ -3,7 +3,8 @@ import nfp from "../fixtures/nfp";
 const initialState = {
   headerDisplay : false,
   nfps: {
-    "1": [nfp],
+    "1": [nfp, nfp],
+    "2": [nfp],
   },
 };
 
