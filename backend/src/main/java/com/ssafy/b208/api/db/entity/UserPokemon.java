@@ -1,7 +1,9 @@
 package com.ssafy.b208.api.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +21,7 @@ public class UserPokemon extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PokeDex pokemon;

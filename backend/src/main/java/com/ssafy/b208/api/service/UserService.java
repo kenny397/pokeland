@@ -11,4 +11,6 @@ public interface UserService {
     public void register(UserRequestDto registerRequestDto);
 
     public UserDto getUserByUserEmail(String email);
+
+    UserDto getUserByUserNickname(String nickname);
 }
