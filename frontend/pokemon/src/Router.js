@@ -1,7 +1,7 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 
-import IntroPage from './pages/IntroPage';
+import IntroPage from './intro/IntroPage';
 import MainPage from './mainpage/MainPage';
 import TutorialPage from './tutorial/TutorialPage';
 import SupportPage from './support/SupportPage';

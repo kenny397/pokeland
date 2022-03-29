@@ -35,3 +35,33 @@ a:hover, a:active { text-decoration: none; }
     background: white;
   }
 }
+
+button {
+  margin: 0 0.3rem;
+  width: 3rem;
+  height: 2rem;
+  background-color: #005FC6;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-style: hidden;
+  border-radius: 0.25rem;
+}
+
+button > a {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input::placeholder, textarea::placeholder {
+  font-size: 0.5rem;
+}
+
+input:focus, select:focus {
+  border-color: #005FC6;
+}

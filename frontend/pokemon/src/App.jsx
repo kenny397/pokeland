@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import NavBar from './mainpage/NavBar';
 
-import './App.css';
+import './App.scss';
 // js
 import { decideHeaderDisplay } from './headerDisplay';
 
