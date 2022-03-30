@@ -14,6 +14,7 @@ export default function GachaContainer() {
   const [drawnPokemon, setDrawnPokemon] = useState(null);
   const [grade, setGrade] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [confetti, setConfetti] = useState(null);
 
   const { balance } = useSelector(state => ({
     balance: state.balance
@@ -35,13 +36,14 @@ export default function GachaContainer() {
     
     setPokeballDisplay(false);
     setLoading(true);
-    setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); }, 1200);
+    setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 2000);
     
   };
   
   const handleClickGoBackToGacha = () => {
     setDrawnPokemon(null);
     setGrade(null);
+    setConfetti(false);
   };
   
   return (
@@ -50,6 +52,7 @@ export default function GachaContainer() {
       drawnPokemon={drawnPokemon}
       grade={grade}
       loading={loading}
+      confetti={confetti}
       onClickGetPokemon={handleClickGetPokemon}
       onClickOpenPokeball={handleClickOpenPokeball}
       onClickGoBackToGacha={handleClickGoBackToGacha}

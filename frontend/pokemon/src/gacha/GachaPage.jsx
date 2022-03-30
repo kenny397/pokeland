@@ -3,6 +3,8 @@ import getImgPath from "../utils/getImgPath";
 import "./GachaPage.scss";
 import { useSelector } from "react-redux";
 
+import Confetti from 'react-confetti';
+
 export default function GachaPage({
   pokeballDisplay,
   drawnPokemon,
@@ -11,6 +13,7 @@ export default function GachaPage({
   onClickOpenPokeball,
   onClickGoBackToGacha,
   loading,
+  confetti,
 }) {
 
   let pokemonImgPath = null;
@@ -65,9 +68,17 @@ export default function GachaPage({
       {loading &&
         <>
           <div className="body-blackout"/>
-          <img src="/images/static/pokemonStickerGif/picachuhappy.gif" alt="" className="pokeball-spinning-img"/> 
+          <img src="/images/static/pokemonStickerGif/monsterball.gif" alt="" className="pokeball-spinning-img"/> 
         </>
       }
+      { confetti &&
+        <Confetti
+          width={500}
+          height={800}
+          gravity={0.03}
+        />
+      }
+      
     </div>
   );
 }
