@@ -19,10 +19,14 @@ public class SupportServiceImpl implements SupportService {
     public void mailSend(MailDto mailDto) {
         SimpleMailMessage message = new SimpleMailMessage();
         String title = "[" + mailDto.getCategory() + "] " + mailDto.getTitle();
-        message.setTo(mailDto.getAddress());
+        message.setTo("yuparknji@gmail.com");
         message.setFrom(SupportServiceImpl.FROM_ADDRESS);
         message.setSubject(title);
-        message.setText(mailDto.getMessage());
+        message.setText(
+                "답신할 이메일: " + mailDto.getAddress()
+                + System.lineSeparator() + System.lineSeparator()
+                + mailDto.getMessage()
+        );
         mailSender.send(message);
     }
 }
