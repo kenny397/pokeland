@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
+
+// font-awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faUser, faCopy } from "@fortawesome/free-regular-svg-icons";
 
+import { useNavigate } from "react-router-dom";
+
 import './SideBar.scss';
 
 export default function SideBar() {
+  useEffect(() => {
+    overlay[0].addEventListener("click", clicked);
+
+  });
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
   const publicKey = localStorage.getItem('publicKey');
@@ -17,10 +26,10 @@ export default function SideBar() {
   };
   const overlay = document.getElementsByClassName('bm-overlay');
 
-  useEffect(() => {
-    overlay[0].addEventListener("click", clicked);
-
-  });
+  const handleClickLogOut = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
   return (
     <>
@@ -36,9 +45,10 @@ export default function SideBar() {
           <div className="user-icon-wrapper">
             <FontAwesomeIcon icon={faUser} className="user-icon"/>
           </div>
+          <p onClick={handleClickLogOut}>로그아웃</p>
           <div>계정 주소</div>
           <div className="asset-wrapper">
-            <p>{ publicKey.substring(0,4)+ "...."+ publicKey.slice(-4) }</p>
+            <p>{ publicKey ? publicKey.substring(0,4)+ "...."+ publicKey.slice(-4) : 0 }</p>
             <FontAwesomeIcon icon={faCopy} className="copy-icon"/>
           </div>
           <div>자산</div>
