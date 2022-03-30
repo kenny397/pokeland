@@ -16,7 +16,7 @@ export const routers = [
   { path: "/main", element: <MainPage /> },
   { path: "/tutorial", element: <TutorialPage /> },
   { path: "/support", element: <SupportPage /> },
-  { path: "/pokedex", element: <PokedexPage /> },
+  { path: "/pokedex/*", element: <PokedexPage /> },
   { path: "/pokedex/nfps/:pokedexId", element: <NfpsByPokemon /> },
   { path: "/gacha", element: <GachaContainer/> },
   { path: "/signup", element: <SignupPage/> },

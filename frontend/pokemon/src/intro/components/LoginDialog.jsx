@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import "./LoginDialog.scss";
-import axios from "axios";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { requestLogin, getBalance } from "../../api";
+
+import { useDispatch } from "react-redux";
+import { updateBalance } from "../../redux/actions";
+
 export default function LoginDialog({ handleClickCloseModal }) {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const [ userInfo, setUserInfo ] = useState({
@@ -21,31 +27,21 @@ export default function LoginDialog({ handleClickCloseModal }) {
     });
   };
 
-  async function onClickSubmitBtn() {
+  const onClickSubmitBtn = async () => {
     const { email, password } = userInfo;
-    
-    try {
-      const response = await axios.post(
-        'https://j6b208.p.ssafy.io/api/v1/users/login',
-        { 
-          email,
-          password
-        });
-      
-      const { accessToken, publicKey } = response.data;
+    const accessToken = await requestLogin(email, password);
+    if (accessToken) {
+      const { data: { money } } = await getBalance();
+      localStorage.setItem("balance", money);
+      dispatch(updateBalance(localStorage.getItem('balance')));
+      console.log(money);
 
-      localStorage.setItem("jwtToken", accessToken);
-      localStorage.setItem("publicKey", publicKey);
-
-      if (accessToken !== null) {
-        navigate('/main');
-        handleClickCloseModal();
-      }
-    } catch(err) {
+      navigate('/main');
+      handleClickCloseModal();
+    } else {
       alert('아이디나 비밀번호가 틀립니다.');
     }
-    
-  }
+  };
 
   return (
     <div className="LoginDialog">
