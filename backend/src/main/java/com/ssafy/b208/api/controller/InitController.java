@@ -25,7 +25,7 @@ public class InitController {
     private final PokeDexRepository pokeDexRepository;
     private final UserPokemonRepository userPokemonRepository;
 
-    private final String jsonIpfs="https://gateway.pinata.cloud/ipfs/QmPXLaCos9u9SCDnwhyz8CHZnVpkkutJ4QfzCtKjtm6CcJ/";
+    private final String jsonIpfs="https://ipfs.io/ipfs/QmP9UvkfujEmgDFmFXJx4JRzcwutNGcuSaEfieseqGTkRS/";
 
     @ApiOperation(value = "pokedex 초기 업로드")
     @ApiResponses({
