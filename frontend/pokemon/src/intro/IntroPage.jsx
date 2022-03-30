@@ -16,7 +16,7 @@ export default function IntroPage() {
     setIsLoginModalVisible(active);
   };
 
-  const jwtToken = localStorage.getItem('jwtToken') !== null;
+  const jwt = localStorage.getItem('jwt') !== null;
 
   const navigate = useNavigate();
 
@@ -37,10 +37,10 @@ export default function IntroPage() {
       <img src='/images/static/monsterBall.png' alt="" className="intro-monster-ball"/>
 
       <div>
-        {/* TODO: jwtToken이 있는 유저일 경우 메인페이지로 이동 */}
+        {/* TODO: jwt가 있는 유저일 경우 메인페이지로 이동 */}
         <button 
           className="intro-start-btn" 
-          onClick={() => { jwtToken ? navigate('/main') : onSetIsLoginModalVisible(true); } }>
+          onClick={() => { jwt ? navigate('/main') : onSetIsLoginModalVisible(true); } }>
           시작하기
         </button>
       </div>

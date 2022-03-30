@@ -16,7 +16,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateJwt(localStorage.getItem('jwtToken')));
+    dispatch(updateJwt(localStorage.getItem('jwt')));
   }, []);
 
   // header, container 표시 or not
