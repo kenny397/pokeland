@@ -1,33 +1,100 @@
+.SideBar {
+  font-weight: bold;
 
-.sidebar-cross-btn {
-  height: 30px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
+  .sidebar-user-wrapper {
+    padding: 2.5em 1.5em 0;
+  }
 
-.burger-btn {
-  cursor: pointer;
-}
+  .sidebar-cross-btn {
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
 
-.user-icon-wrapper {
-  background: #C4C4C4;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  border-radius: 60px;
-}
+  .burger-btn {
+    cursor: pointer;
+  }
 
-.user-icon {
-  vertical-align: middle;
-  height: 30px;
-  width: 40px;
-}
+  .user-icon-wrapper {
+    background: #C4C4C4;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 60px;
+  }
 
-.asset-wrapper p {
-  display: inline-block;
-  color: #747474;
-  margin-right: 10px;
+  .user-icon {
+    vertical-align: middle;
+    height: 30px;
+    width: 40px;
+  }
+
+  .big-font {
+    font-size: 30px;
+
+  }
+
+  .blue-font {
+    color: #005FC6;
+  }
+
+  .asset-wrapper span {
+    color: #747474;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: normal;
+  }
+
+  .menu-container {
+    margin-top: 4vh;
+    padding: 0 !important;
+    display:grid !important; 
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    cursor: pointer;
+    background: white;
+    overflow: hidden;
+    border-top: 1px solid #C8C8C8;
+    height: 10vh;
+  }
+
+  .menu:last-child {
+    border-bottom: 1px solid #C8C8C8;
+  }
   
+  .menu p {
+    margin-top: 1vh;
+    margin-left: 1em;
+    display:inline-block;
+  }
+
+  .menu:hover {
+    background : #f0f0f0;
+  }
+
+  .menu-container img{
+    margin-right: 15px;
+    float:right;
+  }
+
+  .h12 {
+    height: 80px;
+  }
+  .h15 {
+    height: 120px;
+  }
+
+  .pokedex-image {
+    margin-top: 2vh;
+  }
+
+
+
+
+
 }

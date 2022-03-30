@@ -1,23 +1,37 @@
 import React from "react";
 import getImgPath from "../utils/getImgPath";
-
 import "./GachaPage.scss";
+import { useSelector } from "react-redux";
+
+import Confetti from 'react-confetti';
 
 export default function GachaPage({
   pokeballDisplay,
   drawnPokemon,
+  grade,
   onClickGetPokemon,
   onClickOpenPokeball,
-  onClickGoBackToGacha
+  onClickGoBackToGacha,
+  loading,
+  confetti,
 }) {
+
   let pokemonImgPath = null;
   if (drawnPokemon) {
     const { id } = drawnPokemon;
     pokemonImgPath = getImgPath(id, 'colored');
   }
 
+  const { balance } = useSelector(state => ({
+    balance: state.balance
+  }));
+
+  const backgroundStyle ={
+    backgroundImage: `url(/images/backgroundImg/${grade}.png)`
+  };
+  
   return (
-    <div className="GachaPage">
+    <div className="GachaPage" style={ backgroundStyle }>
       {!drawnPokemon ?
         <div className="gacha-container">
           
@@ -27,7 +41,10 @@ export default function GachaPage({
             <img className="pokeball-img" src="/images/static/pokeball.png" alt="몬스터볼" />
           }
           {!pokeballDisplay && 
-            <button onClick={onClickGetPokemon}>포켓몬 뽑기</button>
+            <>
+              <button onClick={onClickGetPokemon}>포켓몬 뽑기</button>
+              <p className="decrease-ssf">-100 SSF</p>
+            </>
           }
           {pokeballDisplay &&
             <button 
@@ -38,7 +55,7 @@ export default function GachaPage({
             </button>
           }
           <div className="balance-div">
-            <span>내 자산: </span><span>1000.0 SSF</span>
+            <span>내 자산: </span><span>{balance} SSF</span>
           </div>
         </div>
         :
@@ -48,6 +65,20 @@ export default function GachaPage({
           <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
         </div>
       }
+      {loading &&
+        <>
+          <div className="body-blackout"/>
+          <img src="/images/static/pokemonStickerGif/monsterball.gif" alt="" className="pokeball-spinning-img"/> 
+        </>
+      }
+      { confetti &&
+        <Confetti
+          width={500}
+          height={800}
+          gravity={0.03}
+        />
+      }
+      
     </div>
   );
 }

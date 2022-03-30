@@ -16,7 +16,7 @@ export default function MainPage() {
   }, []);
 
   return (
-    <div>
+    <div className="MainPage">
       { !isDeskTop 
         ?
         <img src={ '/images/static/mainPage/mainPageImage.png' } alt="" className="main-image"/>
@@ -36,9 +36,9 @@ export default function MainPage() {
           <p>고객센터</p>
           <img src={ '/images/static/nurse.png' } alt="" className="h15"/>
         </Link>
-        <div className="menu menu4">
-          <p>지갑설정</p>
-          <img src={ '/images/static/metamask.png' } alt="" className="h12"/>
+        <div className="menu menu4" onClick={() => alert('아직 준비중이에요!')}>
+          <p>스티커 거래</p>
+          <img src={ '/images/pokemonImg/colored/no.132_colored.jpg' } alt="" className="h15 metamong-img"/>
         </div>
       </div>
     </div>
