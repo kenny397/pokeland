@@ -2,6 +2,7 @@ import nfp from "../fixtures/nfp";
 
 const initialState = {
   headerDisplay : false,
+  existingPokemons: [],
   nfps: {
     "1": [nfp, nfp],
     "2": [nfp],
@@ -30,6 +31,11 @@ export default function reducer(state = initialState, action) {
       balance: action.payload.balance
     };
   }
-
+  if (action.type === 'setExistingPokemons') {
+    return {
+      ...state,
+      existingPokemons: action.payload.existingPokemons
+    };
+  }
   return state;
 }

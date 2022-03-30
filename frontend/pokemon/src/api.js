@@ -37,6 +37,20 @@ export async function requestLogin(email, password) {
   }
 }
 
+export async function fetchExistingPokemons(jwt) {
+  const response = await axios(
+    {
+      method : 'get',
+      url : `${BASE_URL}/pokedex`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+      data : '',
+    }
+  );
+
+  let { pokemonList } = response.data;
+  return pokemonList;
+}
+
 export async function doGacha() {
   try {
     const jwt = localStorage.getItem('jwt');
