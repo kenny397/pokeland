@@ -1,6 +1,7 @@
 import React from "react";
 import getImgPath from "../utils/getImgPath";
 import "./GachaPage.scss";
+import { useSelector } from "react-redux";
 
 export default function GachaPage({
   pokeballDisplay,
@@ -9,13 +10,18 @@ export default function GachaPage({
   onClickGetPokemon,
   onClickOpenPokeball,
   onClickGoBackToGacha,
+  loading,
 }) {
-  
+
   let pokemonImgPath = null;
   if (drawnPokemon) {
     const { id } = drawnPokemon;
     pokemonImgPath = getImgPath(id, 'colored');
   }
+
+  const { balance } = useSelector(state => ({
+    balance: state.balance
+  }));
 
   const backgroundStyle ={
     backgroundImage: `url(/images/backgroundImg/${grade}.png)`
@@ -46,7 +52,7 @@ export default function GachaPage({
             </button>
           }
           <div className="balance-div">
-            <span>내 자산: </span><span>1000.0 SSF</span>
+            <span>내 자산: </span><span>{balance} SSF</span>
           </div>
         </div>
         :
@@ -55,6 +61,12 @@ export default function GachaPage({
           <h2>{drawnPokemon.name}</h2>
           <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
         </div>
+      }
+      {loading &&
+        <>
+          <div className="body-blackout"/>
+          <img src="/images/static/pokemonStickerGif/picachuhappy.gif" alt="" className="pokeball-spinning-img"/> 
+        </>
       }
     </div>
   );

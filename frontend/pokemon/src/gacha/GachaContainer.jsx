@@ -1,16 +1,19 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import pokemonList from "../fixtures/pokemonList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import GachaPage from "./GachaPage";
 
-import { doGacha } from "../api";
+import { doGacha, getBalance } from "../api";
+import { updateBalance } from "../redux/actions";
 
 export default function GachaContainer() {
+  const dispatch = useDispatch();
   const [pokeballDisplay, setPokeballDisplay] = useState(false);
   const [drawnPokemon, setDrawnPokemon] = useState(null);
   const [grade, setGrade] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   const { balance } = useSelector(state => ({
     balance: state.balance
@@ -25,12 +28,15 @@ export default function GachaContainer() {
   };
   
   const handleClickOpenPokeball = async () => {
-    const { data: { grade, ipfsImageUri, pokeDexId } } = await doGacha();
-    console.log(grade, ipfsImageUri, pokeDexId);
+    const { data: { grade, pokeDexId } } = await doGacha();
+    const response = await getBalance();
+    localStorage.setItem('balance', response.data.money);
+    dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
-    setDrawnPokemon(pokemonList[pokeDexId-1]);
-    setGrade(grade);
+    setLoading(true);
+    setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); }, 1200);
+    
   };
   
   const handleClickGoBackToGacha = () => {
@@ -43,6 +49,7 @@ export default function GachaContainer() {
       pokeballDisplay={pokeballDisplay}
       drawnPokemon={drawnPokemon}
       grade={grade}
+      loading={loading}
       onClickGetPokemon={handleClickGetPokemon}
       onClickOpenPokeball={handleClickOpenPokeball}
       onClickGoBackToGacha={handleClickGoBackToGacha}
