@@ -6,3 +6,12 @@ export function updateHeaderDisplay(headerDisplay) {
     },
   };
 }
+
+export function updateJwt(jwt) {
+  return {
+    type: 'updateJwt',
+    payload: {
+      jwt,
+    },
+  };
+}
