@@ -61,7 +61,5 @@
     "commitizen": {
       "path": "git-cz"
     }
-  },
-  "proxy": "https://j6b208.p.ssafy.io/"
-  
+  }
 }

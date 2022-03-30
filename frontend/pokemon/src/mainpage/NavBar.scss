@@ -2,11 +2,18 @@
   background: white;
   height:5.9vh;
   border-bottom: 1px solid black;
+  
 }
 
 @media(max-width: 1030px) {
+  .navbar-container {
+    line-height:5.9vh;
+  }
   .pokemon-logo {
+    height: 37px;
+    margin-top: calc(2.95vh - 20px);
     float:right;
+    
   }
 }
 
@@ -18,7 +25,6 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    height: 5.9vh;
   }
   .navbar-right-wrapper {
     display:flex;
@@ -74,22 +80,6 @@
   height: 4vh;
   left: 4px;
   top: 0.9vh;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: #373a47;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #bdc3c7;
 }
 
 /* General sidebar styles */

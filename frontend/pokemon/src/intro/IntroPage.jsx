@@ -6,12 +6,19 @@ import Modal from "../components/Modal";
 import BodyBlackoutStyle from "../components/BodyBlackoutStyle";
 import LoginDialog from "./components/LoginDialog";
 
+// react redux
+import { useNavigate } from "react-router-dom";
+
 export default function IntroPage() {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
 
   const onSetIsLoginModalVisible = (active) => {
     setIsLoginModalVisible(active);
   };
+
+  const jwtToken = localStorage.getItem('jwtToken') !== null;
+
+  const navigate = useNavigate();
 
   return (
     <div className="intro-container">
@@ -31,7 +38,11 @@ export default function IntroPage() {
 
       <div>
         {/* TODO: jwtToken이 있는 유저일 경우 메인페이지로 이동 */}
-        <button className="intro-start-btn" onClick={() => onSetIsLoginModalVisible(true)}>시작하기</button>
+        <button 
+          className="intro-start-btn" 
+          onClick={() => { jwtToken ? navigate('/main') : onSetIsLoginModalVisible(true); } }>
+          시작하기
+        </button>
       </div>
 
       {/* 모달 컴포넌트 */}

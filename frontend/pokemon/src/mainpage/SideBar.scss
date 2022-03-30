@@ -1,7 +1,33 @@
 
 .sidebar-cross-btn {
+  height: 30px;
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.burger-btn {
+  cursor: pointer;
+}
+
+.user-icon-wrapper {
+  background: #C4C4C4;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+.user-icon {
+  vertical-align: middle;
+  height: 30px;
+  width: 40px;
+}
+
+.asset-wrapper p {
+  display: inline-block;
+  color: #747474;
+  margin-right: 10px;
+  
 }
