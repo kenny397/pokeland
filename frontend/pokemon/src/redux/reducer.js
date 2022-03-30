@@ -7,6 +7,7 @@ const initialState = {
     "2": [nfp],
   },
   jwt: '',
+  balance: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -21,6 +22,12 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       jwt: action.payload.jwt
+    };
+  }
+  if (action.type === 'updateBalance') {
+    return {
+      ...state,
+      balance: action.payload.balance
     };
   }
 

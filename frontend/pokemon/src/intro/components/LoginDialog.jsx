@@ -6,7 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 import { requestLogin, getBalance } from "../../api";
 
+import { useDispatch } from "react-redux";
+import { updateBalance } from "../../redux/actions";
+
 export default function LoginDialog({ handleClickCloseModal }) {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const [ userInfo, setUserInfo ] = useState({
@@ -26,9 +31,13 @@ export default function LoginDialog({ handleClickCloseModal }) {
     const { email, password } = userInfo;
     const accessToken = await requestLogin(email, password);
     if (accessToken) {
+      const { data: { money } } = await getBalance();
+      localStorage.setItem("balance", money);
+      dispatch(updateBalance(localStorage.getItem('balance')));
+      console.log(money);
+
       navigate('/main');
       handleClickCloseModal();
-      getBalance();
     } else {
       alert('아이디나 비밀번호가 틀립니다.');
     }

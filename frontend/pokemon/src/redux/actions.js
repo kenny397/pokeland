@@ -15,3 +15,12 @@ export function updateJwt(jwt) {
     },
   };
 }
+
+export function updateBalance(balance) {
+  return {
+    type: 'updateBalance',
+    payload: {
+      balance,
+    },
+  };
+}

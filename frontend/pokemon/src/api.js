@@ -12,11 +12,7 @@ export async function getBalance() {
       headers: { 'Authorization': 'Bearer ' + jwt },
     });
     
-    let { money } = response.data;
-    
-    localStorage.setItem("asset", money);
-    
-    return money;
+    return response;
   } catch {
     return '';
   }

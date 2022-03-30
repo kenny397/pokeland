@@ -12,8 +12,7 @@ function NavBar(){
   });
 
   const handleClickLogOut = () => {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('publicKey');
+    localStorage.clear();
     navigate('/');
   };
   

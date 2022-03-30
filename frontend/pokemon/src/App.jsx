@@ -4,7 +4,7 @@ import { Router } from './Router';
 import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
-import { updateJwt } from './redux/actions';
+import { updateJwt, updateBalance } from './redux/actions';
 
 import NavBar from './mainpage/NavBar';
 
@@ -17,6 +17,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(updateJwt(localStorage.getItem('jwt')));
+    dispatch(updateBalance(localStorage.getItem('balance')));
   }, []);
 
   // header, container 표시 or not
