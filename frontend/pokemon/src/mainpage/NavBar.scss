@@ -13,7 +13,7 @@
     height: 37px;
     margin-top: calc(2.95vh - 20px);
     float:right;
-    
+    margin-right: 10px;
   }
 }
 
@@ -79,14 +79,13 @@
 .burger-btn {
   position: absolute;
   height: 4vh;
-  left: 4px;
+  left: 10px;
   top: 0.9vh;
 }
 
 /* General sidebar styles */
 .bm-menu {
   background: white;
-  padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 

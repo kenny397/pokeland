@@ -1,106 +1,108 @@
-.main-image {
-  width: 100%;
-  height: 30vh;
-}
-
-.menu-container {
-  margin-top: 4vh;
-  display:grid;
-}
-
-.menu-container img {
-  filter: brightness(80%); 
-}
-
-.menu {
-  cursor: pointer;
-  background: white;
-  overflow: hidden;
-}
-
-.menu p {
-  font-size: large;
-  font-weight: 600;
-}
-
-.menu:hover {
-  background : #f0f0f0;
-}
-
-.menu:hover img{
-  filter: brightness(100%); 
-}
-
-.pokedex-image{
-  margin-top: 1vh;
-}
-.h15 {
-  height:15vh;
-}
-.h12 {
-  height: 12vh;
-}
-
-
-@media (max-width: 1030px) {
-  .menu-container {
-    /* 세로 */
-    grid-template-rows: repeat(4, 1fr);
-    /* 가로 */
-    grid-template-columns: 1fr;
-  }
-  
-  .menu {
-    height: 13.5vh;
-    border-top: 1px solid #C8C8C8;
-  }
-  .menu:last-child {
-    border-bottom: 1px solid #C8C8C8;
-  }
-  .menu p {
-    margin-top: 1vh;
-    margin-left: 3%;
-    display:inline-block;
-  }
-  .menu-container img{
-    margin-right: 15px;
-    float: right;
-  }
-}
-
-@media (min-width: 1030px) {
+.MainPage{
   .main-image {
     width: 100%;
-    height: 35vh;
-  }
-  .menu-container {
-    /* 세로 */
-    grid-template-rows: repeat(2, 1fr);
-    /* 가로 */
-    grid-template-columns: 1fr 1fr;
-    margin: 3vh 60px;
-    text-align: center;
-  }
-  .menu {
-    height: 24vh;
-    line-height:22vh;
-    margin: 1vh 3%;
-    border : 1px solid #C8C8C8;
-    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.322);
-  }
-  .menu p {
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -8vh;
-    width:100px;
-    text-align: left;
-  }
-  .menu-container img {
-    height: 20vh;
-    vertical-align: middle;
-  }
-  .menu-container .pokedex-image {
-    height: 14vh;
+    height: 30vh;
   }
 
+  .menu-container {
+    margin-top: 4vh;
+    display:grid;
+  }
+
+  .menu-container img {
+    filter: brightness(80%); 
+  }
+
+  .menu {
+    cursor: pointer;
+    background: white;
+    overflow: hidden;
+  }
+
+  .menu p {
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .menu:hover {
+    background : #f0f0f0;
+  }
+
+  .menu:hover img{
+    filter: brightness(100%); 
+  }
+
+  .pokedex-image{
+    margin-top: 1vh;
+  }
+  .h15 {
+    height:15vh;
+  }
+  .h12 {
+    height: 12vh;
+  }
+
+
+  @media (max-width: 1030px) {
+    .menu-container {
+      /* 세로 */
+      grid-template-rows: repeat(4, 1fr);
+      /* 가로 */
+      grid-template-columns: 1fr;
+    }
+    
+    .menu {
+      height: 13.5vh;
+      border-top: 1px solid #C8C8C8;
+    }
+    .menu:last-child {
+      border-bottom: 1px solid #C8C8C8;
+    }
+    .menu p {
+      margin-top: 1vh;
+      margin-left: 3%;
+      display:inline-block;
+    }
+    .menu-container img{
+      margin-right: 15px;
+      float: right;
+    }
+  }
+
+  @media (min-width: 1030px) {
+    .main-image {
+      width: 100%;
+      height: 35vh;
+    }
+    .menu-container {
+      /* 세로 */
+      grid-template-rows: repeat(2, 1fr);
+      /* 가로 */
+      grid-template-columns: 1fr 1fr;
+      margin: 3vh 60px;
+      text-align: center;
+    }
+    .menu {
+      height: 24vh;
+      line-height:22vh;
+      margin: 1vh 3%;
+      border : 1px solid #C8C8C8;
+      box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.322);
+    }
+    .menu p {
+      position: absolute;
+      margin-left: 10px;
+      margin-top: -8vh;
+      width:100px;
+      text-align: left;
+    }
+    .menu-container img {
+      height: 20vh;
+      vertical-align: middle;
+    }
+    .menu-container .pokedex-image {
+      height: 14vh;
+    }
+
+  }
 }

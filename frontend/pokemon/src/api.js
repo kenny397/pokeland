@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://j6b208.p.ssafy.io/api/v1/';
+const BASE_URL = 'https://j6b208.p.ssafy.io/api/v1';
 
 export async function getBalance() {
   try {
@@ -8,7 +8,7 @@ export async function getBalance() {
 
     const response = await axios({
       method : 'GET',
-      url : `${BASE_URL}users/balance`,
+      url : `${BASE_URL}/users/balance`,
       headers: { 'Authorization': 'Bearer ' + jwt },
     });
     
@@ -21,7 +21,7 @@ export async function getBalance() {
 export async function requestLogin(email, password) {
   try {
     const response = await axios.post(
-      `${BASE_URL}users/login`,
+      `${BASE_URL}/users/login`,
       {
         email,
         password
@@ -49,4 +49,20 @@ export async function fetchExistingPokemons(jwt) {
 
   let { pokemonList } = response.data;
   return pokemonList;
+}
+
+export async function doGacha() {
+  try {
+    const jwt = localStorage.getItem('jwt');
+
+    const response = await axios({
+      method : 'POST',
+      url : `${BASE_URL}/gacha`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+    });
+    
+    return response;
+  } catch {
+    return '';
+  }
 }

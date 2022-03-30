@@ -4,6 +4,7 @@ import SideBar from "./SideBar";
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NavBar(){
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ function NavBar(){
     query: "(min-width: 1030px)"
   });
 
+  const { balance } = useSelector(state => ({
+    balance: state.balance
+  }));
+  
   const handleClickLogOut = () => {
     localStorage.clear();
     navigate('/');
@@ -21,7 +26,9 @@ function NavBar(){
       {!isDeskTop 
         ?
         <>
-          <SideBar/>
+          <SideBar
+            balance={balance}
+          />
           <Link to={'/main'} >
             <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
           </Link>
@@ -35,7 +42,7 @@ function NavBar(){
           <div className="navbar-right-wrapper">
             <div className="navbar-asset-wrapper">
               <div>내 자산:</div>
-              <div className="asset-box">500.0SSF</div>
+              <div className="asset-box">{balance}SSF</div>
             </div>
             <div className="navbar-menu-wrapper">
               <Link to={'/pokedex'} >포켓몬 도감</Link>
