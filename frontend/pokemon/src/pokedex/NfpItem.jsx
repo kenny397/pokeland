@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function NfpItem({ pokemonNum, pokemonName, nfpImgPath }) {
-
   return (
     <div className="pokemon-item">
       <div className="pokemon-title">
