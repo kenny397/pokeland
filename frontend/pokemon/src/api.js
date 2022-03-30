@@ -2,26 +2,25 @@ import axios from 'axios';
 
 const BASE_URL = 'https://j6b208.p.ssafy.io/api/v1/';
 
-// async function getBalance() {
-//   try {
-//     localStorage.getItem('jwt');
+export async function getBalance() {
+  try {
+    const jwt = localStorage.getItem('jwt');
 
-//     const response = await axios.get(
-//       `${BASE_URL}users/balance`,
-//       {
-//         email,
-//         password
-//       });
+    const response = await axios({
+      method : 'GET',
+      url : `${BASE_URL}users/balance`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+    });
     
-//     let { accessToken, publicKey } = response.data;
+    let { money } = response.data;
     
-//     localStorage.setItem("jwt", accessToken);
-//     localStorage.setItem("publicKey", publicKey);
-//     return accessToken;
-//   } catch {
-//     return '';
-//   }
-// }
+    localStorage.setItem("asset", money);
+    
+    return money;
+  } catch {
+    return '';
+  }
+}
 
 export async function requestLogin(email, password) {
   try {

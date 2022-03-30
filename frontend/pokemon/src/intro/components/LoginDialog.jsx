@@ -4,7 +4,7 @@ import "./LoginDialog.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { requestLogin } from "../../api";
+import { requestLogin, getBalance } from "../../api";
 
 export default function LoginDialog({ handleClickCloseModal }) {
   const navigate = useNavigate();
@@ -28,6 +28,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
     if (accessToken) {
       navigate('/main');
       handleClickCloseModal();
+      getBalance();
     } else {
       alert('아이디나 비밀번호가 틀립니다.');
     }
