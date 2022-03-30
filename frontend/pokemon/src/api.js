@@ -40,12 +40,12 @@ export async function requestLogin(email, password) {
 export async function fetchExistingPokemons(jwt) {
   const response = await axios(
     {
-      method : 'GET',
-      url : `${BASE_URL}pokedex`,
+      method : 'get',
+      url : `${BASE_URL}/pokedex`,
       headers: { 'Authorization': 'Bearer ' + jwt },
+      data : '',
     }
   );
-  console.log(response);
 
   let { pokemonList } = response.data;
   return pokemonList;

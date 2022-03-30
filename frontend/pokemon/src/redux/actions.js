@@ -36,9 +36,9 @@ export function setExistingPokemons(existingPokemons) {
   };
 }
 
-export function loadExistingPokemons() {
+export function loadExistingPokemons(jwt) {
   return async (dispatch) => {
-    const existingPokemons = await fetchExistingPokemons();
+    const existingPokemons = await fetchExistingPokemons(jwt);
     dispatch(setExistingPokemons(existingPokemons));
   };
 }
