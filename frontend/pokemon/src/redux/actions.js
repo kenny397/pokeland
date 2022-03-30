@@ -1,3 +1,5 @@
+import { fetchExistingPokemons } from '../api';
+
 export function updateHeaderDisplay(headerDisplay) {
   return {
     type: 'updateHeaderDisplay',
@@ -22,5 +24,21 @@ export function updateBalance(balance) {
     payload: {
       balance,
     },
+  };
+}
+
+export function setExistingPokemons(existingPokemons) {
+  return {
+    type: 'setExistingPokemons',
+    payload: {
+      existingPokemons,
+    },
+  };
+}
+
+export function loadExistingPokemons() {
+  return async (dispatch) => {
+    const existingPokemons = await fetchExistingPokemons();
+    dispatch(setExistingPokemons(existingPokemons));
   };
 }

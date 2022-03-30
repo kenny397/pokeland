@@ -36,3 +36,17 @@ export async function requestLogin(email, password) {
     return '';
   }
 }
+
+export async function fetchExistingPokemons(jwt) {
+  const response = await axios(
+    {
+      method : 'GET',
+      url : `${BASE_URL}pokedex`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+    }
+  );
+  console.log(response);
+
+  let { pokemonList } = response.data;
+  return pokemonList;
+}

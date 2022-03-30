@@ -30,6 +30,11 @@ export default function reducer(state = initialState, action) {
       balance: action.payload.balance
     };
   }
-
+  if (action.type === 'setExistingPokemons') {
+    return {
+      ...state,
+      existingPokemons: action.payload.existingPokemons
+    };
+  }
   return state;
 }
