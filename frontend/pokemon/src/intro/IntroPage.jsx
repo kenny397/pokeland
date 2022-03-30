@@ -8,8 +8,15 @@ import LoginDialog from "./components/LoginDialog";
 
 // react redux
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+import { changeHeaderDisplay } from "../headerDisplay";
 
 export default function IntroPage() {
+  useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
+  }, []);
+
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
 
   const onSetIsLoginModalVisible = (active) => {
