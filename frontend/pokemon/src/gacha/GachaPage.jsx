@@ -1,23 +1,28 @@
 import React from "react";
 import getImgPath from "../utils/getImgPath";
-
 import "./GachaPage.scss";
 
 export default function GachaPage({
   pokeballDisplay,
   drawnPokemon,
+  grade,
   onClickGetPokemon,
   onClickOpenPokeball,
-  onClickGoBackToGacha
+  onClickGoBackToGacha,
 }) {
+  
   let pokemonImgPath = null;
   if (drawnPokemon) {
     const { id } = drawnPokemon;
     pokemonImgPath = getImgPath(id, 'colored');
   }
 
+  const backgroundStyle ={
+    backgroundImage: `url(/images/backgroundImg/${grade}.png)`
+  };
+  
   return (
-    <div className="GachaPage">
+    <div className="GachaPage" style={ backgroundStyle }>
       {!drawnPokemon ?
         <div className="gacha-container">
           
@@ -27,7 +32,10 @@ export default function GachaPage({
             <img className="pokeball-img" src="/images/static/pokeball.png" alt="몬스터볼" />
           }
           {!pokeballDisplay && 
-            <button onClick={onClickGetPokemon}>포켓몬 뽑기</button>
+            <>
+              <button onClick={onClickGetPokemon}>포켓몬 뽑기</button>
+              <p className="decrease-ssf">-100 SSF</p>
+            </>
           }
           {pokeballDisplay &&
             <button 

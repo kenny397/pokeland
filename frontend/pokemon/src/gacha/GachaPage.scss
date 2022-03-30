@@ -1,10 +1,13 @@
 
 .GachaPage {
+  background-repeat : no-repeat;
+  background-size : cover;
+
   .gacha-container {
     display: grid;
     justify-content: center;
     text-align: center;
-    height: 90vh;
+    height: 94vh;
   }
 
   .gacha-img {
@@ -34,5 +37,18 @@
 
   .drawn-pokemon-img {
     margin: 10vh auto 3vh;
+  }
+
+  .decrease-ssf {
+    margin-top: -40px;
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+  }
+
+  .balance-div {
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: -30px;
   }
 }
