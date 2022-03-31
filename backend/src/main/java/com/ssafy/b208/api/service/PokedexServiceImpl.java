@@ -48,7 +48,12 @@ public class PokedexServiceImpl implements PokedexService {
     }
 
     @Override
-    public List<NfpDetailDto> getNfpList(Long userId, Long pokedexId) {
+    public List<NfpDetailDto> getNfpList(String publicKey, Long pokedexId) {
+        // public key로 userId 찾기
+        User user = Optional.ofNullable(userRepository.findUserByPublicKey(publicKey).get())
+                .orElseGet(() -> new User());
+        Long userId = user.getId();
+
         List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
                 .orElseGet(() -> new ArrayList<>());
         List<NfpDetailDto> nftList= new ArrayList<>();
