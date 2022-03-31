@@ -2,6 +2,7 @@ import React from "react";
 import getImgPath from "../utils/getImgPath";
 import "./GachaPage.scss";
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 import Confetti from 'react-confetti';
 
@@ -63,7 +64,12 @@ export default function GachaPage({
         <div className="gacha-container">
           <img className="drawn-pokemon-img" src={pokemonImgPath} alt="뽑은 포켓몬 이미지" />
           <h2>{drawnPokemon.name}</h2>
-          <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
+          <div>
+            <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
+            <Link to='/pokedex'>
+              <button className="pokedex-btn">도감 가기</button>
+            </Link>
+          </div>
         </div>
       }
       {loading &&
