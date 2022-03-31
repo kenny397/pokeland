@@ -2,6 +2,7 @@ import React from "react";
 import pokemonList from "../fixtures/pokemonList";
 import getImgPath from "../utils/getImgPath";
 import { useNavigate } from "react-router-dom";
+import whatPageInPokedex from "../utils/whatPageInPokedex";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -18,10 +19,6 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   for (let i = 0; i < paginatedNfpList.length; i++) {
     emptyGridItems.pop();
   }
-
-  const whatPageInPokedex = (pokedexId, each) => {
-    return parseInt((pokedexId - 1) / each + 1);
-  };
 
   const navigate = useNavigate();
   const handleClickCloseNfps = () => {
