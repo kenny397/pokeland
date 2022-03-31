@@ -3,9 +3,17 @@ import { Link } from "react-router-dom";
 
 import './SupportPage.scss';
 
-import { writeSupport } from "../api";
+import { writeSupport, getBalance } from "../api";
+import { updateBalance } from "../redux/actions";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function SupportPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({
     category: '',
     email: '',
@@ -16,9 +24,16 @@ export default function SupportPage() {
   const onClickSubmitSupport = async function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
     const { category, email, title, content } = inputs;
-    
+    setIsLoading(true);
     const response = await writeSupport( email, category, content, title );
+    const { data: { money } } = await getBalance();
+    setIsLoading(false);
     console.log(response);
+    localStorage.setItem("balance", money);
+    dispatch(updateBalance(localStorage.getItem('balance')));
+    alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. ');
+    navigate('/main');
+    
   };
 
   const onChangeInputs = (e) => {
@@ -68,7 +83,12 @@ export default function SupportPage() {
         <button className="cancel-button"><Link to="/main">취소</Link></button>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
       </div>
-
+      { isLoading &&
+        <>
+          <div className="body-blackout"/>
+          <img src="/images/static/pokemonStickerGif/picachuhappy.gif" alt="" className="pokeball-spinning-img"/> 
+        </>
+      }
     </div>
   );
 }
