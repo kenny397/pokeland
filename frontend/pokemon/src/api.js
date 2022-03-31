@@ -71,7 +71,7 @@ export async function writeSupport(address, category, message, title) {
   try {
     const publicKey = localStorage.getItem('publicKey');
     const response = await axios.post(
-      `${BASE_URL}/support`,
+      `${BASE_URL}/support/`,
       {
         address,
         category,
