@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { loadExistingPokemons } from "../redux/actions";
 import isLogin from '../utils/isLogin';
 import PokemonList from "./PokemonList";
+import { changeHeaderDisplay } from "../headerDisplay";
 
 import "./PokedexPage.scss";
 
 export default function PokedexPage() {
   const dispatch = useDispatch();
   useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
     const jwt = isLogin();
     dispatch(loadExistingPokemons(jwt));
   }, []);

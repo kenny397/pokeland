@@ -9,7 +9,7 @@ export function decideHeaderDisplay(to) {
   let headerDisplay = false;
 
   for (let { path } of routers){
-    if(to === path && isNotIntro && isNotTutorial && isNotSignup){
+    if(path.includes(to) && isNotIntro && isNotTutorial && isNotSignup){
       headerDisplay = true;
       break;
     }
