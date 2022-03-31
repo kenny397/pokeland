@@ -45,6 +45,9 @@
     .signup-header {
       margin-top: 20px;
     }
+    .btn-down {
+      top: calc(7vh + 242px);
+    }
   }
   @media (min-width: 1030px) {
     .signup-container {
@@ -85,6 +88,9 @@
     }
     .signup-header {
       margin-top: 50px;
+    }
+    .btn-down {
+      top: calc(7vh + 272px);
     }
   }
   .signup-header span {
@@ -128,11 +134,6 @@
   }
 
   // 해결
-
-  
-  .btn-down {
-    top: calc(7vh + 254px);
-  }
 
   .btn-dp-none {
     display: none;
