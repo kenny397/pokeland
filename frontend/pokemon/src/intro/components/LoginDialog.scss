@@ -1,9 +1,31 @@
 .LoginDialog {
+  @media (max-width: 1030px) {
+    input {
+      width: 65vw;
+      height: 40px;
+    }
+
+    .login-btn {
+      height: 40px;
+      margin: 3vh 0 2vh 0;
+      width: calc(65vw + 12px);
+    }
+  }
+  @media (min-width: 1030px) {
+    input {
+      width: 400px;
+      height: 40px;
+    }
+
+    .login-btn {
+      height: 40px;
+      margin: 3vh 0 2vh 0;
+      width: 412px;
+    }
+  }
 
   input {
     padding: 5px;
-    width: 65vw;
-    height: 40px;
     margin: 10px 0;
     border: 1px solid #CDCDCD;
     border-radius: 4px;
@@ -34,7 +56,6 @@
   .login-btn {
     height: 40px;
     margin: 3vh 0 2vh 0;
-    width: calc(65vw + 12px);
   }
 
 }
