@@ -5,6 +5,7 @@ import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
 import com.ssafy.b208.api.dto.response.GachaResponseDto;
 import com.ssafy.b208.api.service.GachaService;
+import com.ssafy.b208.api.service.NftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -23,7 +24,6 @@ import springfox.documentation.annotations.ApiIgnore;
 public class GachaController {
 
     private final GachaService gachaService;
-
 
     // spring security
     // ipfs반환하고 민팅정보 저장

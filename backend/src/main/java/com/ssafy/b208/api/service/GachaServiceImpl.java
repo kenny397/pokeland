@@ -17,20 +17,28 @@ import java.util.List;
 public class GachaServiceImpl implements GachaService {
     private final UserPokemonRepository userPokemonRepository;
     private final UserRepository userRepository;
-
+    private final NftService nftService;
     @Override
     @Transactional
     public GachaResponseDto gacha(String email) {
         User user=userRepository.findUserByEmail(email).get();
         GachaResponseDto gachaResponseDto=new GachaResponseDto();
         if(user.getMoney()>=100){
+
+
             user.setMoney(user.getMoney()-100L);
             List<UserPokemon> userPokemonList=userPokemonRepository.findUserPokemonByUserIsNull();
             int randomNumber=(int)(Math.random()*userPokemonList.size());
 
             UserPokemon userPokemon=userPokemonList.get(randomNumber);
-            System.out.println(randomNumber);
+
             userPokemon.setUser(user);
+            try {
+                nftService.minting(user,userPokemon.getIpfsMetaUri());
+
+            }catch (Exception e){
+
+            }
             gachaResponseDto.setGrade(userPokemon.getGrade());
             gachaResponseDto.setIpfsImageUri(userPokemon.getIpfsImageUri());
             gachaResponseDto.setIpfsMetaUri(userPokemon.getIpfsMetaUri());
