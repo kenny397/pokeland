@@ -35,13 +35,13 @@ export default function GachaContainer() {
   };
   
   const handleClickOpenPokeball = async () => {
+    setLoading(true);
     const { data: { grade, pokeDexId } } = await doGacha();
     const response = await getBalance();
     localStorage.setItem('balance', response.data.money);
     dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
-    setLoading(true);
     setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 2000);
     
   };
