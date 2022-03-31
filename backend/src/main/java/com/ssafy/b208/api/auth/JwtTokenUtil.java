@@ -73,7 +73,6 @@ public class JwtTokenUtil {
                 .build();
 
         try {
-            System.out.println("handle"+" "+verifier);
             verifier.verify(token.replace(TOKEN_PREFIX, ""));
         } catch (AlgorithmMismatchException ex) {
             throw ex;
