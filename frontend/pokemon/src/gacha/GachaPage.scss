@@ -14,9 +14,22 @@
     margin: 0 auto;
     width: 20vh;
   }
-
+  @media (max-width :1030px) {
+    .pokeball-img {
+      margin: 48vh 10vh 10vh 29.5vh;
+      position: absolute;
+      width: 7vh;
+    }
+  }
+  @media (min-width : 1030px) {
+    .pokeball-img {
+      top: 50%;
+      left: 54%;
+      position: absolute;
+      width: 7vh;
+    }
+  }
   .pokeball-img {
-    margin: 48vh 10vh 10vh 29.5vh;
     position: absolute;
     width: 7vh;
   }
