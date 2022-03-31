@@ -40,6 +40,7 @@ export default function SupportPage() {
         <label htmlFor="category-select" className="form-item-title">카테고리</label><span className="asterisk">*</span><br />
         <select name="category" id="category-select" onChange={(e) => onChangeInputs(e)} defaultValue="">
           <option value="" disabled>카테고리 선택</option>
+          <option value="cheering" >응원</option>
           <option value="review" >리뷰</option>
           <option value="suggestion">건의사항</option>
           <option value="question">문의사항</option>
