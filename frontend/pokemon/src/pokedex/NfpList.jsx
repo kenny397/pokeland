@@ -1,7 +1,10 @@
 import React from "react";
 import pokemonList from "../fixtures/pokemonList";
 import getImgPath from "../utils/getImgPath";
+import { useNavigate } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import NfpItem from "./NfpItem";
 
 export default function NfpList({ page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
@@ -16,8 +19,20 @@ export default function NfpList({ page, onClickGoToPrev, onClickGoToNext, existi
     emptyGridItems.pop();
   }
 
+  const navigate = useNavigate();
+  const handleClickCloseNfps = () => {
+    navigate('/pokedex');
+  };
+
   return (
     <div className="pokemon-list">
+      <div className="close-nfps-btn-div">
+        <FontAwesomeIcon
+          className="close-nfps-btn"
+          icon={faXmark}
+          onClick={handleClickCloseNfps}
+        />
+      </div>
       {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
         let pokemonNum = (pokedexId+"").padStart(3, '0');
         const pokemonName = pokemonList[pokedexId - 1]["name"];
