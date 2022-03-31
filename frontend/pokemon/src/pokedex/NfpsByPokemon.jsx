@@ -6,7 +6,8 @@ import NfpList from "./NfpList";
 
 export default function NfpsByPokemon() {
   const { pokedexId } = useParams();
-  const numOfNfps = useSelector(state => state.nfps)[pokedexId].length;
+  const nfps = useSelector(state => state.nfps)[pokedexId];
+  const numOfNfps =  nfps ? nfps.length : 0;
   const [page, setPage] = useState(1);
   
   const handleClickGoToPrev = () => {
@@ -26,7 +27,6 @@ export default function NfpsByPokemon() {
 
   return(
     <div className="pokemon-list">
-      <h1>nfp리스트 by pokemon</h1>
       <div className="PokedexPage">
         <NfpList
           pokedexId={pokedexId}

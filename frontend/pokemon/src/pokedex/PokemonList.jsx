@@ -17,7 +17,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   return (
     <div className="pokemon-list">
       {paginatedPokemonList.map((item) => (
-        <Link 
+        <Link
           to={`nfps/${item.id}`}
           key={item.id}>
           <PokemonItemContainer
