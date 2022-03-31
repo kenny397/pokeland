@@ -1,5 +1,5 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 
 import IntroPage from './intro/IntroPage';
 import MainPage from './mainpage/MainPage';
@@ -17,7 +17,8 @@ export const routers = [
   { path: "/main", element: <MainPage /> },
   { path: "/tutorial", element: <TutorialPage /> },
   { path: "/support", element: <SupportPage /> },
-  { path: "/pokedex/*", element: <PokedexPage /> },
+  { path: "/pokedex", element: <Navigate replace to="/pokedex/1"/> },
+  { path: "/pokedex/:page", element: <PokedexPage /> },
   { path: "/pokedex/pokemon-not-found/:pokedexId", element: <PokemonNotFound /> },
   { path: "/pokedex/nfps/:pokedexId", element: <NfpsByPokemon /> },
   { path: "/gacha", element: <GachaContainer/> },
