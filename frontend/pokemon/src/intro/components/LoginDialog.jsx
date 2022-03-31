@@ -10,10 +10,9 @@ import { useDispatch } from "react-redux";
 import { updateBalance } from "../../redux/actions";
 
 export default function LoginDialog({ handleClickCloseModal }) {
+  
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const [ userInfo, setUserInfo ] = useState({
     email: '',
     password: ''

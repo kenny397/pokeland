@@ -9,6 +9,7 @@ import LoginDialog from "./components/LoginDialog";
 // react redux
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 import { changeHeaderDisplay } from "../headerDisplay";
 
@@ -18,6 +19,9 @@ export default function IntroPage() {
   }, []);
 
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const isDeskTop = useMediaQuery({
+    query: "(min-width: 1030px)"
+  });
 
   const onSetIsLoginModalVisible = (active) => {
     setIsLoginModalVisible(active);
@@ -57,8 +61,8 @@ export default function IntroPage() {
         <Modal 
           setIsVisible={setIsLoginModalVisible} 
           InnerComponent={LoginDialog}
-          width='90vw'
-          height='60vh'
+          width={ isDeskTop ? '500px' :'90vw'}
+          height={ isDeskTop ? '600px' : '60vh'}
         /> 
       }
       { isLoginModalVisible && <BodyBlackoutStyle setIsModalVisible= {setIsLoginModalVisible}/> }

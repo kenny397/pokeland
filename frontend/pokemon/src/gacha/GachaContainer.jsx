@@ -8,6 +8,8 @@ import GachaPage from "./GachaPage";
 import { doGacha, getBalance } from "../api";
 import { updateBalance } from "../redux/actions";
 
+import { useMediaQuery } from "react-responsive";
+
 export default function GachaContainer() {
   const dispatch = useDispatch();
   const [pokeballDisplay, setPokeballDisplay] = useState(false);
@@ -15,6 +17,10 @@ export default function GachaContainer() {
   const [grade, setGrade] = useState(null);
   const [loading, setLoading] = useState(null);
   const [confetti, setConfetti] = useState(null);
+
+  const isDeskTop = useMediaQuery({
+    query: "(min-width: 1030px)"
+  });
 
   const { balance } = useSelector(state => ({
     balance: state.balance
@@ -29,13 +35,13 @@ export default function GachaContainer() {
   };
   
   const handleClickOpenPokeball = async () => {
+    setLoading(true);
     const { data: { grade, pokeDexId } } = await doGacha();
     const response = await getBalance();
     localStorage.setItem('balance', response.data.money);
     dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
-    setLoading(true);
     setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 2000);
     
   };
@@ -53,6 +59,7 @@ export default function GachaContainer() {
       grade={grade}
       loading={loading}
       confetti={confetti}
+      isDeskTop={isDeskTop}
       onClickGetPokemon={handleClickGetPokemon}
       onClickOpenPokeball={handleClickOpenPokeball}
       onClickGoBackToGacha={handleClickGoBackToGacha}

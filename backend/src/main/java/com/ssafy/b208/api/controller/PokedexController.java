@@ -70,11 +70,11 @@ public class PokedexController {
     }
 
     // 보유 NFP 리스트 by 한 포켓몬 조회
-    @GetMapping("/nfp/{userId}/{pokedexId}")
-    @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "user id와 pokedex id로 유저가 가진 특정 포켓몬의 NFP들을 조회한다.")
-    public ResponseEntity<NfpListDto> getNfpList(@PathVariable Long userId, @PathVariable Long pokedexId) throws Exception {
+    @GetMapping("/nfp/{publicKey}/{pokedexId}")
+    @ApiOperation(value = "특정 포켓몬의 보유 NFP 리스트 조회", notes = "public key와 pokedex id로 유저가 가진 특정 포켓몬의 NFP들을 조회한다.")
+    public ResponseEntity<NfpListDto> getNfpList(@PathVariable String publicKey, @PathVariable Long pokedexId) throws Exception {
 
-        List<NfpDetailDto> nfpList = pokedexService.getNfpList(userId, pokedexId);
+        List<NfpDetailDto> nfpList = pokedexService.getNfpList(publicKey, pokedexId);
         NfpListDto nfpListDto = NfpListDto.builder()
                 .nfpList(nfpList)
                 .build();

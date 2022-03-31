@@ -10,5 +10,6 @@ public class UserDto {
     String email;
     String password;
     String publicKey;
+    String privateKey;
     Long Money;
 }
