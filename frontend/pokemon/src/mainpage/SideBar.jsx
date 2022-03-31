@@ -72,6 +72,7 @@ export default function SideBar({ balance }) {
           </Link>
           <Link to={'/support'} className="menu menu3" onClick={clicked}>
             <p>고객센터</p>
+            <p className='ssf'>+500SSF</p>
             <img src={ '/images/static/nurse.png' } alt="" className="h15"/>
           </Link>
           <div className="menu menu4" onClick={() => alert('아직 준비중이에요!')}>
