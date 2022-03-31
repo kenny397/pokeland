@@ -29,7 +29,6 @@ public class NftService {
     }
     public void minting(User user, String tokenUri) throws Exception{
         NetworkConnector nc =new NetworkConnector(user.getPrivateKey());
-        System.out.println("민팅 안");
         SsafyNFT nft = SsafyNFT.load(
                 nftContractAddress,
                 nc.getWeb3j(),
@@ -43,9 +42,7 @@ public class NftService {
 
         ).send();
         if(receipt.isStatusOK()){
-            System.out.println("싱공");
         }else{
-            System.out.println("실패");
         }
     }
 
