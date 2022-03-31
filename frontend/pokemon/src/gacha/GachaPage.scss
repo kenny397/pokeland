@@ -35,8 +35,16 @@
   }
 
   button {
-    margin: 0 auto;
+    margin: 0 0.5rem;
     width: 12vh;
+  }
+
+  .pokedex-btn {
+    background-color: #A51515;
+  }
+
+  .pokedex-btn:hover {
+    background-color: #d43f3f;
   }
 
   .open-pokeball-btn {
