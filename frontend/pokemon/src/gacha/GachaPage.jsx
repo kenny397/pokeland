@@ -65,7 +65,7 @@ export default function GachaPage({
           <img className="drawn-pokemon-img" src={pokemonImgPath} alt="뽑은 포켓몬 이미지" />
           <h2>{drawnPokemon.name}</h2>
           <div>
-            <button onClick={onClickGoBackToGacha}>다시 뽑기</button>
+            <button className="re-gacha-btn" onClick={onClickGoBackToGacha}>다시 뽑기</button>
             <Link to='/pokedex'>
               <button className="pokedex-btn">도감 가기</button>
             </Link>
