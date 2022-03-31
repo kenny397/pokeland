@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         userDto.setPassword(user.getPassword());
         userDto.setPublicKey(user.getPublicKey());
         userDto.setMoney(user.getMoney());
+        userDto.setPrivateKey(user.getPrivateKey());
         //빌더 사용해보기
         return userDto;
     }
