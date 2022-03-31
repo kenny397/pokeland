@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import NfpItem from "./NfpItem";
 
-export default function NfpList({ page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
+export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const nfpList = existingNfps;
   console.log(nfpList);
 
@@ -19,9 +19,13 @@ export default function NfpList({ page, onClickGoToPrev, onClickGoToNext, existi
     emptyGridItems.pop();
   }
 
+  const whatPageInPokedex = (pokedexId, each) => {
+    return parseInt((pokedexId - 1) / each + 1);
+  };
+
   const navigate = useNavigate();
   const handleClickCloseNfps = () => {
-    navigate('/pokedex');
+    navigate(`/pokedex/${whatPageInPokedex(pokedexId, 6)}`);
   };
 
   return (
