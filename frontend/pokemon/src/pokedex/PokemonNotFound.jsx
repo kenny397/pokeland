@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './PokemonNotFound.scss';
 import pokemonList from '../fixtures/pokemonList';
 
-export default function PokemonNotFound({ pokedexId }) {
+export default function PokemonNotFound() {
+  const { pokedexId } = useParams();
   const pokemonName = pokemonList[pokedexId - 1]["name"];
   return (
     <div className="not-found-container">
