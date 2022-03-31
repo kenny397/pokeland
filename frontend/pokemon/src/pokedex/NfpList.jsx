@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import pokemonList from "../fixtures/pokemonList";
 
 import NfpItem from "./NfpItem";
 
-export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext }) {
+export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const pokemonName = pokemonList[pokedexId - 1]["name"];
-  const nfpList = useSelector(state => state.nfps)[pokedexId+""];
+  const nfpList = existingNfps;
   console.log(nfpList);
 
   const start = (page - 1) * 6;
