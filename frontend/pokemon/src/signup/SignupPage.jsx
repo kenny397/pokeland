@@ -117,39 +117,41 @@ export default function SignupPage() {
 
   return (
     <div className="SignupPage">
-      <div className="signup-header">
-        <p>회원가입</p>
-        <img className="picachu-img" src="/images/static/pokemonStickerGif/picachurunning.gif" alt="no-image" />
-      </div>
+      <div className="signup-container">
+        <div className="signup-header">
+          <span>회원가입</span>
+          <img className="picachu-img" src="/images/static/pokemonStickerGif/picachurunning.gif" alt="no-image" />
+        </div>
 
-      <div className="form-container">
-        <div className="email-input-wrapper" >
-          <p>이메일</p>
-          <input name="email" type="text" placeholder="이메일을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
-          <button 
-            className={"dup-btn email-dup-btn " + (isEmailChecked ? ' btn-dp-none' : '')}
-            onClick={ () => onClickEmailCheck() }
-          >중복확인</button>
-          <div className={"dup-check-div" + (isEmailChecked ? '' : ' btn-dp-none')}>사용가능한 이메일 입니다.</div>
+        <div className="form-container">
+          <div className="email-input-wrapper" >
+            <p>이메일</p>
+            <input name="email" type="text" placeholder="이메일을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <button 
+              className={"dup-btn email-dup-btn " + (isEmailChecked ? ' btn-dp-none' : '')}
+              onClick={ () => onClickEmailCheck() }
+            >중복확인</button>
+            <div className={"dup-check-div" + (isEmailChecked ? '' : ' btn-dp-none')}>사용가능한 이메일 입니다.</div>
+          </div>
+          <div className="nickname-input-wrapper" >
+            <p>닉네임</p>
+            <input name="nickname" type="text" placeholder="닉네임을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <button 
+              className={"dup-btn nickname-dup-btn" + (isNicknameChecked ? ' btn-dp-none' : '') + (isEmailChecked ? ' btn-down' : '')} 
+              onClick={() => onClickNicknameCheck()}
+            >중복확인</button>
+            <div className={"dup-check-div" + (isNicknameChecked ? '' : ' btn-dp-none')}>사용가능한 닉네임 입니다.</div>
+          </div>
+          <div className="password-input-wrapper">
+            <p>비밀번호</p>
+            <input name="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+          </div>
+          <div className="password-confirm-input-wrapper" >
+            <p>비밀번호 확인</p>
+            <input name="passwordConfirm" type="password" placeholder="비밀번호를 재확인해 주세요" onChange={(e) => onChangeInputs(e)}/>
+          </div>
+          <button className="submit-btn" onClick={() => onClickSubmit()}>가입하기</button>
         </div>
-        <div className="nickname-input-wrapper" >
-          <p>닉네임</p>
-          <input name="nickname" type="text" placeholder="닉네임을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
-          <button 
-            className={"dup-btn nickname-dup-btn" + (isNicknameChecked ? ' btn-dp-none' : '') + (isEmailChecked ? ' btn-down' : '')} 
-            onClick={() => onClickNicknameCheck()}
-          >중복확인</button>
-          <div className={"dup-check-div" + (isNicknameChecked ? '' : ' btn-dp-none')}>사용가능한 닉네임 입니다.</div>
-        </div>
-        <div className="password-input-wrapper">
-          <p>비밀번호</p>
-          <input name="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
-        </div>
-        <div className="password-confirm-input-wrapper" >
-          <p>비밀번호 확인</p>
-          <input name="passwordConfirm" type="password" placeholder="비밀번호를 재확인해 주세요" onChange={(e) => onChangeInputs(e)}/>
-        </div>
-        <button className="submit-btn" onClick={() => onClickSubmit()}>가입하기</button>
       </div>
     </div>
   );

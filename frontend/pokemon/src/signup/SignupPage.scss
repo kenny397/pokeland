@@ -1,70 +1,134 @@
-body {
-  background: white;
-}
+
+
 .SignupPage {
-  text-align: center;
+
+  .signup-container {
+    position: absolute;
+    background: white;
+    text-align: center;
+    height: 100vh;
+  }
+
+  @media (max-width: 1030px) {
+    .signup-container {
+      width: 100vw;
+    }
+    input {
+      width: 67vw;
+    }
+    .submit-btn {
+      margin-top: 5vh;
+      height: 50px;
+      width: calc(67vw + 20px);
+      font-size: 17px;
+    }
+    .form-container div {
+      margin: 0 auto;
+      width: calc(67vw + 20px);
+    }
+    .picachu-img {
+      height: 90px;
+      position: absolute;
+      right: 9vw;
+      top: 0.5vh;
+    }
+    .dup-btn {
+      right: 15vw;
+    }
+    .email-dup-btn {
+      top: calc(7vh + 110px);
+    }
   
-  .signup-header p {
+    .nickname-dup-btn {
+      top: calc(7vh + 225px);
+    }
+    .signup-header {
+      margin-top: 20px;
+    }
+  }
+  @media (min-width: 1030px) {
+    .signup-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1030px;
+    }
+    input {
+      width: 900px;
+    }
+    .submit-btn {
+      margin-top: 5vh;
+      height: 50px;
+      width: 925px;
+      font-size: 17px;
+    }
+    .form-container div {
+      margin: 0 auto;
+      width: 920px;
+    }
+    .picachu-img {
+      height: 90px;
+      position: absolute;
+      right: 600px;
+      top: 20px;
+    }
+    .dup-btn {
+      right: 60px;
+      width: 100px;
+    }
+    .email-dup-btn {
+      top: calc(7vh + 142px);
+    }
+  
+    .nickname-dup-btn {
+      top: calc(7vh + 255px);
+    }
+    .signup-header {
+      margin-top: 50px;
+    }
+  }
+  .signup-header span {
     font-size: 33px;
     font-weight: bold;
   }
-
+  .submit-btn {
+    margin-top: 5vh;
+    height: 50px;
+    font-size: 17px;
+  }
+  .form-container div {
+    margin: 0 auto;
+  }
   .picachu-img {
     height: 90px;
     position: absolute;
-    right: 9vw;
-    top: 0.5vh;
   }
-
   input {
     padding: 5px 10px;
-    width: 67vw;
     height: 50px;
     border: 1px solid #CDCDCD;
     border-radius: 4px;
     font-size: 17px;
   }
-
   .form-container {
     margin-top: 7vh;
   }
-
   input::placeholder {
     color: #A7A7A7;
     font-size: 15px;
   }
-
-  .form-container div {
-    margin: 0 auto;
-    width: calc(67vw + 20px);
-  }
-
   .form-container p {
     margin-bottom: 7px;
     text-align: left;
     font-weight: bold;
     font-size: 19px;
   }
-
-  .submit-btn {
-    margin-top: 5vh;
-    height: 50px;
-    width: calc(67vw + 20px);
-    font-size: 17px;
-  }
-
   .dup-btn {
     position: absolute;
-    right: 15vw;
   }
 
-  .email-dup-btn {
-    top: calc(7vh + 125px);
-  }
+  // 해결
 
-  .nickname-dup-btn {
-    top: calc(7vh + 240px);
-  }
   
   .btn-down {
     top: calc(7vh + 254px);
