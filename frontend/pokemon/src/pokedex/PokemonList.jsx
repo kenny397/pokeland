@@ -1,6 +1,5 @@
 import React from "react";
 import pokemonList from "../fixtures/pokemonList";
-import { Link } from "react-router-dom";
 
 import PokemonItemContainer from "./PokemonItemContainer";
 
@@ -17,13 +16,10 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   return (
     <div className="pokemon-list">
       {paginatedPokemonList.map((item) => (
-        <Link
-          to={`nfps/${item.id}`}
-          key={item.id}>
-          <PokemonItemContainer
-            item={item}
-          />
-        </Link>
+        <PokemonItemContainer
+          item={item}
+          key={item.id}
+        />
       ))}
 
       {emptyGridItems.map((ele) => (
