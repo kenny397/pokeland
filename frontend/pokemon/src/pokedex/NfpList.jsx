@@ -18,13 +18,14 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
   return (
     <div className="pokemon-list">
-      {paginatedNfpList.map(({ pokedexId, ipfsImageUri }) => {
+      {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
         let pokemonNum = (pokedexId+"").padStart(3, '0');
         return (
           <NfpItem
             pokemonNum={pokemonNum}
             pokemonName={pokemonName}
             nfpImgPath={ipfsImageUri}
+            grade={grade}
             key={ipfsImageUri}
           />
         );
