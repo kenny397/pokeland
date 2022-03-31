@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath }) {
+export default function PokemonItem({ pokemonNum, pokemonName, pokemonImgPath, onClick }) {
   return (
-    <div className="pokemon-item">
+    <div className="pokemon-item" onClick={onClick}>
       <div className="pokemon-title">
         <div className="pokemon-num">
           <p>{pokemonNum}</p>

@@ -1,15 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import pokemonList from "../fixtures/pokemonList";
 
 import NfpItem from "./NfpItem";
 
-export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext }) {
-  const nfpList = useSelector(state => state.nfps)[pokedexId+""];
+export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
+  const pokemonName = pokemonList[pokedexId - 1]["name"];
+  const nfpList = existingNfps;
   console.log(nfpList);
+
   const start = (page - 1) * 6;
   const end = page * 6;
-  
   const paginatedNfpList = nfpList ? nfpList.slice(start, end) : [];
   let emptyGridItems = [1, 2, 3, 4, 5, 6];
   for (let i = 0; i < paginatedNfpList.length; i++) {
@@ -19,7 +19,6 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   return (
     <div className="pokemon-list">
       {paginatedNfpList.map(({ pokedexId, ipfsImageUri }) => {
-        let pokemonName = pokemonList[pokedexId - 1]["name"];
         let pokemonNum = (pokedexId+"").padStart(3, '0');
         return (
           <NfpItem
@@ -35,8 +34,18 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
       {emptyGridItems.map((ele) => (
         <div className="empty-grid-item" key={ele}> </div>
       ))}
-      <button className="prev-btn" onClick={onClickGoToPrev}>왼쪽</button>
-      <button className="next-btn" onClick={onClickGoToNext}>오른쪽</button>
+      {
+        nfpList &&
+        <div className="prev-btn">
+          <button onClick={onClickGoToPrev}>왼쪽</button>
+        </div>
+      }
+      {
+        nfpList &&
+        <div className="next-btn">
+          <button onClick={onClickGoToNext}>오른쪽</button>
+        </div>
+      }
     </div>
   );
 }

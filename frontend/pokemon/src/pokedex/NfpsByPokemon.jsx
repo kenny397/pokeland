@@ -1,12 +1,28 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { loadExistingNfps } from "../redux/actions";
 
 import NfpList from "./NfpList";
+import PokemonNotFound from "./PokemonNotFound";
 
 export default function NfpsByPokemon() {
+  const dispatch = useDispatch();
   const { pokedexId } = useParams();
-  const numOfNfps = useSelector(state => state.nfps)[pokedexId].length;
+  const publicKey = localStorage.getItem('publicKey');
+
+  useEffect(() => {
+    console.log('useEffect excuted');
+    dispatch(loadExistingNfps(publicKey, pokedexId));
+  }, []);
+
+  // const nfps = useSelector(state => state.nfps)[pokedexId];
+
+  const existingNfps = useSelector(state => state.existingNfps);
+  console.log(`nfps is ${JSON.stringify(existingNfps)}`);
+
+  const numOfNfps =  existingNfps ? existingNfps.length : 0;
   const [page, setPage] = useState(1);
   
   const handleClickGoToPrev = () => {
@@ -25,16 +41,20 @@ export default function NfpsByPokemon() {
   };
 
   return(
-    <div className="pokemon-list">
-      <h1>nfp리스트 by pokemon</h1>
-      <div className="PokedexPage">
-        <NfpList
-          pokedexId={pokedexId}
-          page={page}
-          onClickGoToPrev={handleClickGoToPrev}
-          onClickGoToNext={handleClickGoToNext}
-        />
+    existingNfps
+      ?
+      <div className="pokemon-list">
+        <div className="PokedexPage">
+          <NfpList
+            pokedexId={pokedexId}
+            page={page}
+            existingNfps={existingNfps}
+            onClickGoToPrev={handleClickGoToPrev}
+            onClickGoToNext={handleClickGoToNext}
+          />
+        </div>
       </div>
-    </div>
+      :
+      <PokemonNotFound pokedexId={pokedexId}/>
   );
 }

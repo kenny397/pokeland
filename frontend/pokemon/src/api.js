@@ -51,6 +51,20 @@ export async function fetchExistingPokemons(jwt) {
   return pokemonList;
 }
 
+export async function fetchExistingNfps(publicKey, pokedexId) {
+  const response = await axios(
+    {
+      method : 'get',
+      url : `${BASE_URL}/nfp/${publicKey}/${pokedexId}`,
+      data : '',
+    }
+  );
+
+  let { nfpList } = response.data;
+  console.log(`fetchExistingNfps excuted nft list is ${JSON.stringify(nfpList)}`);
+  return nfpList;
+}
+
 export async function doGacha() {
   try {
     const jwt = localStorage.getItem('jwt');

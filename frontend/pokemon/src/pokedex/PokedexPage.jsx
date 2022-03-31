@@ -39,5 +39,3 @@ export default function PokedexPage() {
     </div>
   );
 }
-
-// eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGtpbUBzc2FmeS5jb20iLCJpc3MiOiJzc2FmeS5jb20iLCJleHAiOjE2NDg3Mzg2MzQsImlhdCI6MTY0ODY1MjIzNH0.OCoJ8NH70e9v1o1M50W3EuCqNxb7rDanpmel0MNBy9OeGFL15h4E2KN-dOq3V2b8wABhlRC5Fbgv8OzQFIpvdg

@@ -7,6 +7,7 @@ const initialState = {
     "1": [nfp, nfp],
     "2": [nfp],
   },
+  existingNfps: [],
   jwt: '',
   balance: '',
 };
@@ -35,6 +36,13 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       existingPokemons: action.payload.existingPokemons
+    };
+  }
+  if (action.type === 'setExistingNfps') {
+    console.log(`reducer is excuted `);
+    return {
+      ...state,
+      existingNfps: action.payload.existingNfps
     };
   }
   return state;
