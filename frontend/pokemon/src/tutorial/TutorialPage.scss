@@ -1,0 +1,95 @@
+.TutorialPage{
+  white-space: pre-wrap;
+  .tutorial-page-wrapper {
+    color: black;
+    position: absolute;
+    background: white;
+    text-align: center;
+    height: 100vh;
+  }
+  @media (max-width: 1030px) {
+    .tutorial-page-wrapper {
+      width: 100vw;
+    }
+
+    .prof-oak-image {
+      height: 40vh;
+      margin-top: 10vh;
+    }
+
+    .tutorial-pokemon-logo {
+      margin-top: 2vh;
+      width: 60vw;
+    }
+
+    .script-wrapper {
+      text-align: left;
+      margin: 7vh 7vw 0 7vw;
+      padding: 10px;
+      border: 3px solid black;
+      font-size: 18px;
+    }
+  }
+  @media (min-width: 1030px) {
+    .tutorial-page-wrapper {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1030px;
+    }
+
+    .prof-oak-image {
+      height: 400px;
+      margin-top: 10vh;
+    }
+
+    .tutorial-pokemon-logo {
+      margin-top: 2vh;
+      width: 500px;
+    }
+  }
+
+
+  .script-wrapper {
+    text-align: left;
+    margin: 7vh 7vw 0 7vw;
+    padding: 10px;
+    border: 3px solid black;
+    font-size: 18px;
+    font-family: "dunggunmo" !important;
+    letter-spacing: 3px;
+    line-height: 30px;
+  }
+  .tutorial-down-button {
+    margin-top: -70px;
+    cursor: pointer;
+    height: 40px;
+  }
+  .down-button-wrapper {
+    text-align: end;
+  }
+  .tutorial-btn-wrapper {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .tutorial-btn-wrapper button{
+    width: 120px;
+    font-size: 15px;
+  }
+  .tutorial-red-btn {
+    background: #AA2C2C;
+  }
+
+  .monster-balls-img {
+    margin-top: 20vh;
+    margin-bottom: 18.5vh;
+    width: 300px;
+    cursor: pointer;
+  }
+  .script-to-cursor {
+    cursor: pointer;
+  }
+  
+
+    
+}
