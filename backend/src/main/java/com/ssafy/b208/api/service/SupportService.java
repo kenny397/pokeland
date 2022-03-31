@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface SupportService {
-    public void mailSend(MailDto mailDto, String publicKey);
+    public void mailSend(MailDto mailDto);
 }
