@@ -1,10 +1,10 @@
 import React from "react";
 import pokemonList from "../fixtures/pokemonList";
+import getImgPath from "../utils/getImgPath";
 
 import NfpItem from "./NfpItem";
 
-export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
-  const pokemonName = pokemonList[pokedexId - 1]["name"];
+export default function NfpList({ page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const nfpList = existingNfps;
   console.log(nfpList);
 
@@ -20,11 +20,13 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
     <div className="pokemon-list">
       {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
         let pokemonNum = (pokedexId+"").padStart(3, '0');
+        const pokemonName = pokemonList[pokedexId - 1]["name"];
+        const nfpImgPath = getImgPath(pokedexId, 'colored');
         return (
           <NfpItem
             pokemonNum={pokemonNum}
             pokemonName={pokemonName}
-            nfpImgPath={ipfsImageUri}
+            nfpImgPath={nfpImgPath}
             grade={grade}
             key={ipfsImageUri}
           />
