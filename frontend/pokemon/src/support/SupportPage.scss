@@ -2,7 +2,7 @@
   p {
     margin: 0.5rem 0;
     padding: 0 0.1rem;
-    font-size: 0.7rem;
+    font-size: 18px;
     font-weight: 600;
   }
 
@@ -20,6 +20,9 @@
     border-width: 0 0 2px;
     border-color: dark;
   }
+  input {
+    margin-top: 15px;
+  }
 
   select {
     width: 40%;
@@ -29,13 +32,17 @@
     border-color: #005FC6;
   }
 
+  input::placeholder {
+    font-size: 16px;
+  }
+
   .header {
-    font-size: 1.2rem;
+    font-size: 30px;
     text-align: center;
   }
 
   .sub-title {
-    font-size: 0.67rem;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
   }
@@ -52,7 +59,7 @@
 
   .form-item-title {
     margin: 0.7rem 0;
-    font-size: 0.9rem;
+    font-size: 20px;
     font-weight: 600;
     margin-right: 0.2rem;
   }
@@ -64,6 +71,9 @@
   textarea {
     width: 96%;
   }
+  textarea::placeholder {
+    font-size: 16px;
+  }
 
   .feedback-input:focus {
     border: solid 2px #005FC6;
@@ -72,10 +82,18 @@
   .buttons {
     display: flex;
     justify-content: center;
+
   }
 
   .cancel-button {
     background-color: #AA2C2C;
+    width: 70px;
+    height: 40px;
+  }
+
+  .submit-button {
+    width: 70px;
+    height: 40px;
   }
 
   .cancel-button:hover {

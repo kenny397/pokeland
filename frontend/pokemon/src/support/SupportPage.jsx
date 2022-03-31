@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import './SupportPage.scss';
 
+import { writeSupport } from "../api";
+
 export default function SupportPage() {
   const [inputs, setInputs] = useState({
     category: '',
@@ -11,9 +13,12 @@ export default function SupportPage() {
     content: ''
   });
   
-  const onClickSubmitSupport = function () {
+  const onClickSubmitSupport = async function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
-    console.log(inputs);
+    const { category, email, title, content } = inputs;
+    
+    const response = await writeSupport( email, category, content, title );
+    console.log(response);
   };
 
   const onChangeInputs = (e) => {

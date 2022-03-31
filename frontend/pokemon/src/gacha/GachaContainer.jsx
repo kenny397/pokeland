@@ -30,7 +30,7 @@ export default function GachaContainer() {
     if (balance >= 100) {
       setPokeballDisplay(true);
     } else {
-      alert("자산이 부족합니다");
+      alert("자산이 부족합니다. \n자산을 더 얻으시려면 \n고객센터에서 리뷰를 작성해주세요.");
     }
   };
   
@@ -42,7 +42,7 @@ export default function GachaContainer() {
     dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
-    setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 2000);
+    setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 100);
     
   };
   
