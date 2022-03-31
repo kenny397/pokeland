@@ -14,6 +14,7 @@ export default function GachaPage({
   onClickGoBackToGacha,
   loading,
   confetti,
+  isDeskTop
 }) {
 
   let pokemonImgPath = null;
@@ -73,9 +74,10 @@ export default function GachaPage({
       }
       { confetti &&
         <Confetti
-          width={500}
-          height={800}
-          gravity={0.03}
+          width={ isDeskTop ? 1030 : window.innerWidth}
+          height={isDeskTop ? window.innerHeight-80 : window.innerHeight}
+          numberOfPieces={200}
+          gravity={ isDeskTop ? 0.03 : 0.07}
         />
       }
       
