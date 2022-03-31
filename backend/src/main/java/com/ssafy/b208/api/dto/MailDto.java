@@ -10,4 +10,5 @@ public class MailDto {
     String address;
     String title;
     String message;
+    String publicKey;
 }

@@ -23,7 +23,7 @@ public class SupportServiceImpl implements SupportService {
     private UserRepository userRepository;
 
     @Override
-    public void mailSend(MailDto mailDto, String publicKey) {
+    public void mailSend(MailDto mailDto) {
         // mail send
         SimpleMailMessage message = new SimpleMailMessage();
         String title = "[" + mailDto.getCategory() + "] " + mailDto.getTitle();
@@ -37,7 +37,7 @@ public class SupportServiceImpl implements SupportService {
         );
         mailSender.send(message);
         // 유저 SSF 증가
-        User user = Optional.ofNullable(userRepository.findUserByPublicKey(publicKey).get())
+        User user = Optional.ofNullable(userRepository.findUserByPublicKey(mailDto.getPublicKey()).get())
                 .orElseGet(() -> new User());
         user.setMoney(user.getMoney() + 500);
         userRepository.save(user);
