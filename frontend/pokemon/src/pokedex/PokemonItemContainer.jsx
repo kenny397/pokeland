@@ -10,8 +10,8 @@ export default function PokemonItemContainer({ item }) {
   const pokemonShadowImgPath = getImgPath(id, 'shadow');
   const pokemonColorImgPath = getImgPath(id, 'colored');
   const pokemonNum = (id + "").padStart(3, '0');
-  const toNfps = `nfps/${id}`;
-  const toPokemonNotFound = `pokemon-not-found/${id}`;
+  const toNfps = `/pokedex/nfps/${id}`;
+  const toPokemonNotFound = `/pokedex/pokemon-not-found/${id}`;
   return (
     <PokemonItem
       pokemonNum={pokemonNum}
