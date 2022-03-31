@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import getImgPath from "../utils/getImgPath";
-import { Link } from 'react-router-dom';
-
 import PokemonItem from "./PokemonItem";
 
 export default function PokemonItemContainer({ item }) {
@@ -12,15 +10,15 @@ export default function PokemonItemContainer({ item }) {
   const pokemonShadowImgPath = getImgPath(id, 'shadow');
   const pokemonColorImgPath = getImgPath(id, 'colored');
   const pokemonNum = (id + "").padStart(3, '0');
-
+  const toNfps = `nfps/${id}`;
+  const toPokemonNotFound = `pokemon-not-found/${id}`;
   return (
-    <Link to={`/pokedex/nfps/${item.id}`}>
-      <PokemonItem
-        pokemonNum={pokemonNum}
-        pokemonName={name}
-        pokemonImgPath={hasNfps ? pokemonColorImgPath : pokemonShadowImgPath}
-        key={item['id']}
-      />
-    </Link>
+    <PokemonItem
+      pokemonNum={pokemonNum}
+      pokemonName={name}
+      pokemonImgPath={hasNfps ? pokemonColorImgPath : pokemonShadowImgPath}
+      to={hasNfps ? toNfps : toPokemonNotFound}
+      key={item['id']}
+    />
   );
 }
