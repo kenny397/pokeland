@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
 import Confetti from 'react-confetti';
+import whatPageInPokedex from "../utils/whatPageInPokedex";
 
 export default function GachaPage({
   pokeballDisplay,
@@ -19,8 +20,11 @@ export default function GachaPage({
 }) {
 
   let pokemonImgPath = null;
+  let pokedexId = '';
+
   if (drawnPokemon) {
     const { id } = drawnPokemon;
+    pokedexId = id;
     pokemonImgPath = getImgPath(id, 'colored');
   }
 
@@ -66,7 +70,7 @@ export default function GachaPage({
           <div className="pokemon-name-wrapper">{drawnPokemon.name}<span className="grade-wrapper">{` [${grade}]`}</span></div>
           <div>
             <button className="re-gacha-btn" onClick={onClickGoBackToGacha}>다시 뽑기</button>
-            <Link to='/pokedex'>
+            <Link to={`/pokedex/${whatPageInPokedex(pokedexId, 6)}`}>
               <button className="pokedex-btn">도감 가기</button>
             </Link>
           </div>
