@@ -80,6 +80,7 @@ export default function GachaPage({
         <>
           <div className="body-blackout"/>
           <img src="/images/static/pokemonStickerGif/monsterball.gif" alt="" className="pokeball-spinning-img"/> 
+          <p className="minting-wrapper">NFT 생성중...</p>
         </>
       }
       { confetti &&
