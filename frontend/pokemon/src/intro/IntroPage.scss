@@ -17,6 +17,10 @@
     top: 53%;
     transform: translate(-50%, -50%);
   }
+  .intro-container .intro-logo-desc {
+    height: 5vh;
+    margin: 1vh 0 4vh 0;
+  }
 }
 @media (min-width: 1030px) {
   .intro-container {
@@ -34,6 +38,10 @@
     transform: translate(-50%, -50%);
     padding-right: 600px;
   }
+  .intro-container .intro-logo-desc {
+    height: 8vh;
+    margin: 5vh 0;
+  }
 }
 
 .intro-container .intro-monster-ball {
@@ -41,23 +49,20 @@
   height: 6vh;
 }
 
-.intro-container .intro-logo-desc {
-  height: 8vh;
-  margin: 5vh 0;
-}
-
 .intro-container .intro-running {
   height: 30vh;
 }
+
 .intro-container .intro-running-container {
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .intro-container .intro-shadow {
   height: 5vh;
   position: relative;
-  margin-top: -20px;
-  z-index: -999;
+  margin: -20px 0 0 30px;
+  z-index: 1;
 }
 
 .intro-container .intro-start-btn {

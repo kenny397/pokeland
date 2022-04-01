@@ -23,7 +23,7 @@ export default function TutorialPage() {
     '불꽃 포켓몬 파이리를 선택했구나! 아주 매력적인 포켓몬이지.', 
     '자, 방금 파이리가 NFT로 생성되었다! 이 파이리는 이제 전 세계에서 한마리밖에 존재하지 않는 너만의 파이리인 것이야!',
     '이 파이리를 네 지갑에 저장하기만 한다면, 네가 이 파이리를 소유한다는 것을 전 세계가 보증하게 되지!!',
-    '파이리는 나 오박사가 압수해가지! \n하지만 뽑기를 할 수 있는 충분한 토큰을 주었으니 포켓몬 뽑기를 해보도록 하거라 !! \n그럼 태초마을에서 보자꾸나 !!'];
+    '파이리는 나 오박사가 압수해가지! \n하지만 뽑기를 할 수 있는 충분한 토큰을 주었으니 포켓몬 뽑기를 해보도록 하거라 !! \n그럼 태초마을에서 보자꾸나 '];
   const [ scriptNo, setScriptNo ] = useState(1);
   const [ isAllTyped, setIsAllTyped ] = useState(false);
   console.log('first:' + isAllTyped);
@@ -124,11 +124,13 @@ export default function TutorialPage() {
           {
             scriptNo === 9 
             &&
-            <Link to="/">
-              <div className="down-button-wrapper">
-                <FontAwesomeIcon icon={faSortDown} className="tutorial-down-button" onClick={() => changeScriptNo(false)}/>
-              </div>
-            </Link>
+              isAllTyped
+              &&
+              <Link to="/">
+                <div className="down-button-wrapper">
+                  <FontAwesomeIcon icon={faSortDown} className="tutorial-down-button" onClick={() => changeScriptNo(false)}/>
+                </div>
+              </Link>
           }
         </div>
       </div>
