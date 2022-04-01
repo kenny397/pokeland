@@ -7,8 +7,12 @@ import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 
 import Typewriter from 'typewriter-effect';
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 export default function TutorialPage() {
+  const isDeskTop = useMediaQuery({
+    query: "(min-width: 1030px)"
+  });
   const scriptList = [
     "",
     "안녕하신가!\n내 이름은 오박사.\n포켓몬을 연구하고 있단다.\n포켓몬 세상에 온 것을 환영한다!", 
@@ -44,9 +48,12 @@ export default function TutorialPage() {
   return (
     <div className="TutorialPage">
       <div className="tutorial-page-wrapper">
-        <div>
-          <img src="/images/static/pokemonLogo.png" className="tutorial-pokemon-logo" />
-        </div>
+        { isDeskTop
+          &&
+          <div>
+            <img src="/images/static/pokemonLogo.png" className="tutorial-pokemon-logo" />
+          </div>
+        }
         { scriptNo === 5
           &&
           <img src="/images/static/monsterballs.png" className="monster-balls-img" onClick={() => changeScriptNo(false)}/>
@@ -65,7 +72,9 @@ export default function TutorialPage() {
         {
           [7,8].find((e) => e == scriptNo)
             &&
-            <img src="/images/static/newnft.png" className="new-nft-img" />
+            <div>
+              <img src="/images/static/newnft.png" className="new-nft-img" />
+            </div>
         }
         
         <div 
@@ -82,7 +91,7 @@ export default function TutorialPage() {
                     <span>{scriptList[scriptNo]}</span>
                     <div className="tutorial-btn-wrapper">
                       <button className="tutorial-red-btn" onClick={()=> changeScriptNo("red")}> 알고있어요!</button>
-                      <button className="tutorial-blue-btn" onClick={()=> changeScriptNo("blue")}> NFT가 뭐에요?</button>
+                      <button className="tutorial-blue-btn" onClick={()=> changeScriptNo("blue")}> NFT요?</button>
                     </div>
                   </>
                   :

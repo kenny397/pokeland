@@ -96,6 +96,16 @@
     transform: translate(-50%, -50%);
     z-index: 1011;
   }
+  .minting-wrapper{
+    position: fixed;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 1011;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
   .pokemon-name-wrapper {
     font-weight: bold;
     font-size: 24px;
