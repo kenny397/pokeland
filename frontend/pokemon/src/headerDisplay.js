@@ -22,6 +22,7 @@ export function decideHeaderDisplay(to) {
       }
       i++;
     }
+    console.log(domain);
     return domain;
   };
 

@@ -39,6 +39,7 @@ export function setExistingPokemons(existingPokemons) {
 export function loadExistingPokemons(jwt) {
   return async (dispatch) => {
     const existingPokemons = await fetchExistingPokemons(jwt);
+    // console.log(`fetch result : existingPokemons is ${existingPokemons}`);
     dispatch(setExistingPokemons(existingPokemons));
   };
 }

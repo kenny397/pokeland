@@ -46,7 +46,7 @@ export async function fetchExistingPokemons(jwt) {
       data : '',
     }
   );
-
+  // console.log(response);
   let { pokemonList } = response.data;
   return pokemonList;
 }

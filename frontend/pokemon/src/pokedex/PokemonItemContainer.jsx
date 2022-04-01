@@ -5,7 +5,8 @@ import PokemonItem from "./PokemonItem";
 
 export default function PokemonItemContainer({ item }) {
   const { id, name } = item;
-  const hasNfps = useSelector(state => state.existingPokemons).find(ele => ele === id);
+  let nfps = useSelector(state => state.existingPokemons);
+  const hasNfps = nfps ? nfps.find(ele => ele === id) : '';
   
   const pokemonShadowImgPath = getImgPath(id, 'shadow');
   const pokemonColorImgPath = getImgPath(id, 'colored');
