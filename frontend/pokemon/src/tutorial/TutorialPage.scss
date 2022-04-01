@@ -23,12 +23,10 @@
     }
 
     .script-wrapper {
-      text-align: left;
-      margin: 7vh 7vw 0 7vw;
-      padding: 10px;
-      border: 3px solid black;
-      font-size: 18px;
+      font-size: 17px;
+      letter-spacing: 1px;
     }
+
     .pairi-img {
       margin-top: 10vh;
       height: 30vh;
@@ -36,6 +34,7 @@
     .new-nft-img {
       height: 10vh;
     }
+
   }
   @media (min-width: 1030px) {
     .tutorial-page-wrapper {
@@ -54,6 +53,10 @@
       margin-top: 2vh;
       width: 500px;
     }
+    .script-wrapper {
+      font-size: 18px;
+      letter-spacing: 3px;
+    }
   }
 
 
@@ -62,11 +65,10 @@
     margin: 7vh 7vw 0 7vw;
     padding: 10px;
     border: 3px solid black;
-    font-size: 18px;
     font-family: "dunggunmo" !important;
-    letter-spacing: 3px;
     line-height: 30px;
   }
+
   .tutorial-down-button {
     margin-top: -70px;
     cursor: pointer;
