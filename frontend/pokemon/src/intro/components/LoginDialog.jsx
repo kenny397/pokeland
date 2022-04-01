@@ -51,7 +51,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
         <input 
           name="email" 
           type="text" 
-          placeholder=" 이메일"
+          placeholder=" 아이디"
           onChange={(e) => onChangeInputs(e)}
         />
       </div>
@@ -74,6 +74,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
       <Link to="/signup">
         <p className="to-signup">아직 회원이 아니신가요?</p>
       </Link>
+      
     </div>
   );
 }

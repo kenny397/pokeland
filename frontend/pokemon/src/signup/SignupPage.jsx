@@ -125,13 +125,13 @@ export default function SignupPage() {
 
         <div className="form-container">
           <div className="email-input-wrapper" >
-            <p>이메일</p>
-            <input name="email" type="text" placeholder="이메일을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <p>아이디</p>
+            <input name="email" type="text" placeholder="아이디를 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
             <button 
               className={"dup-btn email-dup-btn " + (isEmailChecked ? ' btn-dp-none' : '')}
               onClick={ () => onClickEmailCheck() }
             >중복확인</button>
-            <div className={"dup-check-div" + (isEmailChecked ? '' : ' btn-dp-none')}>사용가능한 이메일 입니다.</div>
+            <div className={"dup-check-div" + (isEmailChecked ? '' : ' btn-dp-none')}>사용가능한 아이디 입니다.</div>
           </div>
           <div className="nickname-input-wrapper" >
             <p>닉네임</p>
