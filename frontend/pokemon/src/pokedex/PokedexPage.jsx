@@ -1,33 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { loadExistingPokemons } from "../redux/actions";
 import isLogin from '../utils/isLogin';
 import PokemonList from "./PokemonList";
+import { useNavigate, useParams } from "react-router-dom";
 import { changeHeaderDisplay } from "../headerDisplay";
 
 import "./PokedexPage.scss";
 
 export default function PokedexPage() {
+  let { page } = useParams();
+  page *= 1;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
     const jwt = isLogin();
     dispatch(loadExistingPokemons(jwt));
   }, []);
 
-  const [page, setPage] = useState(1);
-  
   const handleClickGoToPrev = () => {
-    setPage(page - 1);
+    navigate(`/pokedex/${page - 1}`, { replace: true });
     if (page <= 1) {
-      setPage(1);
+      navigate(`/pokedex/${1}`, { replace: true });
     }
   };
 
   const handleClickGoToNext = () => {
-    setPage(page + 1);
+    navigate(`/pokedex/${page + 1}`, { replace: true });
     if (page >= 26) {
-      setPage(26);
+      navigate(`/pokedex/${26}`, { replace: true });
     }
   };
 

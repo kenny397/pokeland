@@ -13,14 +13,10 @@ export default function NfpsByPokemon() {
   const publicKey = localStorage.getItem('publicKey');
 
   useEffect(() => {
-    console.log('useEffect excuted');
     dispatch(loadExistingNfps(publicKey, pokedexId));
   }, []);
 
-  // const nfps = useSelector(state => state.nfps)[pokedexId];
-
   const existingNfps = useSelector(state => state.existingNfps);
-  console.log(`nfps is ${JSON.stringify(existingNfps)}`);
 
   const numOfNfps =  existingNfps ? existingNfps.length : 0;
   const [page, setPage] = useState(1);
