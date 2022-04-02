@@ -5,7 +5,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import com.ssafy.b208.api.db.entity.User;
 import com.ssafy.b208.api.db.repository.UserRepository;
-import com.ssafy.b208.api.exception.AddressNotFoundException;
+import com.ssafy.b208.api.exception.LackMoneyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -79,10 +79,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                     jwtAuthentication.setDetails(userDetails);
                     return jwtAuthentication;
                 }else{
-                    throw new AddressNotFoundException(2L);
+                    throw new LackMoneyException(2L);
                 }
             }
-            throw new AddressNotFoundException(2L);
+            throw new LackMoneyException(2L);
 
         }
         return null;

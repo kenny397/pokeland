@@ -38,7 +38,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/register")
-    public ResponseEntity<? extends BaseResponseBody> register(@RequestBody UserRequestDto userRequestDto)throws Exception {
+    public ResponseEntity<BaseResponseBody> register(@RequestBody UserRequestDto userRequestDto){
         userService.register(userRequestDto);
         //있는 email이면 에러 발생 시켜야됨
         //회원가입 email인증

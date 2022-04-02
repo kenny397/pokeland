@@ -33,7 +33,7 @@ public class PokedexServiceImpl implements PokedexService {
     @Override
     public List<Long> getPokemonList(String email) {
         User user = Optional.ofNullable(userRepository.findUserByEmail(email).get())
-                .orElseGet(() -> new User());
+                .orElseGet(() -> User.builder().build());
         List<Long> pokemonList = Optional.ofNullable(userPokemonRepository.findPokemonList(user.getId()).get())
                 .orElseGet(() -> new ArrayList<>());
         System.out.println(pokemonList);
@@ -51,7 +51,7 @@ public class PokedexServiceImpl implements PokedexService {
     public List<NfpDetailDto> getNfpList(String publicKey, Long pokedexId) {
         // public key로 userId 찾기
         User user = Optional.ofNullable(userRepository.findUserByPublicKey(publicKey).get())
-                .orElseGet(() -> new User());
+                .orElseGet(() -> User.builder().build());
         Long userId = user.getId();
 
         List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
