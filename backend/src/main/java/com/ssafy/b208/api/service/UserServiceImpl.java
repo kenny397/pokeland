@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public void register(UserRequestDto registerRequestDto) {
         //회원가입이 된경우
         Optional<User> optionalUser=userRepository.findUserByEmail(registerRequestDto.getEmail());
-        System.out.println(optionalUser.isPresent());
+        
         if(optionalUser.get()==null){
             throw new ExistIdException(registerRequestDto.getEmail());
         }else{
