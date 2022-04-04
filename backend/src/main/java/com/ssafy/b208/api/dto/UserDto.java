@@ -11,5 +11,6 @@ public class UserDto {
     String password;
     String publicKey;
     String privateKey;
+    boolean enabled;
     Long Money;
 }
