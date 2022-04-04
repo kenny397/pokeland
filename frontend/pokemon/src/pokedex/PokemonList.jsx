@@ -16,6 +16,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
       each: columns * 3,
       gridTemplateColumns: '1fr '.repeat(columns).slice(0, -1),
       gridColumn: `${columns}/${columns + 1}`,
+      gridTemplateRows: '1fr '.repeat(4).slice(0, -1),
     };
   };
 
@@ -29,7 +30,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
     layout = generateLayout(6);
   }
 
-  let { each, gridTemplateColumns, gridColumn } = layout;
+  let { each, gridTemplateColumns, gridTemplateRows, gridColumn } = layout;
 
   const start = (page - 1) * each;
   const end = page * each;
@@ -39,9 +40,10 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   for (let i = 0; i < paginatedPokemonList.length; i++) {
     emptyGridItems.pop();
   }
+  console.log(emptyGridItems);
 
   return (
-    <div className="pokemon-list" style={{ gridTemplateColumns }}>
+    <div className="pokemon-list" style={{ gridTemplateColumns, gridTemplateRows }}>
       {paginatedPokemonList.map((item) => (
         <PokemonItemContainer
           item={item}
