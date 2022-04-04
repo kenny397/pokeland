@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMediaQuery } from "react-responsive";
 import pokemonList from "../fixtures/pokemonList";
 
@@ -7,15 +7,9 @@ import range from '../utils/range';
 import PokemonItemContainer from "./PokemonItemContainer";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
-  const isPc = useMediaQuery({
-    query : "(min-width:1024px)"
-  });
-  const isTablet = useMediaQuery({
-    query : "(min-width:768px) and (max-width:1023px)"
-  });
-  const isMobile = useMediaQuery({
-    query : "(max-width:600px)"
-  });
+  const isPc = useMediaQuery({ query : "(min-width:1024px)" });
+  const isTablet = useMediaQuery({ query : "(min-width:768px) and (max-width:1023px)" });
+  const isMobile = useMediaQuery({ query : "(max-width:600px)" });
 
   const generateLayout = (columns) => {
     return {
@@ -25,14 +19,14 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
     };
   };
 
-  const [ layout, setLayout ] = useState(generateLayout(2));
-  
+  let layout = generateLayout(2);
+
   if (isMobile) {
-    setLayout(generateLayout(2));
+    layout = generateLayout(2);
   } else if (isTablet) {
-    setLayout(generateLayout(3));
+    layout = generateLayout(4);
   } else if (isPc) {
-    setLayout(generateLayout(5));
+    layout = generateLayout(6);
   }
 
   let { each, gridTemplateColumns, gridColumn } = layout;
