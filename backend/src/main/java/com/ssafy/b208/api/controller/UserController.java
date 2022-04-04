@@ -10,6 +10,8 @@ import com.ssafy.b208.api.dto.response.CheckResponseDto;
 import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
 import com.ssafy.b208.api.service.UserService;
+import com.ssafy.b208.api.service.utils.InputValidation;
+import com.ssafy.b208.api.service.utils.SiteURL;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Email;
 
 @Api(value = "유저 API", tags = {"user-controller"})
 @RestController
@@ -31,6 +34,9 @@ public class UserController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final InputValidation inputValidation;
+    private final SiteURL siteURL;
+    private final static String emailRegexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; // by RFC 5322
 
     @ApiOperation(value = "회원가입", notes = "성공시 Success응답")
     @ApiResponses({
@@ -40,14 +46,17 @@ public class UserController {
     })
     @PostMapping("/register")
     public ResponseEntity<? extends BaseResponseBody> register(HttpServletRequest request, @RequestBody UserRequestDto userRequestDto) throws Exception {
-        userService.register(userRequestDto, getSiteURL(request));
 
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern)) {
+            userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        }
+        return ResponseEntity.status(200).body(BaseResponseBody.of(401, "Fail"));
+
+
     }
 
-    private String getSiteURL(HttpServletRequest request) {
-        return request.getRequestURL().toString().replace("/register","");
-    }
+
 
     @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
     @ApiResponses({
