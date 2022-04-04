@@ -22,7 +22,7 @@ public class GachaServiceImpl implements GachaService {
     @Override
     @Transactional
     public GachaResponseDto gacha(String email) {
-        User user=userRepository.findUserByEmail(email).get();
+        User user=userRepository.findOptionalByEmail(email).get();
 
         if(user.getMoney()>=100){
             user.setMoney(user.getMoney()-100L);

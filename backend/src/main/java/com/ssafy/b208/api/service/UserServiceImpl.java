@@ -32,13 +32,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(UserRequestDto registerRequestDto) {
         //회원가입이 된경우
-        Optional<User> optionalUser=userRepository.findUserByEmail(registerRequestDto.getEmail());
-        
-        if(optionalUser.get()==null){
+        Optional<User> user=userRepository.findOptionalByEmail(registerRequestDto.getEmail());
+
+        if(user.isPresent()){
             throw new ExistIdException(registerRequestDto.getEmail());
         }else{
             WalletDto walletDto = createWallet();
-            User user = User.builder().nickname(registerRequestDto.getNickname())
+            User newUser = User.builder().nickname(registerRequestDto.getNickname())
                     .email(registerRequestDto.getEmail())
                     .money(500L)
                     .mail("x")
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
                     .publicKey(walletDto.getPublicKey())
                     .privateKey(walletDto.getPrivateKey())
                     .build();
-            userRepository.save(user);
+            userRepository.save(newUser);
         }
 
 
@@ -56,11 +56,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByUserEmail(String email) {
-        Optional<User> userOptional=userRepository.findUserByEmail(email);
-        if(!userOptional.isPresent()){
+        User user=userRepository.findOptionalByEmail(email).get();
+        if(user==null){
             return null;
         }
-        User user = userOptional.get();
         UserDto userDto = UserDto.builder()
                 .email(user.getEmail())
                 .password(user.getPassword())
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserDto getUserByUserNickname(String nickname) {
-        Optional<User> userOptional=userRepository.findUserByNickname(nickname);
+        Optional<User> userOptional=userRepository.findOptionalByNickname(nickname);
         if(!userOptional.isPresent()){
             return null;
         }

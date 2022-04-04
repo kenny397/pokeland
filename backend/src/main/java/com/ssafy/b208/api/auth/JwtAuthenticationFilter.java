@@ -6,6 +6,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ssafy.b208.api.db.entity.User;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.exception.LackMoneyException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Optional;
-
+@Slf4j
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     private UserRepository userRepository;
@@ -48,7 +49,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception ex) {
-
+            log.info(ex.getMessage());
             return;
         }
 
@@ -70,20 +71,19 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
             if (userId != null) {
                 // jwt 토큰에 포함된 계정 정보(userId) 통해 실제 디비에 해당 정보의 계정이 있는지 조회.
-                Optional<User> user = userRepository.findUserByEmail(userId);
-                if(user.isPresent()) {
+                User user = userRepository.findOptionalByEmail(userId).get();
+                if(user!=null) {
                     // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
-                    NftUserDetail userDetails = new NftUserDetail(user.get());
+                    NftUserDetail userDetails = new NftUserDetail(user);
                     UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userId,
                             null, userDetails.getAuthorities());
                     jwtAuthentication.setDetails(userDetails);
                     return jwtAuthentication;
                 }else{
-                    throw new LackMoneyException(2L);
+                    return null;
                 }
             }
-            throw new LackMoneyException(2L);
-
+            return null;
         }
         return null;
     }
