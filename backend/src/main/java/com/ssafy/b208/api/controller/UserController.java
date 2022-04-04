@@ -46,6 +46,21 @@ public class UserController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공 혹은 실패"),
+            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    @GetMapping("/verify")
+    public ResponseEntity<? extends BaseResponseBody> verify(@RequestParam String code)throws Exception {
+        if(userService.verify(code)){
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        }else {
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
+        }
+    }
+
     @ApiOperation(value = "로그인" , notes = "로그인시 jwt토큰 Bearer형식과 지갑 publickey 주소 응답")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -59,7 +74,7 @@ public class UserController {
         UserDto userDto =userService.getUserByUserEmail(email);
 
         UserLoginResponseDto userloginResponseDto= new UserLoginResponseDto();
-        if(passwordEncoder.matches(password, userDto.getPassword())){
+        if(passwordEncoder.matches(password, userDto.getPassword()) && userDto.isEnabled()){
             userloginResponseDto.setPublicKey(userDto.getPublicKey());
             userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
             return ResponseEntity.status(200).body(userloginResponseDto);
