@@ -53,13 +53,13 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
         <div className="empty-grid-item" key={ele}> </div>
       ))}
       {
-        nfpList && nfpList.length > 6 &&
+        nfpList.length > 6 && 
         <div className="prev-btn">
           <button onClick={onClickGoToPrev}>왼쪽</button>
         </div>
       }
       {
-        nfpList && nfpList.length > 6 &&
+        nfpList.length > 6 && paginatedNfpList.length === 6 &&
         <div className="next-btn">
           <button onClick={onClickGoToNext}>오른쪽</button>
         </div>

@@ -25,8 +25,14 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
       {emptyGridItems.map((ele) => (
         <div className="empty-grid-item" key={ele}> </div>
       ))}
-      <button className="prev-btn" onClick={() => onClickGoToPrev()}>왼쪽</button>
-      <button className="next-btn" onClick={() => onClickGoToNext()}>오른쪽</button>
+      {
+        pokemonList.length > 6 &&
+        <button className="prev-btn" onClick={() => onClickGoToPrev()}>왼쪽</button>
+      }
+      {
+        paginatedPokemonList.length == 6 &&
+        <button className="next-btn" onClick={() => onClickGoToNext()}>오른쪽</button>
+      }
     </div>
   );
 }
