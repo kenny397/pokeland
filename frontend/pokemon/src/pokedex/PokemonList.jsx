@@ -2,6 +2,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 // import { useNavigate } from "react-router-dom";
 import pokemonList from "../fixtures/pokemonList";
+import { pcSize, tabletSize, mobileSize } from "../utils/querys";
 
 import range from '../utils/range';
 // import whatPageInPokedex from '../utils/whatPageInPokedex';
@@ -9,9 +10,9 @@ import range from '../utils/range';
 import PokemonItemContainer from "./PokemonItemContainer";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
-  const isPc = useMediaQuery({ query : "(min-width:1024px)" });
-  const isTablet = useMediaQuery({ query : "(min-width:768px) and (max-width:1023px)" });
-  const isMobile = useMediaQuery({ query : "(max-width:600px)" });
+  const isPc = useMediaQuery(pcSize);
+  const isTablet = useMediaQuery(tabletSize);
+  const isMobile = useMediaQuery(mobileSize);
 
   const generateLayout = (columns) => {
     return {
