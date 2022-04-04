@@ -4,13 +4,20 @@ import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 @Service
 public interface UserService {
-    public void register(UserRequestDto registerRequestDto);
+    public void register(UserRequestDto registerRequestDto, String siteURL)
+            throws MessagingException, UnsupportedEncodingException;
 
     public UserDto getUserByUserEmail(String email);
 
     UserDto getUserByUserNickname(String nickname);
+
+    public boolean verify(String verificationCode);
+
 }
+
