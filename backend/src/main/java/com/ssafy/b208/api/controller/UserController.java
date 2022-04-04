@@ -1,6 +1,5 @@
 package com.ssafy.b208.api.controller;
 
-
 import com.ssafy.b208.api.auth.JwtTokenUtil;
 import com.ssafy.b208.api.auth.NftUserDetail;
 import com.ssafy.b208.api.dto.UserDto;
@@ -36,6 +35,7 @@ public class UserController {
     private final InputValidation inputValidation;
     private final SiteURL siteURL;
     private final static String emailRegexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; // by RFC 5322
+    private final static String passWordRegexPattern = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{6,15})"; // 숫자,소문자,대문자, 특문(!,@,#,$,%), 6~15 자리
 
     @ApiOperation(value = "회원가입", notes = "성공시 Success응답")
     @ApiResponses({
@@ -46,16 +46,13 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<? extends BaseResponseBody> register(HttpServletRequest request, @RequestBody UserRequestDto userRequestDto) throws Exception {
 
-        if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern)) {
+        if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern) && inputValidation.patternMatches(userRequestDto.getPassword(),passWordRegexPattern)) {
             userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(401, "Fail"));
 
-
     }
-
-
 
     @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
     @ApiResponses({
@@ -100,8 +97,7 @@ public class UserController {
 
     }
 
-    //자산, 유저가 가지고있는 NFT , 상세조회 , 고객센터 email
-    // 자산 조회 jwt
+    //자산, 유저가 가지고있는 NFT , 상세조회, 고객센터 email, 자산 조회 jwt
     @ApiOperation(value = "잔액조회", notes = "로그인한 회원 본인의 잔액정보를 응답한다. jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -148,6 +144,5 @@ public class UserController {
         }
         return ResponseEntity.status(200).body(checkResponseDto);
     }
-
 
 }
