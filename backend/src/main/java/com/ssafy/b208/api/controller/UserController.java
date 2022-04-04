@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+import javax.servlet.http.HttpServletRequest;
 
 @Api(value = "유저 API", tags = {"user-controller"})
 @RestController
@@ -38,12 +39,14 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/register")
-    public ResponseEntity<? extends BaseResponseBody> register(@RequestBody UserRequestDto userRequestDto)throws Exception {
-        userService.register(userRequestDto);
-        //있는 email이면 에러 발생 시켜야됨
-        //회원가입 email인증
+    public ResponseEntity<? extends BaseResponseBody> register(HttpServletRequest request, @RequestBody UserRequestDto userRequestDto) throws Exception {
+        userService.register(userRequestDto, getSiteURL(request));
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        return request.getRequestURL().toString().replace("/register","");
     }
 
     @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
@@ -53,39 +56,45 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/verify")
-    public ResponseEntity<? extends BaseResponseBody> verify(@RequestParam String code)throws Exception {
-        if(userService.verify(code)){
+    public ResponseEntity<? extends BaseResponseBody> verify(@RequestParam String code) throws Exception {
+        if (userService.verify(code)) {
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-        }else {
+        } else {
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
         }
     }
 
-    @ApiOperation(value = "로그인" , notes = "로그인시 jwt토큰 Bearer형식과 지갑 publickey 주소 응답")
+    @ApiOperation(value = "로그인", notes = "로그인시 jwt토큰 Bearer형식과 지갑 publickey 주소 응답")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
             @ApiResponse(code = 401, message = "실패 아직 구현 x"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/login")
-    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserRequestDto userRequestDto)throws Exception {
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserRequestDto userRequestDto) throws Exception {
         String email = userRequestDto.getEmail();
         String password = userRequestDto.getPassword();
-        UserDto userDto =userService.getUserByUserEmail(email);
+        UserDto userDto = userService.getUserByUserEmail(email);
 
-        UserLoginResponseDto userloginResponseDto= new UserLoginResponseDto();
-        if(passwordEncoder.matches(password, userDto.getPassword()) && userDto.isEnabled()){
-            userloginResponseDto.setPublicKey(userDto.getPublicKey());
-            userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
+        UserLoginResponseDto userloginResponseDto = new UserLoginResponseDto();
+        if (passwordEncoder.matches(password, userDto.getPassword())) {
+            if (userDto.isEnabled()) {
+                userloginResponseDto.setPublicKey(userDto.getPublicKey());
+                userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
+                userloginResponseDto.setVerified("Yes");
+            } else {
+                userloginResponseDto.setVerified("No");
+            }
             return ResponseEntity.status(200).body(userloginResponseDto);
-        }else{
+        } else {
             return ResponseEntity.status(401).body(userloginResponseDto);
         }
 
     }
+
     //자산, 유저가 가지고있는 NFT , 상세조회 , 고객센터 email
     // 자산 조회 jwt
-    @ApiOperation(value = "잔액조회" , notes = "로그인한 회원 본인의 잔액정보를 응답한다. jwt토큰 필요")
+    @ApiOperation(value = "잔액조회", notes = "로그인한 회원 본인의 잔액정보를 응답한다. jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
             @ApiResponse(code = 401, message = "인증 실패 200으로 빈문자열이 response..아직 구현 x"),
@@ -93,22 +102,23 @@ public class UserController {
     })
     @GetMapping("/balance")
     public ResponseEntity<UserMoneyResponseDto> checkMoney(@ApiIgnore Authentication authentication) throws Exception {
-        NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
-        String email=nftUserDetail.getUsername();
+        NftUserDetail nftUserDetail = (NftUserDetail) authentication.getDetails();
+        String email = nftUserDetail.getUsername();
         UserDto userDto = userService.getUserByUserEmail(email);
         UserMoneyResponseDto userMoneyResponseDto = new UserMoneyResponseDto();
         userMoneyResponseDto.setMoney(userDto.getMoney());
         return ResponseEntity.status(200).body(userMoneyResponseDto);
     }
-    @ApiOperation(value = "닉네임 중복검사" , notes = "1은 이미 아이디가 있을때 0은 아이디가 없을때.")
+
+    @ApiOperation(value = "닉네임 중복검사", notes = "1은 이미 아이디가 있을때 0은 아이디가 없을때.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공 "),
             @ApiResponse(code = 401, message = "실패 아직 구현 x"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/check/nickname/{nickname}")
-    public ResponseEntity<CheckResponseDto> checkNickname(@PathVariable("nickname") String nickname){
-        CheckResponseDto checkResponseDto=new CheckResponseDto();
+    public ResponseEntity<CheckResponseDto> checkNickname(@PathVariable("nickname") String nickname) {
+        CheckResponseDto checkResponseDto = new CheckResponseDto();
 
         return ResponseEntity.status(200).body(checkResponseDto);
     }
@@ -120,20 +130,16 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/check/email/{email}")
-    public ResponseEntity<CheckResponseDto> checkEmail(@PathVariable String email){
-        CheckResponseDto checkResponseDto=new CheckResponseDto();
+    public ResponseEntity<CheckResponseDto> checkEmail(@PathVariable String email) {
+        CheckResponseDto checkResponseDto = new CheckResponseDto();
         UserDto user = userService.getUserByUserEmail(email);
-        if(user!=null){
+        if (user != null) {
             checkResponseDto.setFlag(1L);
-        }else{
+        } else {
             checkResponseDto.setFlag(0L);
         }
         return ResponseEntity.status(200).body(checkResponseDto);
     }
-
-
-
-
 
 
 }
