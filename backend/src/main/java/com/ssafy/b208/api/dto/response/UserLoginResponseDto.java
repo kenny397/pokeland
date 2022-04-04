@@ -9,5 +9,6 @@ import lombok.Setter;
 public class UserLoginResponseDto {
     String accessToken;
     String publicKey;
+    String verified;
 
 }
