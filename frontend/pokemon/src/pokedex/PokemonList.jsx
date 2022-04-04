@@ -10,9 +10,15 @@ import range from '../utils/range';
 import PokemonItemContainer from "./PokemonItemContainer";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
+  // localStorage.getItem('prevSize');
+  // console.log(JSON.parse(localStorage.getItem('prevSize')));
+
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
+
+  // localStorage.setItem('prevSize', JSON.stringify({ isPc, isTablet, isMobile }));
+  // console.log(JSON.parse(localStorage.getItem('prevSize')));
 
   const generateLayout = (columns) => {
     return {
@@ -33,6 +39,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   } else if (isPc) {
     columns = 6;
   }
+
   layout = generateLayout(columns);
   let { each, gridTemplateColumns, gridTemplateRows, gridColumn } = layout;
 
