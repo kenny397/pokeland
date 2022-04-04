@@ -1,8 +1,10 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+// import { useNavigate } from "react-router-dom";
 import pokemonList from "../fixtures/pokemonList";
 
 import range from '../utils/range';
+// import whatPageInPokedex from '../utils/whatPageInPokedex';
 
 import PokemonItemContainer from "./PokemonItemContainer";
 
@@ -21,16 +23,27 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   };
 
   let layout = generateLayout(2);
+  let columns = 2;
 
   if (isMobile) {
-    layout = generateLayout(2);
+    columns = 2;
   } else if (isTablet) {
-    layout = generateLayout(4);
+    columns = 4;
   } else if (isPc) {
-    layout = generateLayout(6);
+    columns = 6;
   }
-
+  layout = generateLayout(columns);
   let { each, gridTemplateColumns, gridTemplateRows, gridColumn } = layout;
+
+  // let firstPokemonHere = ((page - 1) * each) + 1;
+  // const navigate = useNavigate();
+
+  // let curPage = page;
+  // let newPage = whatPageInPokedex(firstPokemonHere, each);
+
+  // if (page !== newPage) {
+  //   navigate(`/pokedex/${newPage}`);
+  // }
 
   const start = (page - 1) * each;
   const end = page * each;
@@ -40,7 +53,6 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   for (let i = 0; i < paginatedPokemonList.length; i++) {
     emptyGridItems.pop();
   }
-  console.log(emptyGridItems);
 
   return (
     <div className="pokemon-list" style={{ gridTemplateColumns, gridTemplateRows }}>
