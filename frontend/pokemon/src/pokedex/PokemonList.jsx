@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import pokemonList from "../fixtures/pokemonList";
 
@@ -16,30 +16,26 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
   const isMobile = useMediaQuery({
     query : "(max-width:600px)"
   });
-  const layOut = {
-    each: 6,
-    gridTemplateColumns: '1fr 1fr',
-    gridColumn: '2/3',
+
+  const generateLayout = (columns) => {
+    return {
+      each: columns * 3,
+      gridTemplateColumns: '1fr '.repeat(columns).slice(0, -1),
+      gridColumn: `${columns}/${columns + 1}`,
+    };
   };
 
-  const setLayout = (isPc, isTablet, isMobile) => {
-    if (isMobile) {
-      layOut.gridTemplateColumns = '1fr 1fr';
-      layOut.each = 6;
-      layOut.gridColumn = `${layOut.gridTemplateColumns.split(' ').length}/${layOut.gridTemplateColumns.split(' ').length + 1}`;
-    } else if (isTablet) {
-      layOut.gridTemplateColumns = '1fr 1fr 1fr';
-      layOut.each = 9;
-      layOut.gridColumn = `${layOut.gridTemplateColumns.split(' ').length}/${layOut.gridTemplateColumns.split(' ').length + 1}`;
-    } else if (isPc) {
-      layOut.gridTemplateColumns = '1fr 1fr 1fr 1fr 1fr';
-      layOut.each = 15;
-      layOut.gridColumn = `${layOut.gridTemplateColumns.split(' ').length}/${layOut.gridTemplateColumns.split(' ').length + 1}`;
-    }
-    return layOut;
-  };
+  const [ layout, setLayout ] = useState(generateLayout(2));
+  
+  if (isMobile) {
+    setLayout(generateLayout(2));
+  } else if (isTablet) {
+    setLayout(generateLayout(3));
+  } else if (isPc) {
+    setLayout(generateLayout(5));
+  }
 
-  let { each, gridTemplateColumns, gridColumn } = setLayout(isPc, isTablet, isMobile);
+  let { each, gridTemplateColumns, gridColumn } = layout;
 
   const start = (page - 1) * each;
   const end = page * each;
