@@ -1,4 +1,4 @@
-package com.ssafy.b208.api.service.utils;
+package com.ssafy.b208.api.utils;
 
 import java.util.regex.Pattern;
 

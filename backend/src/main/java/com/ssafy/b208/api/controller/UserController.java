@@ -10,8 +10,8 @@ import com.ssafy.b208.api.dto.response.CheckResponseDto;
 import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
 import com.ssafy.b208.api.service.UserService;
-import com.ssafy.b208.api.service.utils.InputValidation;
-import com.ssafy.b208.api.service.utils.SiteURL;
+import com.ssafy.b208.api.utils.InputValidation;
+import com.ssafy.b208.api.utils.SiteURL;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -23,7 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Email;
 
 @Api(value = "유저 API", tags = {"user-controller"})
 @RestController
