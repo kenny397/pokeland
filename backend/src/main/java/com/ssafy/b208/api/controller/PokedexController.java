@@ -41,13 +41,10 @@ public class PokedexController {
     })
     public ResponseEntity<PokemonListDto> getPokemonList(@ApiIgnore Authentication authentication) throws Exception {
 
-        NftUserDetail nftUserDetail = (NftUserDetail)authentication.getDetails();
-        String email=nftUserDetail.getUsername();
+        NftUserDetail nftUserDetail = (NftUserDetail) authentication.getDetails();
+        String email = nftUserDetail.getUsername();
 
-        List<Long> pokemonList = pokedexService.getPokemonList(email);
-        PokemonListDto pokemonListDto = PokemonListDto.builder()
-                .pokemonList(pokemonList)
-                .build();
+        PokemonListDto pokemonListDto = pokedexService.getPokemonList(email);
         return ResponseEntity.status(200).body(pokemonListDto);
     }
 
@@ -57,20 +54,7 @@ public class PokedexController {
     @ApiImplicitParam(name = "pokedexId", value = "포켓몬 번호", required = true)
     public ResponseEntity<PokeInfoOuterDto> getPokeInfo(@PathVariable Long pokedexId) throws Exception {
 
-        PokeDex pokeDex = pokedexService.getPokeInfo(pokedexId);
-        PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
-                .id(pokeDex.getId())
-                .name(pokeDex.getName())
-                .type(pokeDex.getType())
-                .height(pokeDex.getHeight())
-                .category(pokeDex.getCategory())
-                .gender(pokeDex.getGender())
-                .weight(pokeDex.getWeight())
-                .abilities(pokeDex.getAbilities())
-                .build();
-        PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
-                .pokeInfo(pokeInfoDto)
-                .build();
+        PokeInfoOuterDto pokeInfoOuterDto = pokedexService.getPokeInfo(pokedexId);
         return ResponseEntity.status(200).body(pokeInfoOuterDto);
     }
 
@@ -83,10 +67,7 @@ public class PokedexController {
     })
     public ResponseEntity<NfpListDto> getNfpList(@PathVariable String publicKey, @PathVariable Long pokedexId) throws Exception {
 
-        List<NfpDetailDto> nfpList = pokedexService.getNfpList(publicKey, pokedexId);
-        NfpListDto nfpListDto = NfpListDto.builder()
-                .nfpList(nfpList)
-                .build();
+        NfpListDto nfpListDto = pokedexService.getNfpList(publicKey, pokedexId);
         return ResponseEntity.status(200).body(nfpListDto);
     }
 
@@ -97,14 +78,7 @@ public class PokedexController {
     @ApiImplicitParam(name = "tokenId", value = "토큰 아이디", required = true)
     public ResponseEntity<NfpDetailDto> getNfpDetail(@PathVariable Long tokenId) throws Exception {
 
-        UserPokemon userPokemon = pokedexService.getNfpDetail(tokenId);
-        NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
-                .tokenId(userPokemon.getTokenId())
-                .pokedexId(userPokemon.getPokemon().getId())
-                .ipfsMetaUri(userPokemon.getIpfsMetaUri())
-                .ipfsImageUri(userPokemon.getIpfsImageUri())
-                .grade(userPokemon.getGrade())
-                .build();
+        NfpDetailDto nfpDetailDto = pokedexService.getNfpDetail(tokenId);
         return ResponseEntity.status(200).body(nfpDetailDto);
     }
 

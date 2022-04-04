@@ -8,7 +8,7 @@ import com.ssafy.b208.api.db.repository.PokeDexRepository;
 import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
-import com.ssafy.b208.api.dto.response.NfpDetailDto;
+import com.ssafy.b208.api.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,24 +31,39 @@ public class PokedexServiceImpl implements PokedexService {
     private UserRepository userRepository;
 
     @Override
-    public List<Long> getPokemonList(String email) {
+    public PokemonListDto getPokemonList(String email) {
         User user = Optional.ofNullable(userRepository.findUserByEmail(email).get())
                 .orElseGet(() -> new User());
         List<Long> pokemonList = Optional.ofNullable(userPokemonRepository.findPokemonList(user.getId()).get())
                 .orElseGet(() -> new ArrayList<>());
-        System.out.println(pokemonList);
-        return pokemonList;
+        PokemonListDto pokemonListDto = PokemonListDto.builder()
+                .pokemonList(pokemonList)
+                .build();
+        return pokemonListDto;
     }
 
     @Override
-    public PokeDex getPokeInfo(Long id) {
+    public PokeInfoOuterDto getPokeInfo(Long id) {
         PokeDex pokeDex = Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
                 .orElseGet(() -> new PokeDex());
-        return pokeDex;
+        PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
+                .id(pokeDex.getId())
+                .name(pokeDex.getName())
+                .type(pokeDex.getType())
+                .height(pokeDex.getHeight())
+                .category(pokeDex.getCategory())
+                .gender(pokeDex.getGender())
+                .weight(pokeDex.getWeight())
+                .abilities(pokeDex.getAbilities())
+                .build();
+        PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
+                .pokeInfo(pokeInfoDto)
+                .build();
+        return pokeInfoOuterDto;
     }
 
     @Override
-    public List<NfpDetailDto> getNfpList(String publicKey, Long pokedexId) {
+    public NfpListDto getNfpList(String publicKey, Long pokedexId) {
         // public key로 userId 찾기
         User user = Optional.ofNullable(userRepository.findUserByPublicKey(publicKey).get())
                 .orElseGet(() -> new User());
@@ -56,7 +71,7 @@ public class PokedexServiceImpl implements PokedexService {
 
         List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
                 .orElseGet(() -> new ArrayList<>());
-        List<NfpDetailDto> nftList= new ArrayList<>();
+        List<NfpDetailDto> nfpList= new ArrayList<>();
         for (UserPokemon userPokemon : userPokemons) {
             NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
                     .tokenId(userPokemon.getTokenId())
@@ -65,16 +80,26 @@ public class PokedexServiceImpl implements PokedexService {
                     .ipfsImageUri(userPokemon.getIpfsImageUri())
                     .grade(userPokemon.getGrade())
                     .build();
-            nftList.add(nfpDetailDto);
+            nfpList.add(nfpDetailDto);
         }
-        return nftList;
+        NfpListDto nfpListDto = NfpListDto.builder()
+                .nfpList(nfpList)
+                .build();
+        return nfpListDto;
     }
 
     @Override
-    public UserPokemon getNfpDetail(Long id) {
+    public NfpDetailDto getNfpDetail(Long id) {
         UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
                 .orElseGet(() -> new UserPokemon());
-        return userPokemon;
+        NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
+                .tokenId(userPokemon.getTokenId())
+                .pokedexId(userPokemon.getPokemon().getId())
+                .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                .ipfsImageUri(userPokemon.getIpfsImageUri())
+                .grade(userPokemon.getGrade())
+                .build();
+        return nfpDetailDto;
     }
 
 }
