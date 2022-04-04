@@ -24,13 +24,15 @@
 }
 @media (min-width: 1030px) {
   .intro-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     width: 1030px;
-    background: white;
   }
   .intro-container .intro-logo {
     margin-top: 2vh;
-    width: 500px;
-    height: 200px;
+    width: 30vw;
+    height: 20vh;
   }
   .intro-container .intro-monster-ball {
     left: 50%;
@@ -39,7 +41,7 @@
     padding-right: 600px;
   }
   .intro-container .intro-logo-desc {
-    height: 8vh;
+    height: 5vh;
     margin: 5vh 0;
   }
 }
