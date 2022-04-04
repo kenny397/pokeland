@@ -10,6 +10,7 @@ const initialState = {
   existingNfps: [],
   jwt: '',
   balance: '',
+  isMusicMuted: true,
 };
 
 export default function reducer(state = initialState, action) {
@@ -43,6 +44,12 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       existingNfps: action.payload.existingNfps
+    };
+  }
+  if (action.type === 'setIsMusicMuted') {
+    return {
+      ...state,
+      isMusicMuted: action.payload.isMusicMuted
     };
   }
   return state;
