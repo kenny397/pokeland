@@ -12,6 +12,8 @@ import './App.scss';
 // js
 import { decideHeaderDisplay } from './headerDisplay';
 
+import ReactAudioPlayer from 'react-audio-player';
+
 export default function App() {
   const dispatch = useDispatch();
 
@@ -40,6 +42,7 @@ export default function App() {
         :
         <Router />
       }
+      <iframe src={require('./static/audio/silence.mp3')} allow="autoplay" id="audio" ></iframe>
     </BrowserRouter>
   );
 }

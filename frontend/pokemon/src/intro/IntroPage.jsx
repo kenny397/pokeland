@@ -12,12 +12,16 @@ import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
+import ReactAudioPlayer from 'react-audio-player';
+
 import { changeHeaderDisplay } from "../headerDisplay";
 
 export default function IntroPage() {
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
   }, []);
+
+  const navigate = useNavigate();
 
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const isDeskTop = useMediaQuery({
@@ -29,8 +33,6 @@ export default function IntroPage() {
   };
 
   const jwt = localStorage.getItem('jwt') !== null;
-
-  const navigate = useNavigate();
 
   return (
     <div className="intro-container">
@@ -69,6 +71,14 @@ export default function IntroPage() {
         /> 
       }
       { isLoginModalVisible && <BodyBlackoutStyle setIsModalVisible= {setIsLoginModalVisible}/> }
+
+      {/* 오디오파일 */}
+      <iframe src={require('../static/audio/silence.mp3')} allow="autoplay" id="audio" ></iframe>
+      <ReactAudioPlayer
+        src={require('../static/audio/opening.mp3')}
+        autoPlay={true}
+        controls
+      />
     </div>
   );
 }
