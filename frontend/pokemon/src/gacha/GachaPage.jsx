@@ -1,8 +1,11 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 import getImgPath from "../utils/getImgPath";
 import "./GachaPage.scss";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+
+import { pcSize, tabletSize, mobileSize } from "../utils/querys";
 
 import Confetti from 'react-confetti';
 import whatPageInPokedex from "../utils/whatPageInPokedex";
@@ -18,6 +21,19 @@ export default function GachaPage({
   confetti,
   isDeskTop
 }) {
+  const isPc = useMediaQuery(pcSize);
+  const isTablet = useMediaQuery(tabletSize);
+  const isMobile = useMediaQuery(mobileSize);
+
+  let each = 6;
+
+  if (isMobile) {
+    each = 6;
+  } else if (isTablet) {
+    each = 12;
+  } else if (isPc) {
+    each = 18;
+  }
 
   let pokemonImgPath = null;
   let pokedexId = '';
@@ -32,10 +48,10 @@ export default function GachaPage({
     balance: state.balance
   }));
 
-  const backgroundStyle ={
+  const backgroundStyle = {
     backgroundImage: `url(/images/backgroundImg/${grade}.png)`
   };
-  
+
   return (
     <div className="GachaPage" style={ backgroundStyle }>
       {!drawnPokemon ?
@@ -70,7 +86,7 @@ export default function GachaPage({
           <div className="pokemon-name-wrapper">{drawnPokemon.name}<span className="grade-wrapper">{` [${grade}]`}</span></div>
           <div>
             <button className="re-gacha-btn" onClick={onClickGoBackToGacha}>다시 뽑기</button>
-            <Link to={`/pokedex/${whatPageInPokedex(pokedexId, 6)}`}>
+            <Link to={`/pokedex/${whatPageInPokedex(pokedexId, each)}`}>
               <button className="pokedex-btn">도감 가기</button>
             </Link>
           </div>

@@ -12,6 +12,15 @@
     overflow-wrap: normal;
   }
 
+  .empty-grid-item {
+    width: 14.5vh;
+    height: 23.07vh;
+    margin: 0.25rem auto;
+    padding: 0.05rem 0.4rem;
+    border: 0.1rem solid;
+    border-color: #ffffff;
+  }
+
   .pokemon-item {
     display: grid;
     justify-content: center;
@@ -89,12 +98,6 @@
   .pokemon-copyright > p {
     margin: 0 0 0.72vh;
     // transform: scale(0.8);
-  }
-
-  .empty-grid-item {
-    width: 6.25rem;
-    height: 9.92rem;
-    margin: 0.25rem auto;
   }
 
   h1 {
