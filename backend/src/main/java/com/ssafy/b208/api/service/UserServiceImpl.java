@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
     public void register(UserRequestDto registerRequestDto, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         //회원가입이 된경우
-        Optional<User> user=userRepository.findOptionalByEmail(registerRequestDto.getEmail());
 
         User user = new User();
         user.setNickname(registerRequestDto.getNickname());
@@ -122,7 +121,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         User user = userOptional.get();
-        UserDto userDto = new UserDto();
+        UserDto userDto = UserDto.builder().build();
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setPublicKey(user.getPublicKey());

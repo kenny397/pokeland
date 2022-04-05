@@ -76,7 +76,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                 Optional<User> user = userRepository.findOptionalByEmail(userId);
                 if(user.isPresent()) {
                     // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
-                    NftUserDetail userDetails = new NftUserDetail(user);
+                    NftUserDetail userDetails = new NftUserDetail(user.get());
                     UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userId,
                             null, userDetails.getAuthorities());
                     jwtAuthentication.setDetails(userDetails);
