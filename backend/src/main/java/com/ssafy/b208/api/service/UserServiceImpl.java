@@ -7,6 +7,11 @@ import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.exception.ExistIdException;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +21,9 @@ import org.web3j.crypto.Wallet;
 import org.web3j.crypto.WalletFile;
 
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,26 +35,33 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JavaMailSender mailSender;
+    private final Environment env;
 
     @Transactional
     @Override
-    public void register(UserRequestDto registerRequestDto) {
+    public void register(UserRequestDto registerRequestDto, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
         //회원가입이 된경우
-        Optional<User> user=userRepository.findOptionalByEmail(registerRequestDto.getEmail());
 
-        if(user.isPresent()){
-            throw new ExistIdException(registerRequestDto.getEmail());
-        }else{
+        User user = new User();
+        user.setNickname(registerRequestDto.getNickname());
+        user.setEmail(registerRequestDto.getEmail());
+        user.setMoney(500L);
+        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
+        if (userRepository.findOptionalByEmail(registerRequestDto.getEmail()).isPresent()) {
+            return;
+        } else {
             WalletDto walletDto = createWallet();
-            User newUser = User.builder().nickname(registerRequestDto.getNickname())
-                    .email(registerRequestDto.getEmail())
-                    .money(500L)
-                    .mail("x")
-                    .password(passwordEncoder.encode(registerRequestDto.getPassword()))
-                    .publicKey(walletDto.getPublicKey())
-                    .privateKey(walletDto.getPrivateKey())
-                    .build();
-            userRepository.save(newUser);
+            user.setPublicKey(walletDto.getPublicKey());
+            user.setPrivateKey(walletDto.getPrivateKey());
+
+            String randomCode = RandomString.make(64);
+            user.setVerificationCode(randomCode);
+            user.setEnabled(false);
+
+            userRepository.save(user);
+            sendVerificationEmail(user, siteURL);
         }
 
 
@@ -54,26 +69,73 @@ public class UserServiceImpl implements UserService {
         //회원가입이 안된경우
     }
 
+    private void sendVerificationEmail(User user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String siteAddress = "gmail.com";
+        String fromAddress = env.getProperty("spring.mail.username") + "@" + siteAddress;
+        String senderName = "PokeLand";
+        String subject = "Please verify your registration";
+        String content = "[[name]]님,<br>"
+                + "아래 인증 버튼을 눌러 회원가입 인증을 진행해주세요 :<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">인증완료</a></h3>"
+                + "감사합니다,<br>"
+                + senderName;
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getNickname());
+        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+        content = content.replace("[[URL]]", verifyURL);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
+    @Override
+    @Transactional
+    public boolean verify(String verificationCode) {
+        User user = userRepository.findByVerificationCode(verificationCode);
+        System.out.println(user.getEmail());
+        if (user == null || user.isEnabled()) {
+            return false;
+        } else {
+            user.setVerificationCode(null);
+            user.setEnabled(true);
+            userRepository.save(user);
+            return true;
+        }
+
+    }
+
     @Override
     public UserDto getUserByUserEmail(String email) {
-        User user=userRepository.findOptionalByEmail(email).get();
-        if(user==null){
+        Optional<User> userOptional = userRepository.findOptionalByEmail(email);
+        if (!userOptional.isPresent()) {
             return null;
         }
-        UserDto userDto = UserDto.builder()
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .publicKey(user.getPublicKey())
-                .privateKey(user.getPrivateKey())
-                .money(user.getMoney())
-                .build();
-
+        User user = userOptional.get();
+        UserDto userDto = UserDto.builder().build();
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
+        userDto.setPublicKey(user.getPublicKey());
+        userDto.setMoney(user.getMoney());
+        userDto.setPrivateKey(user.getPrivateKey());
+        userDto.setEnabled(user.isEnabled());
+        //빌더 사용해보기
         return userDto;
     }
+
     @Override
     public UserDto getUserByUserNickname(String nickname) {
-        Optional<User> userOptional=userRepository.findOptionalByNickname(nickname);
-        if(!userOptional.isPresent()){
+        Optional<User> userOptional = userRepository.findOptionalByNickname(nickname);
+        if (!userOptional.isPresent()) {
             return null;
         }
 
@@ -98,7 +160,6 @@ public class UserServiceImpl implements UserService {
             WalletFile aWallet = Wallet.createLight(seed, ecKeyPair);
             String address = "0x" + aWallet.getAddress();
 
-
             walletDto.setPublicKey(address);
             walletDto.setPrivateKey(privKey);
         } catch (Exception e) {
@@ -107,8 +168,6 @@ public class UserServiceImpl implements UserService {
         }
         return walletDto;
     }
-
-
 
 
 }

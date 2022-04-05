@@ -22,8 +22,11 @@ public class User extends BaseEntity {
     private String publicKey;
     private String privateKey;
     private Long money;
-    private String mail;  // 메일 인증 여부?
+    private boolean enabled;  // 메일 인증 여부?
     private LocalDateTime createdDate;
+    @Column(length = 64)
+    private String verificationCode;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserPokemon> userPokemonList = new ArrayList<>();

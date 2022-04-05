@@ -13,5 +13,6 @@ public class UserDto {
     String password;
     String publicKey;
     String privateKey;
-    Long money;
+    boolean enabled;
+    Long Money;
 }

@@ -2,7 +2,6 @@ package com.ssafy.b208.api.service;
 
 import com.ssafy.b208.api.contract.SsafyNFT;
 import com.ssafy.b208.api.db.entity.User;
-import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.utils.NetworkConnector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import javax.annotation.PostConstruct;
-import java.math.BigInteger;
 
 @Service
 @Slf4j
