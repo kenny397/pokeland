@@ -29,7 +29,9 @@
     text-align: center;
     white-space: nowrap;
     width: 14.5vh;
+    max-width: 140px;
     height: 23.07vh;
+    max-height: 220px;
     border: 0.1rem solid;
     border-color: #9B9B9B;
     border-radius: 0.5rem;
@@ -85,6 +87,7 @@
     margin:  1.68vh 0 0.72vh;
     padding: 0.24rem;
     width: 12.67vh;
+    max-width: 130px;
     border-radius: 0.8rem;
   }
 
