@@ -32,9 +32,8 @@ export default function AudioPlayer() {
   const gachaBgm = ['gacha.mp3', 'whilemonsterball.mp3', 'common.mp3', 'rare.mp3', 'unique.mp3'];
   const supportBgm = ['support.mp3', 'supportsuccess.mp3'];
   let bgmTitle = null;
-
+  const randomNum = Math.floor(Math.random() * 5) + 1;
   if (pathNow ==='/main') {
-    const randomNum = Math.floor(Math.random() * 5) + 1;
     bgmTitle = `main${randomNum}.mp3`;
   } else if (pathNow === '/support') {
     bgmTitle = supportBgm[supportOrder];
@@ -45,7 +44,7 @@ export default function AudioPlayer() {
   } else if (pathNow === '/tutorial') {
     bgmTitle = 'tutorial.mp3';
   } else {
-    bgmTitle = 'silence.mp3';
+    bgmTitle = `main${randomNum}.mp3`;
   }
   const audioContainer = document.querySelector('#audio-player');
   console.log(bgmTitle);
@@ -69,7 +68,7 @@ export default function AudioPlayer() {
           autoPlay={!isMusicMuted}
           loop={true}
           id="audio-player"
-          volume={0.1}
+          volume={0.2}
         />
         <span className="muted-icon-wrapper">
           {isMusicMuted 
