@@ -50,7 +50,7 @@ public class UserController {
             userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         }
-        return ResponseEntity.status(200).body(BaseResponseBody.of(401, "Fail"));
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
 
     }
 
