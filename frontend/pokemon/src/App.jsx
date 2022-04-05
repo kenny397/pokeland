@@ -40,7 +40,7 @@ export default function App() {
           </div>
         </>
         :
-        <Router />
+        <Router /> 
       }
       <AudioPlayer/>
     </BrowserRouter>

@@ -11,6 +11,8 @@ const initialState = {
   jwt: '',
   balance: '',
   isMusicMuted: true,
+  gachaOrder: 0,
+  supportOrder: 0,
 };
 
 export default function reducer(state = initialState, action) {
@@ -50,6 +52,20 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       isMusicMuted: action.payload.isMusicMuted
+    };
+  }
+
+  if (action.type === 'setGachaOrder') {
+    return {
+      ...state,
+      gachaOrder: action.payload.gachaOrder
+    };
+  }
+
+  if (action.type === 'setSupportOrder') {
+    return {
+      ...state,
+      supportOrder: action.payload.supportOrder
     };
   }
   return state;

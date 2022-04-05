@@ -22,38 +22,40 @@ function NavBar(){
   };
   
   return (
-    <div className="navbar-container">
-      {!isDeskTop 
-        ?
-        <>
-          <SideBar
-            balance={balance}
-          />
-          <Link to={'/main'} >
-            <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
-          </Link>
-        </>
-        :
-        <>
-          <Link to={'/main'}>
-            <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
-          </Link>
-          
-          <div className="navbar-right-wrapper">
-            <div className="navbar-asset-wrapper">
-              <div>내 자산:</div>
-              <div className="asset-box">{balance}SSF</div>
+    <div className="NavBar">
+      <div className="navbar-container">
+        {!isDeskTop 
+          ?
+          <>
+            <SideBar
+              balance={balance}
+            />
+            <Link to={'/main'} >
+              <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
+            </Link>
+          </>
+          :
+          <>
+            <Link to={'/main'}>
+              <img src={ '/images/static/pokemonLogo.png' } className="pokemon-logo"/>
+            </Link>
+            
+            <div className="navbar-right-wrapper">
+              <div className="navbar-asset-wrapper">
+                <div>내 자산:</div>
+                <div className="asset-box">{balance}SSF</div>
+              </div>
+              <div className="navbar-menu-wrapper">
+                <Link to={'/pokedex'} >포켓몬 도감</Link>
+                <Link to={'/gacha'} >포켓몬 뽑기</Link>
+                <Link to={'/support'} >고객센터</Link>
+                <a onClick={handleClickLogOut}>로그아웃</a>
+              </div>
             </div>
-            <div className="navbar-menu-wrapper">
-              <Link to={'/pokedex'} >포켓몬 도감</Link>
-              <Link to={'/gacha'} >포켓몬 뽑기</Link>
-              <Link to={'/support'} >고객센터</Link>
-              <a onClick={handleClickLogOut}>로그아웃</a>
-            </div>
-          </div>
-        </>
-      }
+          </>
+        }
 
+      </div>
     </div>
   );
 }

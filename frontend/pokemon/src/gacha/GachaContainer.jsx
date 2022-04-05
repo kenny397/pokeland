@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import pokemonList from "../fixtures/pokemonList";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,6 +10,9 @@ import { updateBalance } from "../redux/actions";
 
 import { useMediaQuery } from "react-responsive";
 
+import { changeHeaderDisplay } from "../headerDisplay";
+import { setGachaOrder } from "../redux/actions";
+
 export default function GachaContainer() {
   const dispatch = useDispatch();
   const [pokeballDisplay, setPokeballDisplay] = useState(false);
@@ -17,6 +20,11 @@ export default function GachaContainer() {
   const [grade, setGrade] = useState(null);
   const [loading, setLoading] = useState(null);
   const [confetti, setConfetti] = useState(null);
+
+  useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
+    dispatch(setGachaOrder(0));
+  }, []);
 
   const isDeskTop = useMediaQuery({
     query: "(min-width: 1030px)"
@@ -35,6 +43,7 @@ export default function GachaContainer() {
   };
   
   const handleClickOpenPokeball = async () => {
+    dispatch(setGachaOrder(1));
     setLoading(true);
     const { data: { grade, pokeDexId } } = await doGacha();
     const response = await getBalance();
@@ -42,11 +51,21 @@ export default function GachaContainer() {
     dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
+    console.log(grade);
+    console.log(typeof grade);
+    if (grade === 'Epic') {
+      dispatch(setGachaOrder(4));  
+    } else if (grade === 'Unique') {
+      dispatch(setGachaOrder(3));
+    } else {
+      dispatch(setGachaOrder(2));
+    }
     setTimeout(() => { setDrawnPokemon(pokemonList[pokeDexId-1]); setLoading(false); setGrade(grade); setConfetti(true); }, 100);
     
   };
   
   const handleClickGoBackToGacha = () => {
+    dispatch(setGachaOrder(0));
     setDrawnPokemon(null);
     setGrade(null);
     setConfetti(false);
