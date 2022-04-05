@@ -6,8 +6,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { changeHeaderDisplay } from "../headerDisplay";
 import { pcSize, tabletSize, mobileSize } from '../utils/querys';
-import isLogin from '../utils/isLogin';
-import generateLayout from "../utils/generateLayout";
+import { isLogin, generateLayout, calcMaxPage } from '../utils/utils';
 import PokemonList from "./PokemonList";
 import "./PokedexPage.scss";
 
@@ -20,26 +19,10 @@ export default function PokedexPage() {
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
-
   const viewPort = { isPc, isTablet, isMobile };
 
   const layout = generateLayout(viewPort);
-  const { each } = layout;
-
-  const calcMaxPage = (total, each) => {
-    let maxPage = 1;
-    const quotient = total / each;
-
-    if (parseInt(quotient) === quotient) {
-      maxPage = quotient;
-    } else {
-      maxPage = Math.floor(total / each) + 1;
-    }
-
-    return maxPage;
-  };
-
-  const maxPage = calcMaxPage(151, each);
+  const maxPage = calcMaxPage(151, layout.each);
 
   if (page > maxPage) {
     navigate(`/pokedex/${maxPage}`);
