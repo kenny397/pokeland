@@ -9,7 +9,14 @@ import Typewriter from 'typewriter-effect';
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
+import { useEffect } from "react";
+import { changeHeaderDisplay } from "../headerDisplay";
+
 export default function TutorialPage() {
+  useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
+  }, []);
+
   const isDeskTop = useMediaQuery({
     query: "(min-width: 1030px)"
   });
@@ -26,7 +33,6 @@ export default function TutorialPage() {
     '파이리는 나 오박사가 압수해가지! \n하지만 뽑기를 할 수 있는 충분한 토큰을 주었으니 포켓몬 뽑기를 해보도록 하거라 !! \n그럼 태초마을에서 보자꾸나 '];
   const [ scriptNo, setScriptNo ] = useState(1);
   const [ isAllTyped, setIsAllTyped ] = useState(false);
-  console.log('first:' + isAllTyped);
   
   const changeScriptNo = (btnColor) => {
     if (isAllTyped) {
@@ -35,14 +41,10 @@ export default function TutorialPage() {
       } else {
         setScriptNo(scriptNo + 1);
       }
-      console.log(`setIsAllTyped start ${isAllTyped}`);
       setIsAllTyped(false);
-      console.log(`setIsAllTyped end ${isAllTyped}`);
     } else {
       setIsAllTyped(true);
     }
-    console.log(`setIsAllTyped end ${isAllTyped}`);
-
   };
 
   return (

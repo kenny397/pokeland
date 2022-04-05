@@ -61,3 +61,12 @@ export function loadExistingNfps(publicKey, pokedexId) {
     dispatch(setExistingNfps(existingNfps));
   };
 }
+
+export function setIsMusicMuted(isMusicMuted) {
+  return {
+    type: 'setIsMusicMuted',
+    payload: {
+      isMusicMuted
+    }
+  };
+}

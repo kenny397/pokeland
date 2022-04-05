@@ -19,6 +19,8 @@ export default function IntroPage() {
     changeHeaderDisplay(window.location.pathname);
   }, []);
 
+  const navigate = useNavigate();
+
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const isDeskTop = useMediaQuery({
     query: "(min-width: 1030px)"
@@ -29,8 +31,6 @@ export default function IntroPage() {
   };
 
   const jwt = localStorage.getItem('jwt') !== null;
-
-  const navigate = useNavigate();
 
   return (
     <div className="intro-container">

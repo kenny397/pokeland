@@ -5,7 +5,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 import com.ssafy.b208.api.db.entity.User;
 import com.ssafy.b208.api.db.repository.UserRepository;
-import com.ssafy.b208.api.exception.AddressNotFoundException;
+import com.ssafy.b208.api.exception.LackMoneyException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Optional;
-
+@Slf4j
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     private UserRepository userRepository;
@@ -49,6 +50,8 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception ex) {
 
+            log.info(ex.getMessage());
+            response.sendError(401,"올바르지 않은 토큰입니다.");
             return;
         }
 
@@ -73,17 +76,16 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
                 Optional<User> user = userRepository.findOptionalByEmail(userId);
                 if(user.isPresent()) {
                     // 식별된 정상 유저인 경우, 요청 context 내에서 참조 가능한 인증 정보(jwtAuthentication) 생성.
-                    NftUserDetail userDetails = new NftUserDetail(user.get());
+                    NftUserDetail userDetails = new NftUserDetail(user);
                     UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(userId,
                             null, userDetails.getAuthorities());
                     jwtAuthentication.setDetails(userDetails);
                     return jwtAuthentication;
                 }else{
-                    throw new AddressNotFoundException(2L);
+                    return null;
                 }
             }
-            throw new AddressNotFoundException(2L);
-
+            return null;
         }
         return null;
     }

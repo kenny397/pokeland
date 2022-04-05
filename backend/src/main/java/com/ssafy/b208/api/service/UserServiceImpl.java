@@ -5,6 +5,7 @@ import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
+import com.ssafy.b208.api.exception.ExistIdException;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender mailSender;
@@ -41,6 +43,7 @@ public class UserServiceImpl implements UserService {
     public void register(UserRequestDto registerRequestDto, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         //회원가입이 된경우
+        Optional<User> user=userRepository.findOptionalByEmail(registerRequestDto.getEmail());
 
         User user = new User();
         user.setNickname(registerRequestDto.getNickname());
@@ -61,6 +64,8 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             sendVerificationEmail(user, siteURL);
         }
+
+
 
         //회원가입이 안된경우
     }
@@ -134,27 +139,20 @@ public class UserServiceImpl implements UserService {
         if (!userOptional.isPresent()) {
             return null;
         }
+
         User user = userOptional.get();
-        UserDto userDto = new UserDto();
-        userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
-        userDto.setPublicKey(user.getPublicKey());
-        //빌더 사용해보기
+        UserDto userDto = UserDto.builder()
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .publicKey(user.getPublicKey())
+                .build();
         return userDto;
     }
 
-//    @Override
-//    public User getNft(String email) {
-//        User user = userRepository.findUserByEmail(email).get();
-//        Optional<UserPokemon> userPokemon = userPokemonRepository.findUserPokemonByUser(user);
-//        UserPokemonDto userPokemonDto = new UserPokemonDto();
-//        // 빌더
-//    }
 
 
     public WalletDto createWallet() {
         String seed = UUID.randomUUID().toString();
-        System.out.println(seed);
         WalletDto walletDto = new WalletDto();
         try {
             ECKeyPair ecKeyPair = Keys.createEcKeyPair();

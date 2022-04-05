@@ -12,6 +12,8 @@ import './App.scss';
 // js
 import { decideHeaderDisplay } from './headerDisplay';
 
+import AudioPlayer from './components/AudioPlayer';
+
 export default function App() {
   const dispatch = useDispatch();
 
@@ -40,6 +42,7 @@ export default function App() {
         :
         <Router />
       }
+      <AudioPlayer/>
     </BrowserRouter>
   );
 }
