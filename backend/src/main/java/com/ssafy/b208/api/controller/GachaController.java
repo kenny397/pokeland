@@ -2,10 +2,8 @@ package com.ssafy.b208.api.controller;
 
 
 import com.ssafy.b208.api.auth.NftUserDetail;
-import com.ssafy.b208.api.dto.response.BaseResponseBody;
 import com.ssafy.b208.api.dto.response.GachaResponseDto;
 import com.ssafy.b208.api.service.GachaService;
-import com.ssafy.b208.api.service.NftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -25,8 +23,6 @@ public class GachaController {
 
     private final GachaService gachaService;
 
-    // spring security
-    // ipfs반환하고 민팅정보 저장
     @ApiOperation(value = "nft 뽑기", notes = "성공시 민팅 주소 응답 jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
