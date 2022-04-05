@@ -37,7 +37,7 @@ public class SupportServiceImpl implements SupportService {
         );
         mailSender.send(message);
         // 유저 SSF 증가
-        User user = Optional.ofNullable(userRepository.findUserByPublicKey(mailDto.getPublicKey()).get())
+        User user = Optional.ofNullable(userRepository.findOptionalByPublicKey(mailDto.getPublicKey()).get())
                 .orElseGet(() -> new User());
         user.setMoney(user.getMoney() + 500);
         userRepository.save(user);

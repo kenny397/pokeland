@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registerRequestDto.getEmail());
         user.setMoney(500L);
         user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
-        if (userRepository.findUserByEmail(registerRequestDto.getEmail()).isPresent()) {
+        if (userRepository.findOptionalByEmail(registerRequestDto.getEmail()).isPresent()) {
             return;
         } else {
             WalletDto walletDto = createWallet();
@@ -105,7 +105,6 @@ public class UserServiceImpl implements UserService {
             user.setVerificationCode(null);
             user.setEnabled(true);
             userRepository.save(user);
-
             return true;
         }
 
@@ -113,7 +112,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByUserEmail(String email) {
-        Optional<User> userOptional = userRepository.findUserByEmail(email);
+        Optional<User> userOptional = userRepository.findOptionalByEmail(email);
         if (!userOptional.isPresent()) {
             return null;
         }
@@ -131,7 +130,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByUserNickname(String nickname) {
-        Optional<User> userOptional = userRepository.findUserByNickname(nickname);
+        Optional<User> userOptional = userRepository.findOptionalByNickname(nickname);
         if (!userOptional.isPresent()) {
             return null;
         }

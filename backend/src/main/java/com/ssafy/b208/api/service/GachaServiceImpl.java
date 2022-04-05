@@ -21,7 +21,7 @@ public class GachaServiceImpl implements GachaService {
     @Override
     @Transactional
     public GachaResponseDto gacha(String email) {
-        User user=userRepository.findUserByEmail(email).get();
+        User user=userRepository.findOptionalByEmail(email).get();
         GachaResponseDto gachaResponseDto=new GachaResponseDto();
         if(user.getMoney()>=100){
 
