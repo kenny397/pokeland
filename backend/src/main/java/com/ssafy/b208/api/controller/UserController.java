@@ -8,6 +8,7 @@ import com.ssafy.b208.api.dto.response.BaseResponseBody;
 import com.ssafy.b208.api.dto.response.CheckResponseDto;
 import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
+import com.ssafy.b208.api.exception.EmailNotFoundException;
 import com.ssafy.b208.api.service.UserService;
 import com.ssafy.b208.api.utils.InputValidation;
 import com.ssafy.b208.api.utils.SiteURL;
@@ -80,21 +81,21 @@ public class UserController {
         String email = userRequestDto.getEmail();
         String password = userRequestDto.getPassword();
         UserDto userDto = userService.getUserByUserEmail(email);
-
         UserLoginResponseDto userloginResponseDto = new UserLoginResponseDto();
-        if (passwordEncoder.matches(password, userDto.getPassword())) {
-            if (userDto.isEnabled()) {
-                userloginResponseDto.setPublicKey(userDto.getPublicKey());
-                userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
-                userloginResponseDto.setVerified("Yes");
-            } else {
-                userloginResponseDto.setVerified("No");
+        try{
+            if (passwordEncoder.matches(password, userDto.getPassword())) {
+                if (userDto.isEnabled()) {
+                    userloginResponseDto.setPublicKey(userDto.getPublicKey());
+                    userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
+                    userloginResponseDto.setVerified("Yes");
+                } else {
+                    userloginResponseDto.setVerified("No");
+                }
             }
-            return ResponseEntity.status(200).body(userloginResponseDto);
-        } else {
-            return ResponseEntity.status(401).body(userloginResponseDto);
+        }catch (Exception ex){
+            throw new EmailNotFoundException("email");
         }
-
+        return ResponseEntity.status(200).body(userloginResponseDto);
     }
 
     //자산, 유저가 가지고있는 NFT , 상세조회, 고객센터 email, 자산 조회 jwt
@@ -123,7 +124,12 @@ public class UserController {
     @GetMapping("/check/nickname/{nickname}")
     public ResponseEntity<CheckResponseDto> checkNickname(@PathVariable("nickname") String nickname) {
         CheckResponseDto checkResponseDto = new CheckResponseDto();
-
+        UserDto user =userService.getUserByUserNickname(nickname);
+        if (user != null) {
+            checkResponseDto.setFlag(1L);
+        } else {
+            checkResponseDto.setFlag(0L);
+        }
         return ResponseEntity.status(200).body(checkResponseDto);
     }
 

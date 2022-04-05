@@ -51,13 +51,13 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (TokenExpiredException ex){
             log.info(ex.getMessage());
-            response.sendError(401,"토큰 만료 기간이 지난 토큰입니다.");
+            response.sendError(400,"토큰 만료 기간이 지난 토큰입니다.");
             return;
         }
         catch (Exception ex) {
 
             log.info(ex.getMessage());
-            response.sendError(401,"올바르지 않은 토큰입니다.");
+            response.sendError(400,"올바르지 않은 토큰입니다.");
             return;
         }
 

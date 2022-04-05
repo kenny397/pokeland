@@ -5,6 +5,7 @@ import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.UserDto;
 import com.ssafy.b208.api.dto.WalletDto;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
+import com.ssafy.b208.api.exception.EmailNotFoundException;
 import com.ssafy.b208.api.exception.ExistIdException;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
@@ -113,7 +114,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findOptionalByEmail(email);
 
         if (userOptional.isEmpty()) {
-            return null;
+           return null;
         }
         User user = userOptional.get();
         UserDto userDto = UserDto.builder()
@@ -131,7 +132,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByUserNickname(String nickname) {
         Optional<User> userOptional = userRepository.findOptionalByNickname(nickname);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return null;
         }
 
