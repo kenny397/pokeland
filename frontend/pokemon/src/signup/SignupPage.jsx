@@ -22,9 +22,6 @@ export default function SignupPage() {
     passwordConfirm: '',
     isEmailChecked: false,
     isNicknameChecked: false,
-    isEmailValid : false,
-    isNicknameValid: false,
-    isPasswordValid: false,
   });
 
   const [isLoading, setIsLoading] = useState(false);
