@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { pcSize, tabletSize, mobileSize } from '../utils/querys';
-import pokemonList from "../fixtures/pokemonList";
 import { getImgPath, whatPageInPokedex } from "../utils/utils";
+import pokemonList from "../fixtures/pokemonList";
 
 import NfpItem from "./NfpItem";
 
