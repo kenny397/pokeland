@@ -1,14 +1,12 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import getImgPath from "../utils/getImgPath";
-import "./GachaPage.scss";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
+import Confetti from 'react-confetti';
 
 import { pcSize, tabletSize, mobileSize } from "../utils/querys";
-
-import Confetti from 'react-confetti';
-import whatPageInPokedex from "../utils/whatPageInPokedex";
+import { getImgPath, whatPageInPokedex } from "../utils/utils";
+import "./GachaPage.scss";
 
 export default function GachaPage({
   pokeballDisplay,

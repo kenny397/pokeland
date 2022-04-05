@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import getImgPath from "../utils/getImgPath";
+import { getImgPath } from "../utils/utils";
 import PokemonItem from "./PokemonItem";
 
 export default function PokemonItemContainer({ item }) {

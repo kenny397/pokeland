@@ -1,11 +1,11 @@
 import React from "react";
-import pokemonList from "../fixtures/pokemonList";
-import getImgPath from "../utils/getImgPath";
 import { useNavigate } from "react-router-dom";
-import whatPageInPokedex from "../utils/whatPageInPokedex";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
+import pokemonList from "../fixtures/pokemonList";
+import { getImgPath, whatPageInPokedex } from "../utils/utils";
+
 import NfpItem from "./NfpItem";
 
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {

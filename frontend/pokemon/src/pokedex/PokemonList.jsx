@@ -1,62 +1,26 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-// import { useNavigate } from "react-router-dom";
+
 import pokemonList from "../fixtures/pokemonList";
 import { pcSize, tabletSize, mobileSize } from "../utils/querys";
-
-import range from '../utils/range';
-// import whatPageInPokedex from '../utils/whatPageInPokedex';
+import { range, generateLayout } from '../utils/utils';
 
 import PokemonItemContainer from "./PokemonItemContainer";
 
 export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
-  // localStorage.getItem('prevSize');
-  // console.log(JSON.parse(localStorage.getItem('prevSize')));
-
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
+  const viewPort = { isPc, isTablet, isMobile };
 
-  // localStorage.setItem('prevSize', JSON.stringify({ isPc, isTablet, isMobile }));
-  // console.log(JSON.parse(localStorage.getItem('prevSize')));
-
-  const generateLayout = (columns) => {
-    return {
-      each: columns * 3,
-      gridTemplateColumns: '1fr '.repeat(columns).slice(0, -1),
-      gridColumn: `${columns}/${columns + 1}`,
-      gridTemplateRows: '1fr '.repeat(4).slice(0, -1),
-    };
-  };
-
-  let layout = generateLayout(2);
-  let columns = 2;
-
-  if (isMobile) {
-    columns = 2;
-  } else if (isTablet) {
-    columns = 4;
-  } else if (isPc) {
-    columns = 6;
-  }
-
-  layout = generateLayout(columns);
+  let layout = generateLayout(viewPort);
   let { each, gridTemplateColumns, gridTemplateRows, gridColumn } = layout;
-
-  // let firstPokemonHere = ((page - 1) * each) + 1;
-  // const navigate = useNavigate();
-
-  // let curPage = page;
-  // let newPage = whatPageInPokedex(firstPokemonHere, each);
-
-  // if (page !== newPage) {
-  //   navigate(`/pokedex/${newPage}`);
-  // }
 
   const start = (page - 1) * each;
   const end = page * each;
   
   const paginatedPokemonList = pokemonList.slice(start, end);
+  
   let emptyGridItems = range(1, each);
   for (let i = 0; i < paginatedPokemonList.length; i++) {
     emptyGridItems.pop();
