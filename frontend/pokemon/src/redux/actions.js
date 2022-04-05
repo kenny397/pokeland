@@ -70,3 +70,21 @@ export function setIsMusicMuted(isMusicMuted) {
     }
   };
 }
+
+export function setGachaOrder(gachaOrder) {
+  return {
+    type: 'setGachaOrder',
+    payload: {
+      gachaOrder
+    }
+  };
+}
+
+export function setSupportOrder(supportOrder) {
+  return {
+    type: 'setSupportOrder',
+    payload: {
+      supportOrder
+    }
+  };
+}
