@@ -1,106 +1,111 @@
-.navbar-container {
-  background: white;
-  height:5.9vh;
-  border-bottom: 1px solid black;
-  
-}
-
-@media(max-width: 1030px) {
+.NavBar {
   .navbar-container {
-    line-height:5.9vh;
+    background: white;
+    height:5.9vh;
+    border-bottom: 1px solid black;
+    
   }
-  .pokemon-logo {
-    height: 37px;
-    margin-top: calc(2.95vh - 20px);
-    float:right;
-    margin-right: 10px;
-  }
-}
 
-@media(min-width: 1030px) {
-  .pokemon-logo {
-    margin-left: 0.8rem;
+  @media(max-width: 1030px) {
+    .navbar-container {
+      line-height:5.9vh;
+    }
+    .pokemon-logo {
+      height: 37px;
+      margin-top: calc(2.95vh - 20px);
+      float:right;
+      margin-right: 10px;
+    }
+  }
+
+  @media(min-width: 1030px) {
+    .pokemon-logo {
+      margin-left: 0.8rem;
+      height: 4vh;
+    }
+    .navbar-container {
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar-right-wrapper {
+      display:flex;
+      justify-content: space-between;
+    }
+    .navbar-menu-wrapper {
+      display:flex;
+      justify-content: space-between;
+    }
+    .navbar-menu-wrapper a {
+      margin-right: 50px;
+      font-size: 1.07rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .navbar-asset-wrapper {
+      display:flex;
+      justify-content: space-between;
+      margin-right: 30px;
+      padding: 0px 40px;
+      border-radius: 10px;
+      border: 1px solid #C8C8C8;
+    }
+    .asset-box {
+      margin-left: 8px;
+      font-weight: 700;
+      color: #005FC6;
+    }
+  }
+
+
+
+  /* 버거버튼 */
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+
+    /* Our sidebar item styling */
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: black;
+    transition: color 0.2s;
+  }
+
+  /* Change color on hover */
+  .bm-item:hover {
+    color: black;
+  }
+
+  /* The rest copied directly from react-burger-menu docs */
+
+  /* Position and sizing of burger button */
+  .burger-btn {
+    position: absolute;
     height: 4vh;
-  }
-  .navbar-container {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .navbar-right-wrapper {
-    display:flex;
-    justify-content: space-between;
-  }
-  .navbar-menu-wrapper {
-    display:flex;
-    justify-content: space-between;
-  }
-  .navbar-menu-wrapper a {
-    margin-right: 50px;
-    font-size: 1.07rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .navbar-asset-wrapper {
-    display:flex;
-    justify-content: space-between;
-    margin-right: 30px;
-    padding: 0px 40px;
-    border-radius: 10px;
-    border: 1px solid #C8C8C8;
-  }
-  .asset-box {
-    margin-left: 8px;
-    font-weight: 700;
-    color: #005FC6;
+    left: 10px;
+    top: 0.9vh;
   }
 
-}
+  /* General sidebar styles */
+  .bm-menu {
+    background: white;
+    font-size: 1.15em;
+  }
 
-/* 버거버튼 */
-/* Individual item */
-.bm-item {
-  display: inline-block;
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
 
-  /* Our sidebar item styling */
-  text-decoration: none;
-  margin-bottom: 10px;
-  color: black;
-  transition: color 0.2s;
-}
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: black;
+  }
 
-/* Change color on hover */
-.bm-item:hover {
-  color: black;
-}
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
 
-/* The rest copied directly from react-burger-menu docs */
 
-/* Position and sizing of burger button */
-.burger-btn {
-  position: absolute;
-  height: 4vh;
-  left: 10px;
-  top: 0.9vh;
-}
-
-/* General sidebar styles */
-.bm-menu {
-  background: white;
-  font-size: 1.15em;
-}
-
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: black;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
 }
