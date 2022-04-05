@@ -87,7 +87,7 @@ export default function SupportPage() {
       </div>
       
       <div className="buttons">
-        <button className="cancel-button"><Link to="/main">취소</Link></button>
+        <Link to="/main"><button className="cancel-button">취소</button></Link>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
       </div>
       { isLoading &&
