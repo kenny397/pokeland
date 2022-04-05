@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class JwtTokenUtil {
     private static String secretKey="nfp";
-    private static Integer expirationTime=10000;
+    private static Integer expirationTime=1000*60*60;
 
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
@@ -37,7 +37,7 @@ public class JwtTokenUtil {
         return JWT
                 .require(Algorithm.HMAC512(secretKey.getBytes()))
                 .withIssuer(ISSUER)
-                .acceptExpiresAt(10000)
+                .acceptExpiresAt(expirationTime)
                 .build();
     }
 
@@ -69,7 +69,7 @@ public class JwtTokenUtil {
         JWTVerifier verifier = JWT
                 .require(Algorithm.HMAC512(secretKey.getBytes()))
                 .withIssuer(ISSUER)
-                .acceptExpiresAt(10000)
+                .acceptExpiresAt(expirationTime)
                 .build();
 
         try {
