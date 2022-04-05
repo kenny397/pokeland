@@ -33,6 +33,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation "org.assertj:assertj-core:3.20.2"
 	implementation("com.squareup.okhttp3:okhttp:4.9.3")
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation("com.auth0:java-jwt:3.10.3")
 	implementation("com.google.guava:guava:29.0-jre")

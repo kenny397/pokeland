@@ -24,7 +24,6 @@ public class InitController {
 
     private final PokeDexRepository pokeDexRepository;
     private final UserPokemonRepository userPokemonRepository;
-
     private final String jsonIpfs="https://ipfs.io/ipfs/QmP9UvkfujEmgDFmFXJx4JRzcwutNGcuSaEfieseqGTkRS/";
 
     @ApiOperation(value = "pokedex 초기 업로드")

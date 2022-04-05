@@ -44,6 +44,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/register")
+
     public ResponseEntity<? extends BaseResponseBody> register(HttpServletRequest request, @RequestBody UserRequestDto userRequestDto) throws Exception {
 
         if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern) && inputValidation.patternMatches(userRequestDto.getPassword(),passWordRegexPattern)) {

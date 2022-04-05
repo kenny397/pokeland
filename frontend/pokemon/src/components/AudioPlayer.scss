@@ -1,0 +1,22 @@
+.AudioPlayer {
+  @media(max-width: 1030px) {
+    .audio-btn {
+      height: 30px;
+      top: 2%;
+      right: 3%;
+    }  
+  }
+  @media(min-width: 1030px) {
+    .audio-btn {
+      height: 50px;
+      width: 50px;
+      top: 1%;
+      left: calc(50% + 400px);
+    }  
+  }
+  .audio-btn {
+    color: black;
+    cursor: pointer;
+    position: absolute;
+  }
+}

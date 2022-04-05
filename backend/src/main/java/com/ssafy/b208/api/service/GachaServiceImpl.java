@@ -5,6 +5,7 @@ import com.ssafy.b208.api.db.entity.UserPokemon;
 import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.response.GachaResponseDto;
+import com.ssafy.b208.api.exception.LackMoneyException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,27 +27,29 @@ public class GachaServiceImpl implements GachaService {
         if(user.getMoney()>=100){
 
 
+        if(user.getMoney()>=100){
             user.setMoney(user.getMoney()-100L);
             List<UserPokemon> userPokemonList=userPokemonRepository.findUserPokemonByUserIsNull();
             int randomNumber=(int)(Math.random()*userPokemonList.size());
-
             UserPokemon userPokemon=userPokemonList.get(randomNumber);
-
             userPokemon.setUser(user);
             try {
                 nftService.minting(user,userPokemon.getIpfsMetaUri());
-
             }catch (Exception e){
-
+                e.printStackTrace();
             }
-            gachaResponseDto.setGrade(userPokemon.getGrade());
-            gachaResponseDto.setIpfsImageUri(userPokemon.getIpfsImageUri());
-            gachaResponseDto.setIpfsMetaUri(userPokemon.getIpfsMetaUri());
-            gachaResponseDto.setPokeDexId(""+userPokemon.getPokemon().getId());
+            GachaResponseDto gachaResponseDto = GachaResponseDto.builder()
+                    .grade(userPokemon.getGrade())
+                    .ipfsImageUri(userPokemon.getIpfsImageUri())
+                    .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                    .pokeDexId(""+userPokemon.getPokemon().getId())
+                    .build();
             userPokemonRepository.save(userPokemon);
-
+            return gachaResponseDto;
+        }
+        else{
+            throw new LackMoneyException(100L);
         }
 
-        return gachaResponseDto;
     }
 }
