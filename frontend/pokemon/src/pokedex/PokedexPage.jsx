@@ -1,18 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { loadExistingPokemons } from "../redux/actions";
-import isLogin from '../utils/isLogin';
-import PokemonList from "./PokemonList";
 import { useNavigate, useParams } from "react-router-dom";
-import { changeHeaderDisplay } from "../headerDisplay";
+import { useMediaQuery } from "react-responsive";
 
+import { changeHeaderDisplay } from "../headerDisplay";
+import { pcSize, tabletSize, mobileSize } from '../utils/querys';
+import { isLogin, generateLayout, calcMaxPage } from '../utils/utils';
+import PokemonList from "./PokemonList";
 import "./PokedexPage.scss";
 
 export default function PokedexPage() {
-  let { page } = useParams();
-  page *= 1;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  let { page } = useParams();
+  page *= 1;
+  const isPc = useMediaQuery(pcSize);
+  const isTablet = useMediaQuery(tabletSize);
+  const isMobile = useMediaQuery(mobileSize);
+  const viewPort = { isPc, isTablet, isMobile };
+
+  const layout = generateLayout(viewPort);
+  const maxPage = calcMaxPage(151, layout.each);
+
+  if (page > maxPage) {
+    navigate(`/pokedex/${maxPage}`);
+  }
 
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
