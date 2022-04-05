@@ -18,9 +18,9 @@ public class NftUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByEmail(email);
-        if(user.isPresent()) {
-            NftUserDetail userDetails = new NftUserDetail(user.get());
+        User user = userRepository.findOptionalByEmail(email).get();
+        if(user!=null) {
+            NftUserDetail userDetails = new NftUserDetail(user);
             return userDetails;
         }
         return null;
