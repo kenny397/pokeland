@@ -26,7 +26,7 @@ public class GachaController {
     @ApiOperation(value = "nft 뽑기", notes = "성공시 민팅 주소 응답 jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "인증 실패 아직 구현 x"),
+            @ApiResponse(code = 401, message = "인증 실패(토큰 오류)"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("")
