@@ -1,14 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
+import { pcSize, tabletSize, mobileSize } from '../utils/querys';
 import pokemonList from "../fixtures/pokemonList";
 import { getImgPath, whatPageInPokedex } from "../utils/utils";
 
 import NfpItem from "./NfpItem";
 
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
+  const isPc = useMediaQuery(pcSize);
+  const isTablet = useMediaQuery(tabletSize);
+  const isMobile = useMediaQuery(mobileSize);
+  const viewPort = { isPc, isTablet, isMobile };
+
   const nfpList = existingNfps;
 
   const start = (page - 1) * 6;
@@ -21,7 +28,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
   const navigate = useNavigate();
   const handleClickCloseNfps = () => {
-    navigate(`/pokedex/${whatPageInPokedex(pokedexId, 6)}`);
+    navigate(`/pokedex/${whatPageInPokedex(pokedexId, viewPort)}`);
   };
 
   return (

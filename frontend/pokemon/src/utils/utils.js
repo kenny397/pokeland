@@ -48,6 +48,7 @@ export const range = (start, end) => {
   return array;
 };
 
-export const whatPageInPokedex = (pokedexId, each) => {
-  return parseInt((pokedexId - 1) / each + 1);
+export const whatPageInPokedex = (pokedexId, viewPort) => {
+  const layout = generateLayout(viewPort);
+  return parseInt((pokedexId - 1) / layout.each + 1);
 };
