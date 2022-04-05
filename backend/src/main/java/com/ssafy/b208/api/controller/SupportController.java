@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SupportController {
 
-    @Autowired
     private final SupportService supportService;
 
     @PostMapping("/")

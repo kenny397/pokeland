@@ -15,11 +15,10 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class SupportServiceImpl implements SupportService {
-    @Autowired
+
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "YOUR_EMAIL_ADDRESS";
 
-    @Autowired
     private UserRepository userRepository;
 
     @Override

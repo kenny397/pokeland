@@ -26,7 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Api(value = "도감 API", tags = {"pokedex-controller"})
 public class PokedexController {
-    @Autowired
+
     private final PokedexService pokedexService;
 
     // 도감조회

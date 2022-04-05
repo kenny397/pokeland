@@ -23,11 +23,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PokedexServiceImpl implements PokedexService {
-    @Autowired
+
     private UserPokemonRepository userPokemonRepository;
-    @Autowired
     private PokeDexRepository pokeDexRepository;
-    @Autowired
     private UserRepository userRepository;
 
     @Override
