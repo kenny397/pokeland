@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import './SupportPage.scss';
@@ -9,7 +9,14 @@ import { updateBalance } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import { changeHeaderDisplay } from "../headerDisplay";
+import { setSupportOrder } from "../redux/actions";
+
 export default function SupportPage() {
+  useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
+    dispatch(setSupportOrder(0));
+  }, []);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +31,7 @@ export default function SupportPage() {
   const onClickSubmitSupport = async function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
     const { category, email, title, content } = inputs;
+    dispatch(setSupportOrder(1));
     setIsLoading(true);
     const response = await writeSupport( email, category, content, title );
     const { data: { money } } = await getBalance();
@@ -33,7 +41,6 @@ export default function SupportPage() {
     dispatch(updateBalance(localStorage.getItem('balance')));
     alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. ');
     navigate('/main');
-    
   };
 
   const onChangeInputs = (e) => {
