@@ -1,0 +1,43 @@
+.pokemon-detail-container {
+  border: 0.15rem solid black;
+  background-color: #ECD259;
+
+  .pokedex-top {
+    height: 40vh;
+    border: 0.15rem solid black;
+  };
+  .pokedex-bottom {
+    height: 44.8vh;
+    border: 0.15rem solid black;
+  };
+
+  .pokedex-pokemon-screen {
+    margin: 1rem;
+    height: 35vh;
+    text-align: center;
+    background-color: white;
+    border: 0;
+  }
+
+  .pokedex-contents-screen {
+    margin: 1rem;
+    height: 34vh;
+    background-color: white;
+  }
+
+  .pokemon-img-div {
+    margin: 1rem auto;
+    width: 35vh;
+    height: 30vh;
+    background-color: #323232;
+  }
+
+  .pokemon-img {
+    border-radius: 0;
+  }
+
+  .pokedex-contents-screen {
+    margin: 1rem;
+    border: 0.15rem solid black;
+  }
+}
