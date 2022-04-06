@@ -1,43 +1,73 @@
 .pokemon-detail-container {
-  border: 0.15rem solid black;
+  max-width: 348px;
+  max-height: 696px;
+  border: 0.25rem solid black;
   background-color: #ECD259;
 
   .pokedex-top {
     height: 40vh;
-    border: 0.15rem solid black;
+    max-width: 354px;
+    max-height: 320.26px;
+    border: 0.25rem solid black;
   };
   .pokedex-bottom {
     height: 44.8vh;
-    border: 0.15rem solid black;
+    max-width: 354px;
+    max-height: 360px;
+    border: 0.25rem solid black;
   };
 
   .pokedex-pokemon-screen {
     margin: 1rem;
+    padding: 0.25rem;
     height: 35vh;
+    max-width: 354px;
+    max-height: 277.81px;
     text-align: center;
     background-color: white;
     border: 0;
   }
 
   .pokedex-contents-screen {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 1rem;
     height: 34vh;
+    max-width: 354px;
+    max-height: 301.84px;
     background-color: white;
+    border: 0;
+  }
+
+  .pokedex-content-item {
+    padding: 0.2rem;
+  }
+
+  .pokedex-content-item p {
+    margin: 0.2rem;
   }
 
   .pokemon-img-div {
     margin: 1rem auto;
-    width: 35vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 40vh;
+    max-width: 263px;
+    max-height: 238.13px;
     height: 30vh;
     background-color: #323232;
   }
 
   .pokemon-img {
+    width: 30vh;
     border-radius: 0;
   }
 
   .pokedex-contents-screen {
     margin: 1rem;
     border: 0.15rem solid black;
+    max-height: 274.63px;
   }
 }

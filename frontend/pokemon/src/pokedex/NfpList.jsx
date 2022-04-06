@@ -19,6 +19,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
   const viewPort = { isPc, isTablet, isMobile };
+  const maxWidthModal = useMediaQuery({ query : "(min-height:800px)" });
 
   const nfpList = existingNfps;
 
@@ -75,8 +76,8 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
         {modalVisibility &&
         <Modal
-          width={ isPc ? '338px' :'45vh'}
-          height={ isPc ? '640px' : '87vh'}
+          width={maxWidthModal ? '357px' : '44.5vh'}
+          height={maxWidthModal ?  '708.4px' : '88vh'}
           setIsVisible={setModalVisibility}
           InnerComponent={() => PokemonDetail({ nfpInModal })}
           onClickToggleModalVisibility={toggleModalVisibility}
