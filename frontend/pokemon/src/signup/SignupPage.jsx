@@ -91,7 +91,7 @@ export default function SignupPage() {
 
   const isNickName = (nickname) => {
     const nicknameRegex = 
-    /^(?=.{2,10}$)[^0-9][^-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]+$/;
+    /^(?=.{2,10}$)[^-@!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/\s]+$/;
     return nicknameRegex.test(nickname);
   };
 
