@@ -23,23 +23,15 @@ export default function PokedexPage() {
     dispatch(loadExistingPokemons(jwt));
   }, []);
 
-  let { page } = useParams();
-  page *= 1;
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
   const viewPort = { isPc, isTablet, isMobile };
   const layout = generateLayout(viewPort);
-  const maxPage = calcMaxPage(pokemonList.length, layout.each);
 
-  if (page > maxPage) {
-    navigate(`/pokedex/${maxPage}`);
-  }
-
-  const [ showOnlyMyPokemons, setShowOnlyMyPokemons ] = useState(false);
-
-  const existingPokemons = useSelector(state => state.existingPokemons);
   let pokemonList = pokemons;
+  const existingPokemons = useSelector(state => state.existingPokemons);
+  const [ showOnlyMyPokemons, setShowOnlyMyPokemons ] = useState(false);
 
   if (showOnlyMyPokemons) {
     const myPokemonList = pokemonList.filter(
@@ -47,6 +39,14 @@ export default function PokedexPage() {
     );
     pokemonList = myPokemonList;
   }
+
+  let { page } = useParams();
+  page *= 1;
+  if (page > maxPage) {
+    navigate(`/pokedex/${maxPage}`);
+  }
+
+  const maxPage = calcMaxPage(pokemonList.length, layout.each);
 
   const handleClickGoToPrev = () => {
     navigate(`/pokedex/${page - 1}`, { replace: true });
