@@ -1,0 +1,37 @@
+.Card {
+  text-align: center;
+
+  @media (max-width: 1030px) {
+    .card-wrapper {
+      width: 14vh; 
+      height: 14vh;
+      line-height: 14vh;
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+  
+    .pokemon-image {
+      width: 20vw;
+    }  
+  }
+  
+  @media (min-width: 1030px) {
+    .card-wrapper {
+      width: 255px; 
+      height: 255px;
+      line-height: 255px;
+      font-size: 35px;
+      margin: 0 10px;
+    }
+    .pokemon-image {
+      height: 13vh;
+    }
+  }
+  .card-wrapper {
+    background: rgb(221, 136, 136);
+    border-radius: 15px;
+  }
+  .pokemon-image {
+    vertical-align: middle;
+  }
+}

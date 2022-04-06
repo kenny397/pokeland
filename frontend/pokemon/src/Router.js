@@ -11,6 +11,7 @@ import NfpsByPokemon from './pokedex/NfpsByPokemon';
 import NotFound from './pages/NotFound';
 import GachaContainer from "./gacha/GachaContainer";
 import SignupPage from "./signup/SignupPage";
+import Cardgame from "./cardgame/Cardgame";
 
 export const routers = [
   { path: "/", element: <IntroPage /> },
@@ -24,6 +25,7 @@ export const routers = [
   { path: "/gacha", element: <GachaContainer/> },
   { path: "/signup", element: <SignupPage/> },
   { path: "/swagger-ui" },
+  { path: "/cardgame", element: <Cardgame/> },
   { path: "*", element: <NotFound /> },
 ];
 
