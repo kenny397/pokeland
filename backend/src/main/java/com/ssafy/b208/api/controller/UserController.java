@@ -16,12 +16,16 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 
 @Api(value = "유저 API", tags = {"user-controller"})
 @RestController
@@ -35,8 +39,9 @@ public class UserController {
     private final InputValidation inputValidation;
     private final SiteURL siteURL;
     private final static String emailRegexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; // by RFC 5322
-    private final static String passWordRegexPattern = "((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{6,15})"; // 숫자,소문자,대문자, 특문(!,@,#,$,%), 6~15 자리
-
+    private final static String passWordRegexPattern = "((?=.*[0-9])(?=.*[a-z]).{8,20})"; // 숫자, 소문자, 8~20 자리
+    private final static String nickNameRegexPattern = "^(?=.{2,10}$)[^-@!$%^&*()_+|~=`\\\\#{}\\[\\]:\";'<>?,.\\/\\s]+$"; // 2-10 자리, 특수문자 안됨.
+    private final static String serverAddress = "https://j6b208.p.ssafy.io";
     @ApiOperation(value = "회원가입", notes = "성공시 Success응답")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -46,12 +51,13 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<? extends BaseResponseBody> register(HttpServletRequest request, @RequestBody UserRequestDto userRequestDto) throws Exception {
 
-        if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern) && inputValidation.patternMatches(userRequestDto.getPassword(),passWordRegexPattern)) {
+        if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern)
+                && inputValidation.patternMatches(userRequestDto.getPassword(),passWordRegexPattern)
+                && inputValidation.patternMatches(userRequestDto.getPassword(),nickNameRegexPattern)) {
             userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
-
     }
 
     @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
@@ -61,11 +67,14 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/verify")
-    public ResponseEntity<? extends BaseResponseBody> verify(@RequestParam String code) throws Exception {
+    public ResponseEntity verify(@RequestParam String code) throws Exception {
+        URI redirectUri = new URI(serverAddress);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(redirectUri);
         if (userService.verify(code)) {
-            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+            return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
         } else {
-            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
+            return new ResponseEntity<>(httpHeaders, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -94,7 +103,6 @@ public class UserController {
         } else {
             return ResponseEntity.status(401).body(userloginResponseDto);
         }
-
     }
 
     //자산, 유저가 가지고있는 NFT , 상세조회, 고객센터 email, 자산 조회 jwt
