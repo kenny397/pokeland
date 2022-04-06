@@ -39,7 +39,7 @@ export default function PokedexPage() {
     );
     pokemonList = myPokemonList;
   }
-
+  
   let { page } = useParams();
   page *= 1;
   

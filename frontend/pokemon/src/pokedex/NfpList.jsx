@@ -12,6 +12,8 @@ import NfpItem from "./NfpItem";
 import Modal from "../components/Modal";
 import PokemonDetail from './PokemonDetail';
 
+import './NfpList.scss';
+
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
@@ -41,7 +43,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   };
 
   return (
-    <>
+    <div className="nfp-list-container">
       <p>내 nfp들</p>
       <div className="pokemon-list">
         <div className="close-nfps-btn-div">
@@ -97,6 +99,6 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
         </div>
         }
       </div>
-    </>
+    </div>
   );
 }
