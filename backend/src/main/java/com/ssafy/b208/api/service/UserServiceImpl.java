@@ -8,7 +8,6 @@ import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.exception.ExistIdException;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -41,32 +40,26 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void register(UserRequestDto registerRequestDto, String siteURL)
-            throws MessagingException, UnsupportedEncodingException {
-        //회원가입이 된경우
+            throws MessagingException, UnsupportedEncodingException , ExistIdException{
 
-        User user = new User();
-        user.setNickname(registerRequestDto.getNickname());
-        user.setEmail(registerRequestDto.getEmail());
-        user.setMoney(500L);
-        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         if (userRepository.findOptionalByEmail(registerRequestDto.getEmail()).isPresent()) {
-            return;
+            throw new ExistIdException(registerRequestDto.getEmail());
         } else {
             WalletDto walletDto = createWallet();
-            user.setPublicKey(walletDto.getPublicKey());
-            user.setPrivateKey(walletDto.getPrivateKey());
-
             String randomCode = RandomString.make(64);
-            user.setVerificationCode(randomCode);
-            user.setEnabled(false);
-
+            User user = User.builder()
+                    .email(registerRequestDto.getEmail())
+                    .nickname(registerRequestDto.getNickname())
+                    .money(500L)
+                    .password(passwordEncoder.encode(registerRequestDto.getPassword()))
+                    .publicKey(walletDto.getPublicKey())
+                    .privateKey(walletDto.getPrivateKey())
+                    .verificationCode(randomCode)
+                    .enabled(false)
+                    .build();
             userRepository.save(user);
             sendVerificationEmail(user, siteURL);
         }
-
-
-
-        //회원가입이 안된경우
     }
 
     private void sendVerificationEmail(User user, String siteURL)
@@ -117,25 +110,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByUserEmail(String email) {
         Optional<User> userOptional = userRepository.findOptionalByEmail(email);
-        if (!userOptional.isPresent()) {
-            return null;
+
+        if (userOptional.isEmpty()) {
+           return null;
         }
         User user = userOptional.get();
-        UserDto userDto = UserDto.builder().build();
-        userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
-        userDto.setPublicKey(user.getPublicKey());
-        userDto.setMoney(user.getMoney());
-        userDto.setPrivateKey(user.getPrivateKey());
-        userDto.setEnabled(user.isEnabled());
-        //빌더 사용해보기
+        UserDto userDto = UserDto.builder()
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .publicKey(user.getPublicKey())
+                .privateKey(user.getPrivateKey())
+                .Money(user.getMoney())
+                .enabled(user.isEnabled())
+                .build();
+
         return userDto;
     }
 
     @Override
     public UserDto getUserByUserNickname(String nickname) {
         Optional<User> userOptional = userRepository.findOptionalByNickname(nickname);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return null;
         }
 

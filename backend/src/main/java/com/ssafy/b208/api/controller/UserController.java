@@ -8,6 +8,7 @@ import com.ssafy.b208.api.dto.response.BaseResponseBody;
 import com.ssafy.b208.api.dto.response.CheckResponseDto;
 import com.ssafy.b208.api.dto.response.UserLoginResponseDto;
 import com.ssafy.b208.api.dto.response.UserMoneyResponseDto;
+import com.ssafy.b208.api.exception.EmailNotFoundException;
 import com.ssafy.b208.api.service.UserService;
 import com.ssafy.b208.api.utils.InputValidation;
 import com.ssafy.b208.api.utils.SiteURL;
@@ -45,7 +46,7 @@ public class UserController {
     @ApiOperation(value = "회원가입", notes = "성공시 Success응답")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
+            @ApiResponse(code = 400, message = "실패 잘못된 요청"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/register")
@@ -57,7 +58,7 @@ public class UserController {
             userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         }
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Fail"));
+        return ResponseEntity.status(400).body(BaseResponseBody.of(400, "Fail"));
     }
 
     @ApiOperation(value = "메일인증", notes = "성공시 Success, 실패시 Fail 응답")
@@ -81,7 +82,7 @@ public class UserController {
     @ApiOperation(value = "로그인", notes = "로그인시 jwt토큰 Bearer형식과 지갑 publickey 주소 응답")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
+            @ApiResponse(code = 400, message = "잘못된 요청"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @PostMapping("/login")
@@ -89,27 +90,28 @@ public class UserController {
         String email = userRequestDto.getEmail();
         String password = userRequestDto.getPassword();
         UserDto userDto = userService.getUserByUserEmail(email);
-
         UserLoginResponseDto userloginResponseDto = new UserLoginResponseDto();
-        if (passwordEncoder.matches(password, userDto.getPassword())) {
-            if (userDto.isEnabled()) {
-                userloginResponseDto.setPublicKey(userDto.getPublicKey());
-                userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
-                userloginResponseDto.setVerified("Yes");
-            } else {
-                userloginResponseDto.setVerified("No");
+        try{
+            if (passwordEncoder.matches(password, userDto.getPassword())) {
+                if (userDto.isEnabled()) {
+                    userloginResponseDto.setPublicKey(userDto.getPublicKey());
+                    userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
+                    userloginResponseDto.setVerified("Yes");
+                } else {
+                    userloginResponseDto.setVerified("No");
+                }
             }
-            return ResponseEntity.status(200).body(userloginResponseDto);
-        } else {
-            return ResponseEntity.status(401).body(userloginResponseDto);
+        }catch (Exception ex){
+            throw new EmailNotFoundException("email");
         }
+        return ResponseEntity.status(200).body(userloginResponseDto);
     }
 
     //자산, 유저가 가지고있는 NFT , 상세조회, 고객센터 email, 자산 조회 jwt
     @ApiOperation(value = "잔액조회", notes = "로그인한 회원 본인의 잔액정보를 응답한다. jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "인증 실패 200으로 빈문자열이 response..아직 구현 x"),
+            @ApiResponse(code = 401, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/balance")
@@ -125,20 +127,23 @@ public class UserController {
     @ApiOperation(value = "닉네임 중복검사", notes = "1은 이미 아이디가 있을때 0은 아이디가 없을때.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공 "),
-            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/check/nickname/{nickname}")
     public ResponseEntity<CheckResponseDto> checkNickname(@PathVariable("nickname") String nickname) {
         CheckResponseDto checkResponseDto = new CheckResponseDto();
-
+        UserDto user =userService.getUserByUserNickname(nickname);
+        if (user != null) {
+            checkResponseDto.setFlag(1L);
+        } else {
+            checkResponseDto.setFlag(0L);
+        }
         return ResponseEntity.status(200).body(checkResponseDto);
     }
 
     @ApiOperation(value = "이메일 중복검사", notes = "1은 이미 아이디가 있을때 0은 아이디가 없을때.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공 1은 이미 아이디가 있을때 0은 아이디가 없을때"),
-            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     @GetMapping("/check/email/{email}")
