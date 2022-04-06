@@ -42,11 +42,11 @@ export default function PokedexPage() {
 
   let { page } = useParams();
   page *= 1;
+  
+  const maxPage = calcMaxPage(pokemonList.length, layout.each);
   if (page > maxPage) {
     navigate(`/pokedex/${maxPage}`);
   }
-
-  const maxPage = calcMaxPage(pokemonList.length, layout.each);
 
   const handleClickGoToPrev = () => {
     navigate(`/pokedex/${page - 1}`, { replace: true });
