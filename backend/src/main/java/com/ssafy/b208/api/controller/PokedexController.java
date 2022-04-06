@@ -36,7 +36,7 @@ public class PokedexController {
     @ApiOperation(value = "도감 조회", notes = "응답으로 사용자가 가진 포켓몬의 pokedex_id들이 담긴 리스트가 나온다. jwt토큰 필요")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "실패 아직 구현 x"),
+            @ApiResponse(code = 403, message = "권한 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<PokemonListDto> getPokemonList(@ApiIgnore Authentication authentication) throws Exception {
@@ -52,6 +52,11 @@ public class PokedexController {
     @GetMapping("/pokedex/{pokedexId}")
     @ApiOperation(value = "포켓몬 도감 정보 상세 조회", notes = "pokedex id로 특정 포켓몬의 상세정보를 조회한다.")
     @ApiImplicitParam(name = "pokedexId", value = "포켓몬 번호", required = true)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 400, message = "존재하지 않는 포켓몬 id"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
     public ResponseEntity<PokeInfoOuterDto> getPokeInfo(@PathVariable Long pokedexId) throws Exception {
 
         PokeInfoOuterDto pokeInfoOuterDto = pokedexService.getPokeInfo(pokedexId);

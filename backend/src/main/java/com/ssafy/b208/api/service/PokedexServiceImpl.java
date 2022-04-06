@@ -9,16 +9,20 @@ import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.*;
+import com.ssafy.b208.api.exception.NonExistentPokedexIdException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -42,22 +46,29 @@ public class PokedexServiceImpl implements PokedexService {
 
     @Override
     public PokeInfoOuterDto getPokeInfo(Long id) {
-        PokeDex pokeDex = Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
-                .orElseGet(() -> new PokeDex());
-        PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
-                .id(pokeDex.getId())
-                .name(pokeDex.getName())
-                .type(pokeDex.getType())
-                .height(pokeDex.getHeight())
-                .category(pokeDex.getCategory())
-                .gender(pokeDex.getGender())
-                .weight(pokeDex.getWeight())
-                .abilities(pokeDex.getAbilities())
-                .build();
-        PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
-                .pokeInfo(pokeInfoDto)
-                .build();
-        return pokeInfoOuterDto;
+        try {
+            log.info("id : " + id);
+            PokeDex pokeDex =
+                    Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
+                    .orElseGet(() -> new PokeDex());
+            log.info("id2 : " + id);
+            PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
+                    .id(pokeDex.getId())
+                    .name(pokeDex.getName())
+                    .type(pokeDex.getType())
+                    .height(pokeDex.getHeight())
+                    .category(pokeDex.getCategory())
+                    .gender(pokeDex.getGender())
+                    .weight(pokeDex.getWeight())
+                    .abilities(pokeDex.getAbilities())
+                    .build();
+            PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
+                    .pokeInfo(pokeInfoDto)
+                    .build();
+            return pokeInfoOuterDto;
+        } catch (NullPointerException e) {
+            throw new NonExistentPokedexIdException(id);
+        }
     }
 
     @Override
