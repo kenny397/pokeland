@@ -50,8 +50,8 @@ export default function Cardgame() {
           />
         ))}
       </div>
-      <Link to="/cardgame">
-        <button className="re-btn">다시하기</button>
+      <Link to="/main">
+        <button className="re-btn">메인으로</button>
       </Link>
     </div>
   );
