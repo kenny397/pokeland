@@ -28,9 +28,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PokedexServiceImpl implements PokedexService {
 
-    private UserPokemonRepository userPokemonRepository;
-    private PokeDexRepository pokeDexRepository;
-    private UserRepository userRepository;
+    private final UserPokemonRepository userPokemonRepository;
+    private final PokeDexRepository pokeDexRepository;
+    private final UserRepository userRepository;
 
     @Override
     public PokemonListDto getPokemonList(String email) {
@@ -47,11 +47,9 @@ public class PokedexServiceImpl implements PokedexService {
     @Override
     public PokeInfoOuterDto getPokeInfo(Long id) {
         try {
-            log.info("id : " + id);
             PokeDex pokeDex =
                     Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
                     .orElseGet(() -> new PokeDex());
-            log.info("id2 : " + id);
             PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
                     .id(pokeDex.getId())
                     .name(pokeDex.getName())
