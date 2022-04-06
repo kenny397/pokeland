@@ -20,5 +20,6 @@ public interface UserService {
 
     public boolean verify(String verificationCode);
 
+    public UserDto giveBonus(String email);
 }
 

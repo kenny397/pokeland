@@ -108,6 +108,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public UserDto giveBonus(String email) {
+        Optional<User> userOptional = userRepository.findOptionalByEmail(email);
+        if (userOptional.isEmpty()) {
+            return null;
+        }
+        User user = userOptional.get();
+        user.setMoney(user.getMoney()+300);
+        userRepository.save(user);
+        UserDto userDto = UserDto.builder()
+                .email(user.getEmail())
+                .publicKey(user.getPublicKey())
+                .Money(user.getMoney())
+                .build();
+        return userDto;
+    }
+
+    @Override
     public UserDto getUserByUserEmail(String email) {
         Optional<User> userOptional = userRepository.findOptionalByEmail(email);
 
