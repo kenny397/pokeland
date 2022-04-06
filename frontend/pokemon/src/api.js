@@ -115,3 +115,15 @@ export async function signupRequest(email,nickname,password) {
     console.log(err);
   }
 }
+
+export async function requestBonus(jwt) {
+  const response = await axios(
+    {
+      method : 'post',
+      url : `${BASE_URL}/users/bonus`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+      data : '',
+    }
+  );
+  return response;
+}
