@@ -1,12 +1,23 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import './Cardgame.scss';
 import { useMediaQuery } from "react-responsive";
 import Card from "./components/Card";
 
+import { useDispatch } from "react-redux";
+import { setCardgameFlipped } from "../redux/actions";
+import { changeHeaderDisplay } from "../headerDisplay";
+import { Link } from "react-router-dom";
+
 export default function Cardgame() {
+  const dispatch = useDispatch();
   const isDeskTop = useMediaQuery({
     query: "(min-width: 1030px)"
   });
+
+  useEffect(() => {
+    changeHeaderDisplay(window.location.pathname);
+    dispatch(setCardgameFlipped(false));
+  },[]);
 
   let isPicachuList = [false, false, false];
   const randomNum = Math.floor(Math.random() * 3);
@@ -39,7 +50,9 @@ export default function Cardgame() {
           />
         ))}
       </div>
-      <button className="re-btn">다시하기</button>
+      <Link to="/cardgame">
+        <button className="re-btn">다시하기</button>
+      </Link>
     </div>
   );
 }

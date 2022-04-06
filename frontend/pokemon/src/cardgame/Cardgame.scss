@@ -22,6 +22,11 @@
       line-height: 35px;
       margin: 6vh 0 5vh 0;
     }
+    .re-btn {
+      margin-top: 3vh;
+      width: 100px;
+      
+    }
     
   }
   @media (min-width: 1030px) {
@@ -42,6 +47,10 @@
     .cardgame-desc {
       line-height: 35px;
       margin: 15vh 0 5vh 0;
+    }
+    .re-btn {
+      margin-top: 10vh;
+      width: 200px;
     }
   }
   .header-picachu {
@@ -65,10 +74,10 @@
     white-space: pre-wrap;
     text-align: center;
   }
-
   .re-btn {
-    width: auto;
     height: 40px;
   }
+
+
 
 }
