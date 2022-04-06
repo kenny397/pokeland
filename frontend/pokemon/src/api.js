@@ -99,3 +99,19 @@ export async function writeSupport(address, category, message, title) {
     return '';
   }
 }
+
+export async function signupRequest(email,nickname,password) {
+  try {
+    const response = await axios.post(
+      'https://j6b208.p.ssafy.io/api/v1/users/register',
+      { 
+        email,
+        nickname,
+        password
+      });
+    console.log(response);
+    alert('회원가입 성공!');
+  } catch (err) {
+    console.log(err);
+  }
+}
