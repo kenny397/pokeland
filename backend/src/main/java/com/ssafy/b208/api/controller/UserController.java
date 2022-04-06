@@ -149,4 +149,19 @@ public class UserController {
         return ResponseEntity.status(200).body(checkResponseDto);
     }
 
+    @ApiOperation(value = "미니게임 성공", notes = "성공한 아이디에 300SSF추가")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    @PostMapping("/bonus")
+    public ResponseEntity<UserMoneyResponseDto> giveBonus(@ApiIgnore Authentication authentication) {
+        NftUserDetail nftUserDetail = (NftUserDetail) authentication.getDetails();
+        String email = nftUserDetail.getUsername();
+        UserDto userDto =   userService.giveBonus(email);
+        UserMoneyResponseDto userMoneyResponseDto = new UserMoneyResponseDto();
+        userMoneyResponseDto.setMoney(userDto.getMoney());
+        return ResponseEntity.status(200).body(userMoneyResponseDto);
+
+    }
 }
