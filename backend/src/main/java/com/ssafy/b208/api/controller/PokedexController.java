@@ -70,6 +70,11 @@ public class PokedexController {
         @ApiImplicitParam(name = "pokedexId", value = "포켓몬 번호", required = true),
         @ApiImplicitParam(name = "publicKey", value = "공개키", required = true)
     })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 400, message = "잘못된 공개키"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
     public ResponseEntity<NfpListDto> getNfpList(@PathVariable String publicKey, @PathVariable Long pokedexId) throws Exception {
 
         NfpListDto nfpListDto = pokedexService.getNfpList(publicKey, pokedexId);

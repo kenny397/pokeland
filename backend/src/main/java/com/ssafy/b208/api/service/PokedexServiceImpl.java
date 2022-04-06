@@ -11,6 +11,7 @@ import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.*;
 import com.ssafy.b208.api.exception.NonExistentPokedexIdException;
 import com.ssafy.b208.api.exception.WrongPublicKeyException;
+import com.ssafy.b208.api.exception.WrongTokenIdException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,16 +104,20 @@ public class PokedexServiceImpl implements PokedexService {
 
     @Override
     public NfpDetailDto getNfpDetail(Long id) {
-        UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
-                .orElseGet(() -> new UserPokemon());
-        NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
-                .tokenId(userPokemon.getTokenId())
-                .pokedexId(userPokemon.getPokemon().getId())
-                .ipfsMetaUri(userPokemon.getIpfsMetaUri())
-                .ipfsImageUri(userPokemon.getIpfsImageUri())
-                .grade(userPokemon.getGrade())
-                .build();
-        return nfpDetailDto;
+        try {
+            UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
+                    .orElseGet(() -> new UserPokemon());
+            NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
+                    .tokenId(userPokemon.getTokenId())
+                    .pokedexId(userPokemon.getPokemon().getId())
+                    .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                    .ipfsImageUri(userPokemon.getIpfsImageUri())
+                    .grade(userPokemon.getGrade())
+                    .build();
+            return nfpDetailDto;
+        } catch (NoSuchElementException e) {
+            throw new WrongTokenIdException(id);
+        }
     }
 
 }

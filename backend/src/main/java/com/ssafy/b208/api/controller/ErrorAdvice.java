@@ -1,10 +1,7 @@
 package com.ssafy.b208.api.controller;
 
 import com.ssafy.b208.api.dto.response.BaseResponseBody;
-import com.ssafy.b208.api.exception.LackMoneyException;
-import com.ssafy.b208.api.exception.ExistIdException;
-import com.ssafy.b208.api.exception.NonExistentPokedexIdException;
-import com.ssafy.b208.api.exception.WrongPublicKeyException;
+import com.ssafy.b208.api.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,9 +31,15 @@ public class ErrorAdvice {
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(WrongPublicKeyException.class)
-    public ResponseEntity<BaseResponseBody> WrongPublicKey() {
+    public ResponseEntity<BaseResponseBody> wrongPublicKey() {
 
         return ResponseEntity.status(400).body(BaseResponseBody.of(400, "잘못된 공개키입니다."));
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(WrongTokenIdException.class)
+    public ResponseEntity<BaseResponseBody> wrongTokenId() {
+
+        return ResponseEntity.status(400).body(BaseResponseBody.of(400, "잘못된 토큰 아이디입니다."));
     }
 
 }
