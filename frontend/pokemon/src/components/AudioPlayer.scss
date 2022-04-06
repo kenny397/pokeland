@@ -5,6 +5,9 @@
       top: 2%;
       right: 3%;
     }  
+    .muted-icon-wrapper {
+      width: 30px;
+    }
   }
   @media(min-width: 1030px) {
     .audio-btn {
@@ -13,17 +16,16 @@
     }
     .muted-icon-wrapper {
       width: 50px;
-      background: rgb(171, 184, 219);
-      bottom: 3%;
-      right: 2%;
-      position:fixed;
-      padding: 10px;
-      text-align: right;
-      border-radius: 20px;
     }
   }
-  .audio-btn {
-    color: black;
+  .muted-icon-wrapper {
+    background: rgb(171, 184, 219);
+    bottom: 3%;
+    right: 2%;
+    position:fixed;
+    padding: 10px;
+    text-align: right;
+    border-radius: 20px;
     cursor: pointer;
   }
 }
