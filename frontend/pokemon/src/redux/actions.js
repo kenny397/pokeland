@@ -88,3 +88,12 @@ export function setSupportOrder(supportOrder) {
     }
   };
 }
+
+export function setCardgameFlipped(cardgameFlipped) {
+  return {
+    type: 'setCardgameFlipped',
+    payload: {
+      cardgameFlipped
+    }
+  };
+}
