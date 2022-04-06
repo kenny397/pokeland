@@ -1,6 +1,7 @@
 package com.ssafy.b208.api.auth;
 
 import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import com.ssafy.b208.api.db.entity.User;
@@ -48,10 +49,15 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             Authentication authentication = getAuthentication(request);
             // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception ex) {
+        }catch (TokenExpiredException ex){
+            log.info(ex.getMessage());
+            response.sendError(400,"토큰 만료 기간이 지난 토큰입니다.");
+            return;
+        }
+        catch (Exception ex) {
 
             log.info(ex.getMessage());
-            response.sendError(401,"올바르지 않은 토큰입니다.");
+            response.sendError(400,"올바르지 않은 토큰입니다.");
             return;
         }
 
