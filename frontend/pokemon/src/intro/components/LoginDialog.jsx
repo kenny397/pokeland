@@ -37,8 +37,6 @@ export default function LoginDialog({ handleClickCloseModal }) {
 
       navigate('/main');
       handleClickCloseModal();
-    } else {
-      alert('아이디나 비밀번호가 틀립니다.');
     }
   };
 
