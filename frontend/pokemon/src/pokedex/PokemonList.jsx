@@ -37,11 +37,12 @@ export default function PokemonList({ pokemonList, page, onClickGoToPrev, onClic
         <div className="empty-grid-item" key={ele}> </div>
       ))}
       {
-        pokemonList.length > each &&
+        pokemonList.length > each && page != 1 &&
         <button className="prev-btn" onClick={() => onClickGoToPrev()}>왼쪽</button>
       }
       {
-        paginatedPokemonList.length == each &&
+        paginatedPokemonList.length == each && 
+        pokemonList.slice(start + each, end + each) != 0 &&
         <button className="next-btn" style={{ gridColumn }} onClick={() => onClickGoToNext()}>오른쪽</button>
       }
     </div>
