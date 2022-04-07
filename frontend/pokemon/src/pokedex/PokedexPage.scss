@@ -153,4 +153,18 @@
   .modal-container .modal-close-handler:hover {
     color: red;
   }
+
+  .filter-wrapper {
+    float: right;
+    margin: 20px 50px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .filter-input {
+    margin-left: 10px;
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+  }
 }

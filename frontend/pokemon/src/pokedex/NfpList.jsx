@@ -45,7 +45,6 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
   return (
     <div className="nfp-list-container">
-      <p>내 nfp들</p>
       <div className="pokemon-list">
         <div className="close-nfps-btn-div">
           <FontAwesomeIcon
