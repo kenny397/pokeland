@@ -75,10 +75,10 @@ export default function SideBar({ balance }) {
             <p className='ssf'>+500SSF</p>
             <img src={ '/images/static/nurse.png' } alt="" className="h15"/>
           </Link>
-          <div className="menu menu4" onClick={() => alert('아직 준비중이에요!')}>
-            <p>스티커 거래</p>
+          <Link to={'/cardgame'} className="menu menu4" onClick={clicked}>
+            <p>카드게임</p>
             <img src={ '/images/pokemonImg/colored/no.132_colored.jpg' } alt="" className="h15 metamong-img"/>
-          </div>
+          </Link>
         </div>
         
       </Menu>
