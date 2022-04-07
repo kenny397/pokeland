@@ -49,7 +49,7 @@ export default function AudioPlayer() {
   const audioContainer = document.querySelector('#audio-player');
   console.log(bgmTitle);
 
-  const onClickAudioStart = () => {
+  const onClickAudioSetting = () => {
     if (isMusicMuted) {
       dispatch(setIsMusicMuted(false));
       audioContainer.play();
@@ -70,12 +70,12 @@ export default function AudioPlayer() {
           id="audio-player"
           volume={0.2}
         />
-        <span className="muted-icon-wrapper">
+        <span className="muted-icon-wrapper" onClick={onClickAudioSetting}>
           {isMusicMuted 
             ? 
-            <FontAwesomeIcon icon={faVolumeXmark} className="audio-btn audio-muted-btn" onClick={onClickAudioStart} />
+            <FontAwesomeIcon icon={faVolumeXmark} className="audio-btn audio-muted-btn"/>
             :
-            <FontAwesomeIcon icon={faVolumeHigh} className="audio-btn" onClick={onClickAudioStart} />
+            <FontAwesomeIcon icon={faVolumeHigh} className="audio-btn"/>
           }
         </span>
       </div>

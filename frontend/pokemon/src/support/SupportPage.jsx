@@ -40,17 +40,29 @@ export default function SupportPage() {
   const onClickSubmitSupport = async function () {
     // TODO : 버튼 클릭시 백엔드로 비동기 요청 
     const { category, email, title, content } = inputs;
-    dispatch(setSupportOrder(1));
-    setIsLoading(true);
+    // setIsLoading(true);
+    // await writeSupport( email, category, content, title );
+    // dispatch(setSupportOrder(1));
+    // const { data: { money } } = await getBalance();
+    // setTimeout(() => {
+    //   setIsLoading(false); 
+    //   localStorage.setItem("balance", money); 
+    //   dispatch(updateBalance(localStorage.getItem('balance'))); 
+    //   alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. '); 
+    //   navigate('/main');
+    // },100);
+
     if (isValidSupportRequest(inputs)) {
-      const response = await writeSupport( email, category, content, title );
+      await writeSupport( email, category, content, title );
+      dispatch(setSupportOrder(1));
       const { data: { money } } = await getBalance();
-      setIsLoading(false);
-      console.log(response);
-      localStorage.setItem("balance", money);
-      dispatch(updateBalance(localStorage.getItem('balance')));
-      alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. ');
-      navigate('/main');
+      setTimeout(() => {
+        setIsLoading(false); 
+        localStorage.setItem("balance", money); 
+        dispatch(updateBalance(localStorage.getItem('balance'))); 
+        alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. '); 
+        navigate('/main');
+      },100);
     } else {
       setIsLoading(false);
       alert('필수 내용을 모두 작성해주세요');

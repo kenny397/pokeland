@@ -13,6 +13,7 @@ const initialState = {
   isMusicMuted: true,
   gachaOrder: 0,
   supportOrder: 0,
+  cardgameFlipped: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -66,6 +67,13 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       supportOrder: action.payload.supportOrder
+    };
+  }
+
+  if (action.type === 'setCardgameFlipped') {
+    return {
+      ...state,
+      cardgameFlipped: action.payload.cardgameFlipped
     };
   }
   return state;

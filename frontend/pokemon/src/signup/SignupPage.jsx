@@ -91,7 +91,7 @@ export default function SignupPage() {
 
   const isNickName = (nickname) => {
     const nicknameRegex = 
-    /^(?=.{2,10}$)[^0-9][^-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]+$/;
+    /^(?=.{2,10}$)[^-@!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/\s]+$/;
     return nicknameRegex.test(nickname);
   };
 
@@ -127,7 +127,7 @@ export default function SignupPage() {
     }
     try {
       const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/nickname/${nickname}`);
-      console.log(isNickName(nickname));
+      console.log(response);
       if (response.data.flag === 1) {
         changeState("isNicknameChecked", false);
         alert('중복된 닉네임입니다.');
@@ -140,6 +140,12 @@ export default function SignupPage() {
     }
   }
 
+  const onKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickSubmit();
+    }
+  };
+
   return (
     <div className="SignupPage">
       <div className="signup-container">
@@ -151,7 +157,7 @@ export default function SignupPage() {
         <div className="form-container">
           <div className="email-input-wrapper" >
             <p>이메일</p>
-            <input name="email" type="text" placeholder="이메일을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <input name="email" type="text" placeholder="이메일을 입력해 주세요" onChange={(e) => onChangeInputs(e)} onKeyPress={onKeyPress}/>
             <button 
               className={"dup-btn email-dup-btn " + (isEmailChecked ? ' btn-dp-none' : '')}
               onClick={ () => onClickEmailCheck() }
@@ -160,7 +166,7 @@ export default function SignupPage() {
           </div>
           <div className="nickname-input-wrapper" >
             <p>닉네임</p>
-            <input name="nickname" type="text" placeholder="닉네임을 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <input name="nickname" type="text" placeholder="닉네임을 입력해 주세요" onChange={(e) => onChangeInputs(e)} onKeyPress={onKeyPress}/>
             <button 
               className={"dup-btn nickname-dup-btn" + (isNicknameChecked ? ' btn-dp-none' : '') + (isEmailChecked ? ' btn-down' : '')} 
               onClick={() => onClickNicknameCheck()}
@@ -169,11 +175,11 @@ export default function SignupPage() {
           </div>
           <div className="password-input-wrapper">
             <p>비밀번호</p>
-            <input name="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <input name="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={(e) => onChangeInputs(e)} onKeyPress={onKeyPress}/>
           </div>
           <div className="password-confirm-input-wrapper" >
             <p>비밀번호 확인</p>
-            <input name="passwordConfirm" type="password" placeholder="비밀번호를 재확인해 주세요" onChange={(e) => onChangeInputs(e)}/>
+            <input name="passwordConfirm" type="password" placeholder="비밀번호를 재확인해 주세요" onChange={(e) => onChangeInputs(e)} onKeyPress={onKeyPress}/>
           </div>
           <button className="submit-btn" onClick={() => onClickSubmit()}>가입하기</button>
         </div>

@@ -42,6 +42,12 @@ export default function LoginDialog({ handleClickCloseModal }) {
     }
   };
 
+  const onKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickSubmitBtn();
+    }
+  };
+
   return (
     <div className="LoginDialog">
       <div>
@@ -53,6 +59,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
           type="text" 
           placeholder=" 아이디"
           onChange={(e) => onChangeInputs(e)}
+          onKeyPress={ onKeyPress }
         />
       </div>
       <div>
@@ -61,6 +68,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
           type="password"
           placeholder=" 비밀번호"
           onChange={ (e) => onChangeInputs(e) }
+          onKeyPress={ onKeyPress }
         />
       </div>
 
