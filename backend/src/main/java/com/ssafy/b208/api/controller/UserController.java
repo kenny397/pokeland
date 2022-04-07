@@ -40,7 +40,7 @@ public class UserController {
     private final InputValidation inputValidation;
     private final SiteURL siteURL;
     private final static String emailRegexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"; // by RFC 5322
-    private final static String passWordRegexPattern = "((?=.*[0-9])(?=.*[a-z]).{8,20})"; // 숫자, 소문자, 8~20 자리
+    private final static String passWordRegexPattern = "^(?=.*[a-z])(?=.*[0-9]).{8,20}$"; // 숫자, 소문자, 8~20 자리
     private final static String nickNameRegexPattern = "^(?=.{2,10}$)[^-@!$%^&*()_+|~=`\\\\#{}\\[\\]:\";'<>?,.\\/\\s]+$"; // 2-10 자리, 특수문자 안됨.
     private final static String serverAddress = "https://j6b208.p.ssafy.io";
     @ApiOperation(value = "회원가입", notes = "성공시 Success응답")
@@ -54,7 +54,7 @@ public class UserController {
 
         if(inputValidation.patternMatches(userRequestDto.getEmail(),emailRegexPattern)
                 && inputValidation.patternMatches(userRequestDto.getPassword(),passWordRegexPattern)
-                && inputValidation.patternMatches(userRequestDto.getPassword(),nickNameRegexPattern)) {
+                && inputValidation.patternMatches(userRequestDto.getNickname(),nickNameRegexPattern)) {
             userService.register(userRequestDto, siteURL.getSiteURL("/register", request));
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         }
