@@ -6,6 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { useMediaQuery } from "react-responsive";
 
 export default function MainCarousel() {
+
   const isFhd = useMediaQuery({
     query: "(min-width: 1031px)"
   });

@@ -130,4 +130,27 @@
     cursor: pointer;
     color: #005FC6;
   }
+
+  .modal-container {
+    position: fixed;
+    overflow-y: auto;
+    left: 50%;
+    top: 55%;
+    padding: 5px;
+    z-index: 1011;
+    transform: translate(-50%, -50%);
+    background:white;
+    border-radius: 10px;
+  }
+  
+  .modal-container .modal-close-handler {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+  }
+  
+  .modal-container .modal-close-handler:hover {
+    color: red;
+  }
 }

@@ -77,7 +77,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
         {modalVisibility &&
         <Modal
           width={maxWidthModal ? '357px' : '44.5vh'}
-          height={maxWidthModal ?  '708.4px' : '88vh'}
+          height={maxWidthModal ?  '708.4px' : '89vh'}
           setIsVisible={setModalVisibility}
           InnerComponent={() => PokemonDetail({ nfpInModal })}
           onClickToggleModalVisibility={toggleModalVisibility}

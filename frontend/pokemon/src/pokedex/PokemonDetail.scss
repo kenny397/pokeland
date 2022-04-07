@@ -40,11 +40,32 @@
   }
 
   .pokedex-content-item {
-    padding: 0.2rem;
+    padding: 0.4rem;
+  }
+  
+  .pokedex-content-item .title {
+    margin: 0.4rem;
+    font-size: 0.8rem;
+    color: #7d8084;
+  }
+  
+  .pokedex-content-item .content {
+    margin: 0.4rem;
+    color: #323232;
+    font-weight: 600;
   }
 
-  .pokedex-content-item p {
-    margin: 0.2rem;
+  .pokedex-content-item .pokemon-name {
+    font-size: 110%;
+    font-weight: 700;
+    background-color: white;
+  }
+
+  .pokedex-content-item .grade {
+    font-size: 20%rem;
+    font-weight: 650;
+    text-align: end;
+    margin-right: 8%;
   }
 
   .pokemon-img-div {
@@ -53,15 +74,16 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-    width: 40vh;
+    width: 34vh;
     max-width: 263px;
     max-height: 238.13px;
     height: 30vh;
-    background-color: #323232;
+    background-repeat : no-repeat;
+    background-size : cover;
   }
 
   .pokemon-img {
-    width: 30vh;
+    width: 19vh;
     border-radius: 0;
   }
 
