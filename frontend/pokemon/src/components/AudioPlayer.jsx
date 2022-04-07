@@ -21,6 +21,9 @@ export default function AudioPlayer() {
   let { supportOrder } = useSelector((state) => ({
     supportOrder: state.supportOrder,
   }));
+  let { cardgameOrder } = useSelector((state) => ({
+    cardgameOrder: state.cardgameOrder,
+  }));
 
   const dispatch = useDispatch();
 
@@ -31,6 +34,7 @@ export default function AudioPlayer() {
   // };
   const gachaBgm = ['gacha.mp3', 'whilemonsterball.mp3', 'common.mp3', 'rare.mp3', 'unique.mp3'];
   const supportBgm = ['support.mp3', 'supportsuccess.mp3'];
+  const cardgameBgm = ['cardgame.mp3', 'cardgamemetamong.mp3', 'cardgamepicachu.mp3'];
   let bgmTitle = null;
   const randomNum = Math.floor(Math.random() * 5) + 1;
   if (pathNow ==='/main') {
@@ -43,6 +47,8 @@ export default function AudioPlayer() {
     bgmTitle = 'intro.mp3';
   } else if (pathNow === '/tutorial') {
     bgmTitle = 'tutorial.mp3';
+  } else if (pathNow === '/cardgame') {
+    bgmTitle = cardgameBgm[cardgameOrder];
   } else {
     bgmTitle = `main${randomNum}.mp3`;
   }
