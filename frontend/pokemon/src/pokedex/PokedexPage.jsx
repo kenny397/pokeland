@@ -64,10 +64,12 @@ export default function PokedexPage() {
 
   return (
     <div className="PokedexPage">
-      <span>가지고 있는 포켓몬만 보기</span>
-      <input type="checkbox" name="MyPokemonCheckbox" id="MyPokemonCheckbox" 
-        onChange={() => setShowOnlyMyPokemons(!showOnlyMyPokemons)}
-      />
+      <div className="filter-wrapper">
+        <span>가지고 있는 포켓몬만 보기</span>
+        <input type="checkbox" name="MyPokemonCheckbox" id="MyPokemonCheckbox" className="filter-input"
+          onChange={() => setShowOnlyMyPokemons(!showOnlyMyPokemons)}
+        />
+      </div>
       <PokemonList
         pokemonList={pokemonList}
         page={page}
