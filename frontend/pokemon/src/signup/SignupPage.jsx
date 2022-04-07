@@ -77,8 +77,8 @@ export default function SignupPage() {
       return;
     }
     setIsLoading(true);
-    const response = await signupRequest(email, nickname, password);
-    console.log(response);
+    await signupRequest(email, nickname, password);
+    alert('이메일 인증 후 사용해주세요');
     navigate('/');
     setIsLoading(false);
   }

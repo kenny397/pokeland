@@ -1,15 +1,16 @@
 import React from "react";
 import './MainCarousel.scss';
 
-import { useMediaQuery } from "react-responsive";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { useMediaQuery } from "react-responsive";
 
 export default function MainCarousel() {
-
-  const isDeskTop = useMediaQuery({
-    query: "(min-width: 1030px)"
+  const isFhd = useMediaQuery({
+    query: "(min-width: 1031px)"
+  });
+  const isQhd = useMediaQuery({
+    query: "(min-width: 1921px)"
   });
   const onClickCarousel = (e) => {
     console.log(e);
@@ -18,12 +19,6 @@ export default function MainCarousel() {
 
   return (
     <div className="MainCarousel">
-      {/* { !isDeskTop 
-        ?
-        <img src={ '/images/static/mainPage/mainPageImage.png' } alt="" className="main-image"/>
-        :
-        <img src={ '/images/static/mainPage/mainPageImageDsk.png' } alt="" className="main-image"/>
-      } */}
       <Carousel
         swipeable
         autoPlay
@@ -33,12 +28,40 @@ export default function MainCarousel() {
         showArrows={true}
       >
         <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
-          <img src={ '/images/static/mainPage/mainPageImage.png' } alt="" className="main-image"/>
-          <p className="legend">Legend 1</p>
+          {
+            isQhd ?
+              <img src={ '/images/static/mainPage/qhd1.png' } alt="" className="main-image"/>
+              :
+              isFhd ?
+                <img src={ '/images/static/mainPage/fhd1.png' } alt="" className="main-image"/>
+                :
+                <img src={ '/images/static/mainPage/mobile1.png' } alt="" className="main-image"/>
+          }
+          <p className="legend">이로치 포켓몬 보러가기</p>
         </div>
         <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
-          <img src={ '/images/static/mainPage/mainPageImageDsk.png' } alt="" className="main-image"/>
-          <p className="legend">Legend 1</p>
+          {
+            isQhd ?
+              <img src={ '/images/static/mainPage/qhd2.png' } alt="" className="main-image"/>
+              :
+              isFhd ?
+                <img src={ '/images/static/mainPage/fhd2.png' } alt="" className="main-image"/>
+                :
+                <img src={ '/images/static/mainPage/mobile2.png' } alt="" className="main-image"/>
+          }
+          <p className="legend">패치노트 보러가기</p>
+        </div>
+        <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
+          {
+            isQhd ?
+              <img src={ '/images/static/mainPage/qhd3.png' } alt="" className="main-image"/>
+              :
+              isFhd ?
+                <img src={ '/images/static/mainPage/fhd3.png' } alt="" className="main-image"/>
+                :
+                <img src={ '/images/static/mainPage/mobile3.png' } alt="" className="main-image"/>
+          }
+          <p className="legend">뽑기확률 보러가기</p>
         </div>
       </Carousel>
     </div>
