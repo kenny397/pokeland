@@ -51,8 +51,6 @@ export default function GachaContainer() {
     dispatch(updateBalance(localStorage.getItem('balance')));
     
     setPokeballDisplay(false);
-    console.log(grade);
-    console.log(typeof grade);
     if (grade === 'Epic') {
       dispatch(setGachaOrder(4));  
     } else if (grade === 'Unique') {

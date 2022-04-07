@@ -39,7 +39,6 @@ export function setExistingPokemons(existingPokemons) {
 export function loadExistingPokemons(jwt) {
   return async (dispatch) => {
     const existingPokemons = await fetchExistingPokemons(jwt);
-    // console.log(`fetch result : existingPokemons is ${existingPokemons}`);
     dispatch(setExistingPokemons(existingPokemons));
   };
 }
@@ -54,10 +53,8 @@ export function setExistingNfps(existingNfps) {
 }
 
 export function loadExistingNfps(publicKey, pokedexId) {
-  // console.log(`action loadExistingNfps: ${publicKey}, ${pokedexId}`);
   return async (dispatch) => {
     const existingNfps = await fetchExistingNfps(publicKey, pokedexId);
-    // console.log(`got existingNfps! ${JSON.stringify(existingNfps)}`);
     dispatch(setExistingNfps(existingNfps));
   };
 }

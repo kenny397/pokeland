@@ -33,7 +33,6 @@ export default function LoginDialog({ handleClickCloseModal }) {
       const { data: { money } } = await getBalance();
       localStorage.setItem("balance", money);
       dispatch(updateBalance(localStorage.getItem('balance')));
-      console.log(money);
 
       navigate('/main');
       handleClickCloseModal();

@@ -55,7 +55,7 @@ export async function fetchExistingPokemons(jwt) {
       data : '',
     }
   );
-  // console.log(response);
+
   let { pokemonList } = response.data;
   return pokemonList;
 }
@@ -70,7 +70,6 @@ export async function fetchExistingNfps(publicKey, pokedexId) {
   );
 
   let { nfpList } = response.data;
-  // console.log(`fetchExistingNfps excuted nft list is ${JSON.stringify(nfpList)}`);
   return nfpList;
 }
 

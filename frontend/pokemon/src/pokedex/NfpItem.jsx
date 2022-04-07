@@ -6,7 +6,6 @@ export default function NfpItem({ onClickToggleModalVisibility, pokemonNum, poke
   const backgroundStyle ={
     backgroundImage: `url(/images/backgroundImg/${grade}.png)`
   };
-  console.log(backgroundStyle);
   
   return (
     <div className="pokemon-item" onClick={onClickToggleModalVisibility} style={ backgroundStyle }>
