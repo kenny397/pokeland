@@ -6,7 +6,9 @@ import { Carousel } from 'react-responsive-carousel';
 import { useMediaQuery } from "react-responsive";
 
 export default function MainCarousel() {
-
+  const isMobile = useMediaQuery({
+    query: "(max-width: 1029px)"
+  });
   const isFhd = useMediaQuery({
     query: "(min-width: 1031px)"
   });
@@ -38,7 +40,10 @@ export default function MainCarousel() {
                 :
                 <img src={ '/images/static/mainPage/mobile1.png' } alt="" className="main-image"/>
           }
-          <p className="legend">이로치 포켓몬 보러가기</p>
+          { !isMobile 
+            &&
+            <p className="legend">이로치 포켓몬 보러가기</p>
+          }
         </div>
         <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
           {
@@ -50,7 +55,10 @@ export default function MainCarousel() {
                 :
                 <img src={ '/images/static/mainPage/mobile2.png' } alt="" className="main-image"/>
           }
-          <p className="legend">패치노트 보러가기</p>
+          { !isMobile 
+            &&
+            <p className="legend">패치노트 보러가기</p>
+          }
         </div>
         <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
           {
@@ -62,7 +70,10 @@ export default function MainCarousel() {
                 :
                 <img src={ '/images/static/mainPage/mobile3.png' } alt="" className="main-image"/>
           }
-          <p className="legend">뽑기확률 보러가기</p>
+          { !isMobile 
+            &&
+            <p className="legend">뽑기확률 보러가기</p>
+          }
         </div>
       </Carousel>
     </div>
