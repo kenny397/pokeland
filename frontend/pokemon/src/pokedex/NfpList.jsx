@@ -12,11 +12,14 @@ import NfpItem from "./NfpItem";
 import Modal from "../components/Modal";
 import PokemonDetail from './PokemonDetail';
 
+import './NfpList.scss';
+
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
   const viewPort = { isPc, isTablet, isMobile };
+  const maxWidthModal = useMediaQuery({ query : "(min-height:800px)" });
 
   const nfpList = existingNfps;
 
@@ -41,7 +44,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
   };
 
   return (
-    <>
+    <div className="nfp-list-container">
       <p>내 nfp들</p>
       <div className="pokemon-list">
         <div className="close-nfps-btn-div">
@@ -73,8 +76,8 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
 
         {modalVisibility &&
         <Modal
-          width={ isPc ? '338px' :'45vh'}
-          height={ isPc ? '640px' : '87vh'}
+          width={maxWidthModal ? '357px' : '44.5vh'}
+          height={maxWidthModal ?  '708.4px' : '88vh'}
           setIsVisible={setModalVisibility}
           InnerComponent={() => PokemonDetail({ nfpInModal })}
           onClickToggleModalVisibility={toggleModalVisibility}
@@ -97,6 +100,6 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
         </div>
         }
       </div>
-    </>
+    </div>
   );
 }

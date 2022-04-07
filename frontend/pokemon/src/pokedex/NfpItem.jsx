@@ -1,5 +1,7 @@
 import React from "react";
 
+import './NfpList.scss';
+
 export default function NfpItem({ onClickToggleModalVisibility, pokemonNum, pokemonName, nfpImgPath, grade }) {
   const backgroundStyle ={
     backgroundImage: `url(/images/backgroundImg/${grade}.png)`
