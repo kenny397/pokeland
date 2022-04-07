@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 
 import Confetti from 'react-confetti';
 import { updateBalance } from "../../redux/actions";
+import { setCardgameOrder } from "../../redux/actions";
 
 import { requestBonus } from "../../api";
 
@@ -31,11 +32,20 @@ export default function Card({ isPicachu }) {
       setCardFlipped(!cardFlipped);
       setTimeout(() => {
         if (isPicachu) {
+          dispatch(setCardgameOrder(2));
           setConfetti(true);
-          alert('피카츄를 뽑으셨군요! \n300SSF가 지급됩니다.');
-          onRequestBonus();  
+          
+          setTimeout(() => {
+            alert('피카츄를 뽑으셨군요! \n300SSF가 지급됩니다.');
+            onRequestBonus();  
+          }, 200);
+          
         } else {
-          alert('꽝 !! 메타몽이지롱 !');
+          dispatch(setCardgameOrder(1));
+          setTimeout(() => {
+            alert('꽝 !! 메타몽이지롱 !');
+          }, 200);
+          
         }
       }, 500);
       dispatch(setCardgameFlipped(true));

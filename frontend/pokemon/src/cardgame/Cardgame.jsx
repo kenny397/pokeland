@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setCardgameFlipped } from "../redux/actions";
 import { changeHeaderDisplay } from "../headerDisplay";
 import { Link } from "react-router-dom";
+import { setCardgameOrder } from "../redux/actions";
 
 export default function Cardgame() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Cardgame() {
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
     dispatch(setCardgameFlipped(false));
+    dispatch(setCardgameOrder(0));
   },[]);
 
   let isPicachuList = [false, false, false];

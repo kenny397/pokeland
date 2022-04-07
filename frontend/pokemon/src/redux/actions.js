@@ -89,6 +89,15 @@ export function setSupportOrder(supportOrder) {
   };
 }
 
+export function setCardgameOrder(cardgameOrder) {
+  return {
+    type: 'setCardgameOrder',
+    payload: {
+      cardgameOrder
+    }
+  };
+}
+
 export function setCardgameFlipped(cardgameFlipped) {
   return {
     type: 'setCardgameFlipped',
