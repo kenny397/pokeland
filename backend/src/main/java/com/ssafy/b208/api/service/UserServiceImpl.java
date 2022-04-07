@@ -135,8 +135,10 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findOptionalByEmail(email);
 
         if (userOptional.isEmpty()) {
+            System.out.println("뭐냐");
             return null;
         }
+        System.out.println("??");
         User user = userOptional.get();
         UserDto userDto = UserDto.builder()
                 .email(user.getEmail())

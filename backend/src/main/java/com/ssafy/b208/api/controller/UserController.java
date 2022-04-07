@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -91,8 +93,13 @@ public class UserController {
         String password = userRequestDto.getPassword();
         UserDto userDto = userService.getUserByUserEmail(email);
         UserLoginResponseDto userloginResponseDto = new UserLoginResponseDto();
+        log.info(userRequestDto.getEmail());
+        log.info(userRequestDto.getPassword());
+        System.out.println(userRequestDto.getPassword());
         try{
             if (passwordEncoder.matches(password, userDto.getPassword())) {
+                log.info("잘들어옴");
+                System.out.println("asd");
                 if (userDto.isEnabled()) {
                     userloginResponseDto.setPublicKey(userDto.getPublicKey());
                     userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
