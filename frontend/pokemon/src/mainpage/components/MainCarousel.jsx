@@ -49,7 +49,7 @@ export default function MainCarousel() {
           }
           { !isMobile 
             &&
-            <p className="legend">이로치 포켓몬 보러가기</p>
+            <p className="legend to-irochi" onClick={(e) => onClickCarousel(e)}>이로치 포켓몬 보러가기</p>
           }
         </div>
         <div className="main-image-wrapper to-patch-note" onClick={(e) => onClickCarousel(e)}>
@@ -64,7 +64,7 @@ export default function MainCarousel() {
           }
           { !isMobile 
             &&
-            <p className="legend">패치노트 보러가기</p>
+            <p className="legend to-patch-note" onClick={(e) => onClickCarousel(e)}>패치노트 보러가기</p>
           }
         </div>
         <div className="main-image-wrapper to-gacha-percent" onClick={(e) => onClickCarousel(e)}>
@@ -79,7 +79,7 @@ export default function MainCarousel() {
           }
           { !isMobile 
             &&
-            <p className="legend">뽑기확률 보러가기</p>
+            <p className="legend to-gacha-percent" onClick={(e) => onClickCarousel(e)}>뽑기확률 보러가기</p>
           }
         </div>
       </Carousel>
