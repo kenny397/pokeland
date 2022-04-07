@@ -16,8 +16,15 @@ export default function MainCarousel() {
     query: "(min-width: 1921px)"
   });
   const onClickCarousel = (e) => {
-    console.log(e);
-    window.open('https://www.notion.so/NFT-88e1b26f882d4254aacfc67aac8525ca');
+    const targetNotion = e.target.className;
+    if (targetNotion.includes('to-irochi')) {
+      window.open('https://three-catcher-318.notion.site/ad7eb9688f4a4975981e0c85aea86d10');
+    } else if(targetNotion.includes('to-patch-note')) {
+      window.open('https://three-catcher-318.notion.site/1-0-4-7-18-00-d729090db7ba4528a5dbdc4f247f7f14');
+    } else if(targetNotion.includes('to-gacha-percent')) {
+      window.open('https://three-catcher-318.notion.site/45e6b9e7a79c4613a90ba035e226a26b');
+    }
+    
   };
 
   return (
@@ -30,7 +37,7 @@ export default function MainCarousel() {
         infiniteLoop={true}
         showArrows={true}
       >
-        <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
+        <div className="main-image-wrapper to-irochi"  onClick={(e) => onClickCarousel(e)}>
           {
             isQhd ?
               <img src={ '/images/static/mainPage/qhd1.png' } alt="" className="main-image"/>
@@ -45,7 +52,7 @@ export default function MainCarousel() {
             <p className="legend">이로치 포켓몬 보러가기</p>
           }
         </div>
-        <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
+        <div className="main-image-wrapper to-patch-note" onClick={(e) => onClickCarousel(e)}>
           {
             isQhd ?
               <img src={ '/images/static/mainPage/qhd2.png' } alt="" className="main-image"/>
@@ -60,7 +67,7 @@ export default function MainCarousel() {
             <p className="legend">패치노트 보러가기</p>
           }
         </div>
-        <div className="main-image-wrapper" onClick={(e) => onClickCarousel(e)}>
+        <div className="main-image-wrapper to-gacha-percent" onClick={(e) => onClickCarousel(e)}>
           {
             isQhd ?
               <img src={ '/images/static/mainPage/qhd3.png' } alt="" className="main-image"/>

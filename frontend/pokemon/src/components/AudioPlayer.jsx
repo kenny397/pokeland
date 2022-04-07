@@ -53,7 +53,6 @@ export default function AudioPlayer() {
     bgmTitle = `main${randomNum}.mp3`;
   }
   const audioContainer = document.querySelector('#audio-player');
-  console.log(bgmTitle);
 
   const onClickAudioSetting = () => {
     if (isMusicMuted) {
@@ -64,7 +63,6 @@ export default function AudioPlayer() {
       audioContainer.pause();
     }
   };
-  console.log("isMusicMuted" + isMusicMuted);
 
   return ( 
     bgmTitle !== undefined &&

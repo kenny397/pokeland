@@ -33,7 +33,6 @@ export default function PokemonDetail({ nfpInModal }) {
     color: `${colorByGradeTable[grade] ? colorByGradeTable[grade] : grade}`
   };
 
-  console.log(backgroundStyle);
   const imgPath = getImgPath(id, 'colored');
   return (
     <div className="pokemon-detail-container">

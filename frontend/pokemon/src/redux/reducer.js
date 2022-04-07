@@ -45,7 +45,6 @@ export default function reducer(state = initialState, action) {
     };
   }
   if (action.type === 'setExistingNfps') {
-    // console.log(`reducer is excuted `);
     return {
       ...state,
       existingNfps: action.payload.existingNfps

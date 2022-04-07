@@ -51,7 +51,6 @@ export default function SignupPage() {
   };
   
   async function onClickSubmit(){
-    console.log(isPassword(password));
     if (!isPassword(password)) {
       alert("비밀번호는 영문, 숫자 포함 8~15자 이내여야 합니다.");
       return;
@@ -127,7 +126,6 @@ export default function SignupPage() {
     }
     try {
       const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/nickname/${nickname}`);
-      console.log(response);
       if (response.data.flag === 1) {
         changeState("isNicknameChecked", false);
         alert('중복된 닉네임입니다.');
