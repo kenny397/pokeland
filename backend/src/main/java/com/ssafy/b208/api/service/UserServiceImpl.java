@@ -8,7 +8,6 @@ import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.exception.ExistIdException;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -41,32 +40,26 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void register(UserRequestDto registerRequestDto, String siteURL)
-            throws MessagingException, UnsupportedEncodingException {
-        //회원가입이 된경우
+            throws MessagingException, UnsupportedEncodingException, ExistIdException {
 
-        User user = new User();
-        user.setNickname(registerRequestDto.getNickname());
-        user.setEmail(registerRequestDto.getEmail());
-        user.setMoney(500L);
-        user.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
         if (userRepository.findOptionalByEmail(registerRequestDto.getEmail()).isPresent()) {
-            return;
+            throw new ExistIdException(registerRequestDto.getEmail());
         } else {
             WalletDto walletDto = createWallet();
-            user.setPublicKey(walletDto.getPublicKey());
-            user.setPrivateKey(walletDto.getPrivateKey());
-
             String randomCode = RandomString.make(64);
-            user.setVerificationCode(randomCode);
-            user.setEnabled(false);
-
+            User user = User.builder()
+                    .email(registerRequestDto.getEmail())
+                    .nickname(registerRequestDto.getNickname())
+                    .money(500L)
+                    .password(passwordEncoder.encode(registerRequestDto.getPassword()))
+                    .publicKey(walletDto.getPublicKey())
+                    .privateKey(walletDto.getPrivateKey())
+                    .verificationCode(randomCode)
+                    .enabled(false)
+                    .build();
             userRepository.save(user);
             sendVerificationEmail(user, siteURL);
         }
-
-
-
-        //회원가입이 안된경우
     }
 
     private void sendVerificationEmail(User user, String siteURL)
@@ -75,12 +68,17 @@ public class UserServiceImpl implements UserService {
         String siteAddress = "gmail.com";
         String fromAddress = env.getProperty("spring.mail.username") + "@" + siteAddress;
         String senderName = "PokeLand";
-        String subject = "Please verify your registration";
-        String content = "[[name]]님,<br>"
-                + "아래 인증 버튼을 눌러 회원가입 인증을 진행해주세요 :<br>"
-                + "<h3><a href=\"[[URL]]\" target=\"_self\">인증완료</a></h3>"
-                + "감사합니다,<br>"
-                + senderName;
+        String subject = "회원가입 인증 안내 메일입니다.";
+        String content = "<img src=\"https://ipfs.io/ipfs/QmQeC9C3ze4rmmG2wxdCYhoEPnGvoxp85whoQAHEvZd7Sf\" " +
+                "style=\"margin: 0 auto; display: block;\" width=\"350\"/>" +
+                "	<h1 style=\"margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400; text-align: center;\">" +
+                "		<span style=\"color: #6A60A9; text-align: center;\">메일인증</span> 안내입니다." +
+                "	</h1>\n"
+                + "<h2 style=\"margin: 0; padding: 0 5px; font-size: 21px; font-weight: 400; text-align: center;\">"
+                + "[[name]]님,<br>"
+                + "아래 '인증완료' 버튼을 눌러 회원가입 인증을 진행해주세요.</h2> <br>"
+                + "<h3 style=\"margin: 0; padding: 0 5px; font-size: 21px; font-weight: 400; text-align: center;\"><a href=\"[[URL]]\" target=\"_self\">인증완료</a></h3> <br>"
+                + "<h3 style=\"margin: 0; padding: 0 5px; font-size: 21px; font-weight: 400; text-align: center;\">감사합니다.</h3>";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -115,27 +113,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserByUserEmail(String email) {
+    @Transactional
+    public UserDto giveBonus(String email) {
         Optional<User> userOptional = userRepository.findOptionalByEmail(email);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return null;
         }
         User user = userOptional.get();
-        UserDto userDto = UserDto.builder().build();
-        userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
-        userDto.setPublicKey(user.getPublicKey());
-        userDto.setMoney(user.getMoney());
-        userDto.setPrivateKey(user.getPrivateKey());
-        userDto.setEnabled(user.isEnabled());
-        //빌더 사용해보기
+        user.setMoney(user.getMoney()+300);
+        userRepository.save(user);
+        UserDto userDto = UserDto.builder()
+                .email(user.getEmail())
+                .publicKey(user.getPublicKey())
+                .Money(user.getMoney())
+                .build();
+        return userDto;
+    }
+
+    @Override
+    public UserDto getUserByUserEmail(String email) {
+        Optional<User> userOptional = userRepository.findOptionalByEmail(email);
+
+        if (userOptional.isEmpty()) {
+            return null;
+        }
+        User user = userOptional.get();
+        UserDto userDto = UserDto.builder()
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .publicKey(user.getPublicKey())
+                .privateKey(user.getPrivateKey())
+                .Money(user.getMoney())
+                .enabled(user.isEnabled())
+                .build();
+
         return userDto;
     }
 
     @Override
     public UserDto getUserByUserNickname(String nickname) {
         Optional<User> userOptional = userRepository.findOptionalByNickname(nickname);
-        if (!userOptional.isPresent()) {
+        if (userOptional.isEmpty()) {
             return null;
         }
 
@@ -147,8 +165,6 @@ public class UserServiceImpl implements UserService {
                 .build();
         return userDto;
     }
-
-
 
     public WalletDto createWallet() {
         String seed = UUID.randomUUID().toString();

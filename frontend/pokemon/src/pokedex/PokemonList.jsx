@@ -1,13 +1,11 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-
-import pokemonList from "../fixtures/pokemonList";
 import { pcSize, tabletSize, mobileSize } from "../utils/querys";
 import { range, generateLayout } from '../utils/utils';
 
 import PokemonItemContainer from "./PokemonItemContainer";
 
-export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) {
+export default function PokemonList({ pokemonList, page, onClickGoToPrev, onClickGoToNext }) {
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
@@ -18,7 +16,7 @@ export default function PokemonList({ page, onClickGoToPrev, onClickGoToNext }) 
 
   const start = (page - 1) * each;
   const end = page * each;
-  
+
   const paginatedPokemonList = pokemonList.slice(start, end);
   
   let emptyGridItems = range(1, each);

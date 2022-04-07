@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,12 +9,17 @@ import { getImgPath, whatPageInPokedex } from "../utils/utils";
 import pokemonList from "../fixtures/pokemonList";
 
 import NfpItem from "./NfpItem";
+import Modal from "../components/Modal";
+import PokemonDetail from './PokemonDetail';
+
+import './NfpList.scss';
 
 export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToNext, existingNfps }) {
   const isPc = useMediaQuery(pcSize);
   const isTablet = useMediaQuery(tabletSize);
   const isMobile = useMediaQuery(mobileSize);
   const viewPort = { isPc, isTablet, isMobile };
+  const maxWidthModal = useMediaQuery({ query : "(min-height:800px)" });
 
   const nfpList = existingNfps;
 
@@ -31,46 +36,70 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
     navigate(`/pokedex/${whatPageInPokedex(pokedexId, viewPort)}`);
   };
 
-  return (
-    <div className="pokemon-list">
-      <div className="close-nfps-btn-div">
-        <FontAwesomeIcon
-          className="close-nfps-btn"
-          icon={faXmark}
-          onClick={handleClickCloseNfps}
-        />
-      </div>
-      {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
-        let pokemonNum = (pokedexId+"").padStart(3, '0');
-        const pokemonName = pokemonList[pokedexId - 1]["name"];
-        const nfpImgPath = getImgPath(pokedexId, 'colored');
-        return (
-          <NfpItem
-            pokemonNum={pokemonNum}
-            pokemonName={pokemonName}
-            nfpImgPath={nfpImgPath}
-            grade={grade}
-            key={ipfsImageUri}
-          />
-        );
-      }
-      )}
+  const [ modalVisibility, setModalVisibility ] = useState(false);
+  const [ nfpInModal, setNfpInModal ] = useState(null);
 
-      {emptyGridItems.map((ele) => (
-        <div className="empty-grid-item" key={ele}> </div>
-      ))}
-      {
-        nfpList.length > 6 && 
+  const toggleModalVisibility = () => {
+    setModalVisibility(!modalVisibility);
+  };
+
+  return (
+    <div className="nfp-list-container">
+      <p>내 nfp들</p>
+      <div className="pokemon-list">
+        <div className="close-nfps-btn-div">
+          <FontAwesomeIcon
+            className="close-nfps-btn"
+            icon={faXmark}
+            onClick={handleClickCloseNfps}
+          />
+        </div>
+        {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
+          let pokemonNum = (pokedexId+"").padStart(3, '0');
+          const pokemonName = pokemonList[pokedexId - 1]["name"];
+          const nfpImgPath = getImgPath(pokedexId, 'colored');
+          return (
+            <NfpItem
+              onClickToggleModalVisibility={() => { 
+                setNfpInModal({ pokedexId, ipfsImageUri, grade });
+                toggleModalVisibility();
+              }}
+              pokemonNum={pokemonNum}
+              pokemonName={pokemonName}
+              nfpImgPath={nfpImgPath}
+              grade={grade}
+              key={ipfsImageUri}
+            />
+          );
+        }
+        )}
+
+        {modalVisibility &&
+        <Modal
+          width={maxWidthModal ? '357px' : '44.5vh'}
+          height={maxWidthModal ?  '708.4px' : '88vh'}
+          setIsVisible={setModalVisibility}
+          InnerComponent={() => PokemonDetail({ nfpInModal })}
+          onClickToggleModalVisibility={toggleModalVisibility}
+        />
+        }
+
+        {emptyGridItems.map((ele) => (
+          <div className="empty-grid-item" key={ele}> </div>
+        ))}
+        {
+          nfpList.length > 6 && 
         <div className="prev-btn">
           <button onClick={onClickGoToPrev}>왼쪽</button>
         </div>
-      }
-      {
-        nfpList.length > 6 && paginatedNfpList.length === 6 &&
+        }
+        {
+          nfpList.length > 6 && paginatedNfpList.length === 6 &&
         <div className="next-btn">
           <button onClick={onClickGoToNext}>오른쪽</button>
         </div>
-      }
+        }
+      </div>
     </div>
   );
 }

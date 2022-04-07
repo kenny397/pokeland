@@ -6,9 +6,12 @@ import java.util.regex.Pattern;
 
 @Component
 public class InputValidation {
-    public static boolean patternMatches(String emailAddress, String regexPattern) {
+
+    public static boolean patternMatches(String validationData, String regexPattern) {
+        if (validationData == null || regexPattern == null)
+            return false;
         return Pattern.compile(regexPattern)
-                .matcher(emailAddress)
+                .matcher(validationData)
                 .matches();
     }
 }

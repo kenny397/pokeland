@@ -68,7 +68,6 @@ public class PokedexServiceImpl implements PokedexService {
         User user = Optional.ofNullable(userRepository.findOptionalByPublicKey(publicKey).get())
                 .orElseGet(() -> User.builder().build());
         Long userId = user.getId();
-
         List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
                 .orElseGet(() -> new ArrayList<>());
         List<NfpDetailDto> nfpList= new ArrayList<>();
