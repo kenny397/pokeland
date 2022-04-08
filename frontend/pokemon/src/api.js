@@ -42,7 +42,7 @@ export async function requestLogin(email, password) {
     }
     
   } catch {
-    return '';
+    alert('아이디나 비밀번호가 틀립니다.');
   }
 }
 
