@@ -93,13 +93,8 @@ public class UserController {
         String password = userRequestDto.getPassword();
         UserDto userDto = userService.getUserByUserEmail(email);
         UserLoginResponseDto userloginResponseDto = new UserLoginResponseDto();
-        log.info(userRequestDto.getEmail());
-        log.info(userRequestDto.getPassword());
-        System.out.println(userRequestDto.getPassword());
         try{
             if (passwordEncoder.matches(password, userDto.getPassword())) {
-                log.info("잘들어옴");
-                System.out.println("asd");
                 if (userDto.isEnabled()) {
                     userloginResponseDto.setPublicKey(userDto.getPublicKey());
                     userloginResponseDto.setAccessToken(JwtTokenUtil.getToken(email));
