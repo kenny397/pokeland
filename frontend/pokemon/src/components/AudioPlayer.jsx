@@ -21,6 +21,9 @@ export default function AudioPlayer() {
   let { supportOrder } = useSelector((state) => ({
     supportOrder: state.supportOrder,
   }));
+  let { cardgameOrder } = useSelector((state) => ({
+    cardgameOrder: state.cardgameOrder,
+  }));
 
   const dispatch = useDispatch();
 
@@ -31,10 +34,10 @@ export default function AudioPlayer() {
   // };
   const gachaBgm = ['gacha.mp3', 'whilemonsterball.mp3', 'common.mp3', 'rare.mp3', 'unique.mp3'];
   const supportBgm = ['support.mp3', 'supportsuccess.mp3'];
+  const cardgameBgm = ['cardgame.mp3', 'cardgamemetamong.mp3', 'cardgamepicachu.mp3'];
   let bgmTitle = null;
-
+  const randomNum = Math.floor(Math.random() * 5) + 1;
   if (pathNow ==='/main') {
-    const randomNum = Math.floor(Math.random() * 5) + 1;
     bgmTitle = `main${randomNum}.mp3`;
   } else if (pathNow === '/support') {
     bgmTitle = supportBgm[supportOrder];
@@ -44,13 +47,14 @@ export default function AudioPlayer() {
     bgmTitle = 'intro.mp3';
   } else if (pathNow === '/tutorial') {
     bgmTitle = 'tutorial.mp3';
+  } else if (pathNow === '/cardgame') {
+    bgmTitle = cardgameBgm[cardgameOrder];
   } else {
-    bgmTitle = 'silence.mp3';
+    bgmTitle = `main${randomNum}.mp3`;
   }
   const audioContainer = document.querySelector('#audio-player');
-  console.log(bgmTitle);
 
-  const onClickAudioStart = () => {
+  const onClickAudioSetting = () => {
     if (isMusicMuted) {
       dispatch(setIsMusicMuted(false));
       audioContainer.play();
@@ -59,7 +63,6 @@ export default function AudioPlayer() {
       audioContainer.pause();
     }
   };
-  console.log("isMusicMuted" + isMusicMuted);
 
   return ( 
     bgmTitle !== undefined &&
@@ -69,14 +72,14 @@ export default function AudioPlayer() {
           autoPlay={!isMusicMuted}
           loop={true}
           id="audio-player"
-          volume={0.1}
+          volume={0.2}
         />
-        <span className="muted-icon-wrapper">
+        <span className="muted-icon-wrapper" onClick={onClickAudioSetting}>
           {isMusicMuted 
             ? 
-            <FontAwesomeIcon icon={faVolumeXmark} className="audio-btn audio-muted-btn" onClick={onClickAudioStart} />
+            <FontAwesomeIcon icon={faVolumeXmark} className="audio-btn audio-muted-btn"/>
             :
-            <FontAwesomeIcon icon={faVolumeHigh} className="audio-btn" onClick={onClickAudioStart} />
+            <FontAwesomeIcon icon={faVolumeHigh} className="audio-btn"/>
           }
         </span>
       </div>

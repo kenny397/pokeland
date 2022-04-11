@@ -13,6 +13,9 @@ const initialState = {
   isMusicMuted: true,
   gachaOrder: 0,
   supportOrder: 0,
+  cardgameOrder: 0,
+  cardgameFlipped: false,
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -42,7 +45,6 @@ export default function reducer(state = initialState, action) {
     };
   }
   if (action.type === 'setExistingNfps') {
-    // console.log(`reducer is excuted `);
     return {
       ...state,
       existingNfps: action.payload.existingNfps
@@ -66,6 +68,20 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       supportOrder: action.payload.supportOrder
+    };
+  }
+
+  if (action.type === 'setCardgameOrder') {
+    return {
+      ...state,
+      cardgameOrder : action.payload.cardgameOrder
+    };
+  }
+
+  if (action.type === 'setCardgameFlipped') {
+    return {
+      ...state,
+      cardgameFlipped: action.payload.cardgameFlipped
     };
   }
   return state;

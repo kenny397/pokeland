@@ -25,22 +25,36 @@ export default function SupportPage() {
     category: '',
     email: '',
     title: '',
-    content: ''
+    content: '',
   });
   
-  const onClickSubmitSupport = async function () {
-    // TODO : 버튼 클릭시 백엔드로 비동기 요청 
+  const isValidSupportRequest = (inputs) => {
     const { category, email, title, content } = inputs;
-    dispatch(setSupportOrder(1));
-    setIsLoading(true);
-    const response = await writeSupport( email, category, content, title );
-    const { data: { money } } = await getBalance();
-    setIsLoading(false);
-    console.log(response);
-    localStorage.setItem("balance", money);
-    dispatch(updateBalance(localStorage.getItem('balance')));
-    alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. ');
-    navigate('/main');
+    if ( category && email && title && content ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onClickSubmitSupport = async function () {
+    const { category, email, title, content } = inputs;
+    if (isValidSupportRequest(inputs)) {
+      setIsLoading(true);
+      await writeSupport( email, category, content, title );
+      dispatch(setSupportOrder(1));
+      const { data: { money } } = await getBalance();
+      setTimeout(() => {
+        setIsLoading(false); 
+        localStorage.setItem("balance", money); 
+        dispatch(updateBalance(localStorage.getItem('balance'))); 
+        alert('리뷰가 작성되었습니다 \n500 SSF가 부여됐습니다. \n감사합니다. '); 
+        navigate('/main');
+      },100);
+    } else {
+      setIsLoading(false);
+      alert('필수 내용을 모두 작성해주세요');
+    }
   };
 
   const onChangeInputs = (e) => {
@@ -49,7 +63,6 @@ export default function SupportPage() {
       ...inputs,
       [name]: value
     });
-    
   };
   
   return (
@@ -87,7 +100,7 @@ export default function SupportPage() {
       </div>
       
       <div className="buttons">
-        <button className="cancel-button"><Link to="/main">취소</Link></button>
+        <Link to="/main"><button className="cancel-button">취소</button></Link>
         <button className="submit-button" onClick={onClickSubmitSupport}>제출</button>
       </div>
       { isLoading &&

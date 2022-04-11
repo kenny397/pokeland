@@ -22,13 +22,10 @@ export function decideHeaderDisplay(to) {
       }
       i++;
     }
-    console.log(domain);
     return domain;
   };
 
   const domain = getDomain(to);
-  console.log(`domain is ${domain}`);
-
   const isNotIntro = to !=='/';
   const isNotTutorial = to !=='/tutorial';
   const isNotSignup = to !=='/signup';

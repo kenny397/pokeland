@@ -37,17 +37,17 @@
       width: auto;
     }
     .email-dup-btn {
-      top: calc(7vh + 105px);
+      top: calc(7vh + 111px);
     }
   
     .nickname-dup-btn {
-      top: calc(7vh + 217px);
+      top: calc(7vh + 225px);
     }
     .signup-header {
       margin-top: 20px;
     }
     .btn-down {
-      top: calc(7vh + 232px);
+      top: calc(7vh + 240px);
     }
   }
   @media (min-width: 1030px) {
@@ -145,6 +145,25 @@
     color: #2743A8;
     font-weight: bold;
     font-size: 12px;
+  }
+  .body-blackout {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1010;
+    background-color: rgba(58, 57, 57, 0.9);
+  }
+
+  .pokeball-spinning-img {
+    width: 200px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1011;
   }
 
 }

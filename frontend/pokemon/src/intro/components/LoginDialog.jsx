@@ -33,12 +33,15 @@ export default function LoginDialog({ handleClickCloseModal }) {
       const { data: { money } } = await getBalance();
       localStorage.setItem("balance", money);
       dispatch(updateBalance(localStorage.getItem('balance')));
-      console.log(money);
 
       navigate('/main');
       handleClickCloseModal();
-    } else {
-      alert('아이디나 비밀번호가 틀립니다.');
+    }
+  };
+
+  const onKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickSubmitBtn();
     }
   };
 
@@ -53,6 +56,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
           type="text" 
           placeholder=" 아이디"
           onChange={(e) => onChangeInputs(e)}
+          onKeyPress={ onKeyPress }
         />
       </div>
       <div>
@@ -61,6 +65,7 @@ export default function LoginDialog({ handleClickCloseModal }) {
           type="password"
           placeholder=" 비밀번호"
           onChange={ (e) => onChangeInputs(e) }
+          onKeyPress={ onKeyPress }
         />
       </div>
 

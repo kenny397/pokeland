@@ -28,6 +28,7 @@ public class User extends BaseEntity {
     private String verificationCode;
 
 
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserPokemon> userPokemonList = new ArrayList<>();
 

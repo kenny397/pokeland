@@ -2,14 +2,12 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { changeHeaderDisplay } from "../headerDisplay";
-import { useMediaQuery } from "react-responsive";
 import './MainPage.scss';
 
-export default function MainPage() {
+// components
+import MainCarousel from "./components/MainCarousel";
 
-  const isDeskTop = useMediaQuery({
-    query: "(min-width: 1030px)"
-  });
+export default function MainPage() {
 
   useEffect(() => {
     changeHeaderDisplay(window.location.pathname);
@@ -17,12 +15,7 @@ export default function MainPage() {
 
   return (
     <div className="MainPage">
-      { !isDeskTop 
-        ?
-        <img src={ '/images/static/mainPage/mainPageImage.png' } alt="" className="main-image"/>
-        :
-        <img src={ '/images/static/mainPage/mainPageImageDsk.png' } alt="" className="main-image"/>
-      }
+      <MainCarousel/>
       <div className="menu-container">
         <Link to={'/pokedex'} className="menu menu1">
           <p>포켓몬 도감</p>
@@ -37,10 +30,10 @@ export default function MainPage() {
           <p className='ssf'>+500SSF</p>
           <img src={ '/images/static/nurse.png' } alt="" className="h15"/>
         </Link>
-        <div className="menu menu4" onClick={() => alert('아직 준비중이에요!')}>
-          <p>스티커 거래</p>
+        <Link to={'/cardgame'} className="menu menu4">
+          <p>카드게임</p>
           <img src={ '/images/pokemonImg/colored/no.132_colored.jpg' } alt="" className="h15 metamong-img"/>
-        </div>
+        </Link>
       </div>
     </div>
   );

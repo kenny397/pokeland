@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { updateJwt, updateBalance } from './redux/actions';
 
-import NavBar from './mainpage/NavBar';
+import NavBar from './components/NavBar';
 
 import './App.scss';
 // js

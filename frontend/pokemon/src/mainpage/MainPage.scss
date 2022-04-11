@@ -1,8 +1,4 @@
 .MainPage{
-  .main-image {
-    width: 100%;
-    height: 30vh;
-  }
 
   .menu-container {
     margin-top: 4vh;
@@ -75,10 +71,6 @@
   }
 
   @media (min-width: 1030px) {
-    .main-image {
-      width: 100%;
-      height: 35vh;
-    }
     .menu-container {
       /* 세로 */
       grid-template-rows: repeat(2, 1fr);

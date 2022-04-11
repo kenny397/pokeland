@@ -14,13 +14,12 @@ public class ErrorAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(LackMoneyException.class)
     public ResponseEntity<BaseResponseBody> lackMoney(){
-
         return ResponseEntity.status(400).body(BaseResponseBody.of(400,"돈이 부족합니다."));
     }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ExistIdException.class)
     public ResponseEntity<BaseResponseBody> existId(){
-
         return ResponseEntity.status(400).body(BaseResponseBody.of(400,"존재하는 아이디입니다."));
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -41,5 +40,9 @@ public class ErrorAdvice {
 
         return ResponseEntity.status(400).body(BaseResponseBody.of(400, "잘못된 토큰 아이디입니다."));
     }
-
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EmailNotFoundException.class)
+    public ResponseEntity<BaseResponseBody> notFoundEmail(){
+        return ResponseEntity.status(400).body(BaseResponseBody.of(400,"존재하지 않는 아이디입니다."));
+    }
 }

@@ -21,8 +21,8 @@ class NftServiceTest {
     @Test
     public void 테스트fsd() throws Exception {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setPrivateKey("0x4d44a3ae3ab73187d1c0cd504c40fb63ce6d24cf08e4a0beca6be54d7430ff4e");
+        //UserDto userDto = new UserDto();
+        //userDto.setPrivateKey("0x4d44a3ae3ab73187d1c0cd504c40fb63ce6d24cf08e4a0beca6be54d7430ff4e");
         //nftService.minting(userDto);
         //nftService.check(userDto);
 

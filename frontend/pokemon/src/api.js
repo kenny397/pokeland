@@ -27,13 +27,22 @@ export async function requestLogin(email, password) {
         password
       });
     
-    let { accessToken, publicKey } = response.data;
+    let { accessToken, publicKey, verified } = response.data;
+    if (verified === 'No') {
+      alert('이메일 인증 후 사용해주세요!');
+      return ;
+    } 
     
-    localStorage.setItem("jwt", accessToken);
-    localStorage.setItem("publicKey", publicKey);
-    return accessToken;
+    if (accessToken) {
+      localStorage.setItem("jwt", accessToken);
+      localStorage.setItem("publicKey", publicKey);
+      return accessToken;
+    } else {
+      alert('아이디나 비밀번호가 틀립니다.');
+    }
+    
   } catch {
-    return '';
+    alert('아이디나 비밀번호가 틀립니다.');
   }
 }
 
@@ -46,7 +55,7 @@ export async function fetchExistingPokemons(jwt) {
       data : '',
     }
   );
-  // console.log(response);
+
   let { pokemonList } = response.data;
   return pokemonList;
 }
@@ -61,7 +70,6 @@ export async function fetchExistingNfps(publicKey, pokedexId) {
   );
 
   let { nfpList } = response.data;
-  // console.log(`fetchExistingNfps excuted nft list is ${JSON.stringify(nfpList)}`);
   return nfpList;
 }
 
@@ -98,4 +106,31 @@ export async function writeSupport(address, category, message, title) {
   } catch {
     return '';
   }
+}
+
+export async function signupRequest(email,nickname,password) {
+  try {
+    await axios.post(
+      'https://j6b208.p.ssafy.io/api/v1/users/register',
+      { 
+        email,
+        nickname,
+        password
+      });
+    alert('회원가입 성공!');
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function requestBonus(jwt) {
+  const response = await axios(
+    {
+      method : 'post',
+      url : `${BASE_URL}/users/bonus`,
+      headers: { 'Authorization': 'Bearer ' + jwt },
+      data : '',
+    }
+  );
+  return response;
 }
