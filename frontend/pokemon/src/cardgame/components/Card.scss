@@ -28,9 +28,15 @@
     }
   }
   .card-wrapper {
+    cursor: pointer;
     background: rgb(221, 136, 136);
     border-radius: 15px;
   }
+
+  .card-wrapper:hover {
+    background: rgb(185, 115, 115);
+  }
+
   .pokemon-image {
     vertical-align: middle;
   }

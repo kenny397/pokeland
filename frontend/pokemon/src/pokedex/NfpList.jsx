@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { pcSize, tabletSize, mobileSize } from '../utils/querys';
-import { getImgPath, whatPageInPokedex } from "../utils/utils";
+import { whatPageInPokedex } from "../utils/utils";
 import pokemonList from "../fixtures/pokemonList";
 
 import NfpItem from "./NfpItem";
@@ -56,7 +56,7 @@ export default function NfpList({ pokedexId, page, onClickGoToPrev, onClickGoToN
         {paginatedNfpList.map(({ pokedexId, ipfsImageUri, grade }) => {
           let pokemonNum = (pokedexId+"").padStart(3, '0');
           const pokemonName = pokemonList[pokedexId - 1]["name"];
-          const nfpImgPath = getImgPath(pokedexId, 'colored');
+          const nfpImgPath = ipfsImageUri;
           return (
             <NfpItem
               onClickToggleModalVisibility={() => { 

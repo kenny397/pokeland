@@ -9,26 +9,31 @@ import com.ssafy.b208.api.db.repository.UserPokemonRepository;
 import com.ssafy.b208.api.db.repository.UserRepository;
 import com.ssafy.b208.api.dto.request.UserRequestDto;
 import com.ssafy.b208.api.dto.response.*;
+import com.ssafy.b208.api.exception.NonExistentPokedexIdException;
+import com.ssafy.b208.api.exception.WrongPublicKeyException;
+import com.ssafy.b208.api.exception.WrongTokenIdException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PokedexServiceImpl implements PokedexService {
-    @Autowired
-    private UserPokemonRepository userPokemonRepository;
-    @Autowired
-    private PokeDexRepository pokeDexRepository;
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserPokemonRepository userPokemonRepository;
+    private final PokeDexRepository pokeDexRepository;
+    private final UserRepository userRepository;
 
     @Override
     public PokemonListDto getPokemonList(String email) {
@@ -44,34 +49,64 @@ public class PokedexServiceImpl implements PokedexService {
 
     @Override
     public PokeInfoOuterDto getPokeInfo(Long id) {
-        PokeDex pokeDex = Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
-                .orElseGet(() -> new PokeDex());
-        PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
-                .id(pokeDex.getId())
-                .name(pokeDex.getName())
-                .type(pokeDex.getType())
-                .height(pokeDex.getHeight())
-                .category(pokeDex.getCategory())
-                .gender(pokeDex.getGender())
-                .weight(pokeDex.getWeight())
-                .abilities(pokeDex.getAbilities())
-                .build();
-        PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
-                .pokeInfo(pokeInfoDto)
-                .build();
-        return pokeInfoOuterDto;
+        try {
+            PokeDex pokeDex =
+                    Optional.ofNullable(pokeDexRepository.findPokeDexById(id).get())
+                    .orElseGet(() -> new PokeDex());
+            PokeInfoDto pokeInfoDto = PokeInfoDto.builder()
+                    .id(pokeDex.getId())
+                    .name(pokeDex.getName())
+                    .type(pokeDex.getType())
+                    .height(pokeDex.getHeight())
+                    .category(pokeDex.getCategory())
+                    .gender(pokeDex.getGender())
+                    .weight(pokeDex.getWeight())
+                    .abilities(pokeDex.getAbilities())
+                    .build();
+            PokeInfoOuterDto pokeInfoOuterDto = PokeInfoOuterDto.builder()
+                    .pokeInfo(pokeInfoDto)
+                    .build();
+            return pokeInfoOuterDto;
+        } catch (NullPointerException e) {
+            throw new NonExistentPokedexIdException(id);
+        }
     }
 
     @Override
     public NfpListDto getNfpList(String publicKey, Long pokedexId) {
-        // public key로 userId 찾기
-        User user = Optional.ofNullable(userRepository.findOptionalByPublicKey(publicKey).get())
-                .orElseGet(() -> User.builder().build());
-        Long userId = user.getId();
-        List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
-                .orElseGet(() -> new ArrayList<>());
-        List<NfpDetailDto> nfpList= new ArrayList<>();
-        for (UserPokemon userPokemon : userPokemons) {
+        try {
+            // public key로 userId 찾기
+            User user = Optional.ofNullable(userRepository.findOptionalByPublicKey(publicKey).get())
+                    .orElseGet(() -> User.builder().build());
+            Long userId = user.getId();
+
+            List<UserPokemon> userPokemons = Optional.ofNullable(userPokemonRepository.findNfpList(userId, pokedexId).get())
+                    .orElseGet(() -> new ArrayList<>());
+            List<NfpDetailDto> nfpList= new ArrayList<>();
+            for (UserPokemon userPokemon : userPokemons) {
+                NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
+                        .tokenId(userPokemon.getTokenId())
+                        .pokedexId(userPokemon.getPokemon().getId())
+                        .ipfsMetaUri(userPokemon.getIpfsMetaUri())
+                        .ipfsImageUri(userPokemon.getIpfsImageUri())
+                        .grade(userPokemon.getGrade())
+                        .build();
+                nfpList.add(nfpDetailDto);
+            }
+            NfpListDto nfpListDto = NfpListDto.builder()
+                    .nfpList(nfpList)
+                    .build();
+            return nfpListDto;
+        } catch (NoSuchElementException e) {
+            throw new WrongPublicKeyException(publicKey);
+        }
+    }
+
+    @Override
+    public NfpDetailDto getNfpDetail(Long id) {
+        try {
+            UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
+                    .orElseGet(() -> new UserPokemon());
             NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
                     .tokenId(userPokemon.getTokenId())
                     .pokedexId(userPokemon.getPokemon().getId())
@@ -79,26 +114,10 @@ public class PokedexServiceImpl implements PokedexService {
                     .ipfsImageUri(userPokemon.getIpfsImageUri())
                     .grade(userPokemon.getGrade())
                     .build();
-            nfpList.add(nfpDetailDto);
+            return nfpDetailDto;
+        } catch (NoSuchElementException e) {
+            throw new WrongTokenIdException(id);
         }
-        NfpListDto nfpListDto = NfpListDto.builder()
-                .nfpList(nfpList)
-                .build();
-        return nfpListDto;
-    }
-
-    @Override
-    public NfpDetailDto getNfpDetail(Long id) {
-        UserPokemon userPokemon = Optional.ofNullable(userPokemonRepository.findNfpDetail(id).get())
-                .orElseGet(() -> new UserPokemon());
-        NfpDetailDto nfpDetailDto = NfpDetailDto.builder()
-                .tokenId(userPokemon.getTokenId())
-                .pokedexId(userPokemon.getPokemon().getId())
-                .ipfsMetaUri(userPokemon.getIpfsMetaUri())
-                .ipfsImageUri(userPokemon.getIpfsImageUri())
-                .grade(userPokemon.getGrade())
-                .build();
-        return nfpDetailDto;
     }
 
 }
