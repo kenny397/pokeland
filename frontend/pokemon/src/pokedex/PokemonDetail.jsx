@@ -1,11 +1,12 @@
 import React from "react";
 import './PokemonNotFound.scss';
+import { getImgPath } from '../utils/utils';
 import pokemonList from '../fixtures/pokemonList';
 
 import './PokemonDetail.scss';
 
 export default function PokemonDetail({ nfpInModal }) {
-  const { pokedexId, grade, ipfsImageUri } = nfpInModal;
+  const { pokedexId, grade } = nfpInModal;
   const pokemon = pokemonList[pokedexId - 1];  
   const {
     id,
@@ -32,7 +33,7 @@ export default function PokemonDetail({ nfpInModal }) {
     color: `${colorByGradeTable[grade] ? colorByGradeTable[grade] : grade}`
   };
 
-  const imgPath = ipfsImageUri;
+  const imgPath = getImgPath(id, 'colored');
   return (
     <div className="pokemon-detail-container">
       <div className="pokedex-top">
