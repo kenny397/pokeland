@@ -201,7 +201,7 @@ refactor : 성능 개선
 
 |                  김태호                   |                  박윤지                   |                  서형준                   |                  오윤기                   |                  현종일                   |
 | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: |
-| ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/132418052.png) | ![004c67bf4](README.assets/004c67bf4.png) |
+| ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/132418053.png) | ![004c67bf4](README.assets/004c67bf4.png) |
 |           **Leader & Frontend**           |                **Backend**                |                **Backend**                |            **Backend , CI/CD**            |               **Frontend**                |
 
 <br>
