@@ -24,9 +24,9 @@
 
 -----
 
-#### :mobile_phone_off: [모바일버전](README.assets/ServiceEx/mobile.md)
+#### :mobile_phone_off: [모바일버전]()
 
-#### :computer: [PC버전](README.assets/ServiceEx/pc.md)
+#### :computer: [PC버전]()
 
 
 
