@@ -1,26 +1,32 @@
 
 ## 📑 SSAFY 6기 특화 프로젝트 - PokeLand
 #### 블록체인 NFT활용한 프로젝트
-![main-logo](https://user-images.githubusercontent.com/66551646/162983829-50f923ab-0211-47dd-a216-c476b10ebae4.png)
+
+![Frame 15 (1)](README.assets/Frame 15 (1).png)
+
 <br>
 
+### :clapper: OverView 🧧 [ TODO ]🧧
 
+-----
 
-
-
-### OverView 🧧 [ TODO ]🧧
 포켓몬 빵 드셔보신 분 있으신가요? 포켓몬 빵이 재출시된 이후 한 번도 먹어보지 못했습니다
 포켓몬 빵 대란이라고 하죠. 스티커 하나가 자그마치 **5만원**에 판매되기도 하는 것도 아시나요?
 이 포켓몬 스티커를 NFT로 얻을 수 있다면??
 
-### PokeLand 교훈  🧧 [ TODO ]🧧
+<br>
+
+### :triangular_flag_on_post: 서비스 초기 목표  🧧 [ TODO ]🧧
+
+-----
+
 유저에게 쉽게 다가갈 수 있는 프로젝트
 최대한 많은 유저가 사용하는 프로젝트, 거기에서 나오는 피드백 대로 프로젝트를 진행하는 애자일을 경험하자.
 **MVP**프로젝트를 만들자
 
+<br>
 
-
-## 🎉 PokeLand 서비스 화면 🧧 [ TODO ]🧧
+### 🎉 PokeLand 서비스 화면 🧧 [ TODO ]🧧
 
 -----
 
@@ -28,9 +34,9 @@
 
 #### :computer: [PC버전](README.assets/ServiceEx/pc.md)
 
+<br>
 
-
-## ✨ 주요기능 🧧 [ TODO ]🧧
+### ✨ 주요기능 🧧 [ TODO ]🧧
 
 -----
 
@@ -41,7 +47,7 @@
   - 토큰을 얻기 위한 미니게임
   - 보유하고 있는 NFT를 확인할 수 있는 포켓몬 도감 
 
-
+<br>
 
 ## :desktop_computer: 개발 환경
 
@@ -89,36 +95,55 @@
 
 -----
 
+<br>
 
-
-## 서비스 아키텍쳐
-![image](https://user-images.githubusercontent.com/66551646/162985569-8dcdf79f-a8b1-40d6-9ccb-c1e22a45d082.png)
-
-
-## 피드백
-![image](https://user-images.githubusercontent.com/66551646/162985817-6a34e8ca-edf3-40cf-8ca3-d2081fcc767a.png)
-
-## 개선사항
-![image](https://user-images.githubusercontent.com/66551646/162986001-e73d677c-0fa1-4f81-82da-0b3e8c257f0e.png)
-![image](https://user-images.githubusercontent.com/66551646/162986028-029198e1-0451-4f3d-9307-72eace39e2a7.png)
+## :earth_asia: 서비스 아키텍쳐
 
 -----
 
 
 
+![image](https://user-images.githubusercontent.com/66551646/162985569-8dcdf79f-a8b1-40d6-9ccb-c1e22a45d082.png)
+
+<br>
+
+## :crossed_fingers: 피드백
+
+-----
+
+
+
+![image](https://user-images.githubusercontent.com/66551646/162985817-6a34e8ca-edf3-40cf-8ca3-d2081fcc767a.png)
+
+<br>
+
+## :hammer_and_wrench: 개선사항
+
+-----
+
+| ![image](https://user-images.githubusercontent.com/66551646/162986001-e73d677c-0fa1-4f81-82da-0b3e8c257f0e.png) | ![image](https://user-images.githubusercontent.com/66551646/162986028-029198e1-0451-4f3d-9307-72eace39e2a7.png) |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+|                                                              |                                                              |
+
+<br>
+
 ## 🧨화면 설계서
+
+-----
 
 ![image](https://user-images.githubusercontent.com/66551646/162986622-277d8192-c088-4b38-91d9-37c9b60876ad.png)
 
+<br>
 
+## :notebook_with_decorative_cover: REST API 문서화
 
-## REST API 문서화
+-----
 
 ![image](https://user-images.githubusercontent.com/66551646/162986293-ce290d15-5b69-4227-bdc7-6ea3ed42012e.png)
 
+<br>
 
-
-## Git 컨벤션
+## 🎇Git 컨벤션
 
 -----
 
@@ -136,9 +161,9 @@ style : 코드 의미에 영향을 주지 않는 변경사항 (포맷, 세미콜
 refactor : 성능 개선
 ```
 
+<br>
 
-
-## Code 컨벤션
+## 🎇Code 컨벤션
 
 -----
 
@@ -151,17 +176,19 @@ refactor : 성능 개선
 	- 응답 요청 모두 String(PK, StudyTime 제외)
 	
 
+<br>
 
-
-## GitLab Flow 브랜치 전략 🧧 [ TODO ]🧧
+## :bar_chart: GitLab Flow 브랜치 전략 🧧 [ TODO ]🧧
 
 -----
 
 
 
+<br>
 
+## :electric_plug: EC2 포트 정리
 
-## EC2 포트 정리
+-----
 
 |**PORT**|**이름**|
 |:---:|:---:|
@@ -172,7 +199,7 @@ refactor : 성능 개선
 |8080|Spring boot Docker Container|
 |3000|React.js, NginX Docker Container|
 
-
+<br>
 
 ## 🎨 PokeLand 프로젝트팀을 소개합니다.
 
@@ -183,13 +210,11 @@ refactor : 성능 개선
 | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) |
 |             Leader & Frontend             |                  Backend                  |                  Backend                  |                  Backend                  |                 Frontend                  |
 
-
+<br>
 
 ## 🤟 팀원 역할
 
 -----
-
-
 
 #### :heavy_check_mark: **김태호 [한마디 😤] ** 
 
