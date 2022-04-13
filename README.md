@@ -2,7 +2,7 @@
 ## 📑 SSAFY 6기 특화 프로젝트 - PokeLand
 #### 블록체인 NFT활용한 프로젝트
 
-![Frame 15 (1)](README.assets/Frame 15 (1).png)
+![Frame 15](README.assets/Frame15.png)
 
 <br>
 
@@ -107,7 +107,7 @@
 
 <br>
 
-## :crossed_fingers: 피드백
+## :heart_eyes: 피드백
 
 -----
 
