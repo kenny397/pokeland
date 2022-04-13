@@ -1,12 +1,12 @@
 
-## 📑 SSAFY 6기 특화 프로젝트 - PokeLand
-#### 블록체인 NFT활용한 프로젝트
+# 📑 SSAFY 6기 특화 프로젝트 - PokeLand
+## 블록체인 NFT활용한 프로젝트
 
 ![Frame 15](README.assets/Frame15.png)
 
 <br>
 
-### :clapper: OverView 🧧 [ TODO ]🧧
+# :clapper: OverView 🧧 [ TODO ]🧧
 
 -----
 
@@ -16,7 +16,7 @@
 
 <br>
 
-### :triangular_flag_on_post: 서비스 초기 목표  🧧 [ TODO ]🧧
+# :triangular_flag_on_post: 서비스 초기 목표  🧧 [ TODO ]🧧
 
 -----
 
@@ -26,17 +26,17 @@
 
 <br>
 
-### 🎉 PokeLand 서비스 화면 🧧 [ TODO ]🧧
+# 🎉 PokeLand 서비스 화면 🧧 [ TODO ]🧧
 
 -----
 
-#### :mobile_phone_off: [모바일버전](README.assets/ServiceEx/mobile.md)
+### :mobile_phone_off: [모바일버전](README.assets/ServiceEx/mobile.md)
 
-#### :computer: [PC버전](README.assets/ServiceEx/pc.md)
+### :computer: [PC버전](README.assets/ServiceEx/pc.md)
 
 <br>
 
-### ✨ 주요기능 🧧 [ TODO ]🧧
+# ✨ 주요기능 🧧 [ TODO ]🧧
 
 -----
 
@@ -49,11 +49,11 @@
 
 <br>
 
-## :desktop_computer: 개발 환경
+# :desktop_computer: 개발 환경
 
 -----
 
-### 💻 BackEnd
+## 💻 BackEnd
 - Intellij
 - Spring-Boot : 2.6.4
 - Spring-Boot-JPA
@@ -63,27 +63,27 @@
 - maria db
 - Lombok
 
-### ✨ Front-End
+## ✨ Front-End
 - Visual Studio Code
 - react@17.0.2
 - redux@4.1.2
 - react-redux@7.2.6
 - sass@1.49.9
 
-### 🖱 BlockChain
+## 🖱 BlockChain
 - truffle
 - solidity
 - ipfs.io
 - OpenZeppelin
 
-### :earth_africa: Infra
+## :earth_africa: Infra
 - AWS EC2 - Deploy Server
 - docker
 - jenkins
 - docker-compose
 - nginx
 
-### 👨‍👩‍👧 협업 툴
+## 👨‍👩‍👧 협업 툴
 - GitLab
 - Jira
 - Nortion
@@ -97,7 +97,7 @@
 
 <br>
 
-## :earth_asia: 서비스 아키텍쳐
+# :earth_asia: 서비스 아키텍쳐
 
 -----
 
@@ -107,7 +107,7 @@
 
 <br>
 
-## :heart_eyes: 피드백
+# :heart_eyes: 피드백
 
 -----
 
@@ -117,7 +117,7 @@
 
 <br>
 
-## :hammer_and_wrench: 개선사항
+# :hammer_and_wrench: 개선사항
 
 -----
 
@@ -127,7 +127,7 @@
 
 <br>
 
-## 🧨화면 설계서
+# 🧨화면 설계서
 
 -----
 
@@ -135,7 +135,7 @@
 
 <br>
 
-## :notebook_with_decorative_cover: REST API 문서화
+# :notebook_with_decorative_cover: REST API 문서화
 
 -----
 
@@ -143,7 +143,7 @@
 
 <br>
 
-## 🎇Git 컨벤션
+# 🎇Git 컨벤션
 
 -----
 
@@ -163,7 +163,7 @@ refactor : 성능 개선
 
 <br>
 
-## 🎇Code 컨벤션
+# 🎇Code 컨벤션
 
 -----
 
@@ -178,7 +178,7 @@ refactor : 성능 개선
 
 <br>
 
-## :bar_chart: GitLab Flow 브랜치 전략 🧧 [ TODO ]🧧
+# :bar_chart: GitLab Flow 브랜치 전략 🧧 [ TODO ]🧧
 
 -----
 
@@ -186,7 +186,7 @@ refactor : 성능 개선
 
 <br>
 
-## :electric_plug: EC2 포트 정리
+# :electric_plug: EC2 포트 정리
 
 -----
 
@@ -201,18 +201,18 @@ refactor : 성능 개선
 
 <br>
 
-## 🎨 PokeLand 프로젝트팀을 소개합니다.
+# 🎨 PokeLand 프로젝트팀을 소개합니다.
 
 -----
 
-|                **김태호**                 |                **박윤지**                 |                **서형준**                 |                **오윤기**                 |                **현종일**                 |
+|                  김태호                   |                  박윤지                   |                  서형준                   |                  오윤기                   |                  현종일                   |
 | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: |
 | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) |
-|             Leader & Frontend             |                  Backend                  |                  Backend                  |                  Backend                  |                 Frontend                  |
+|           **Leader & Frontend**           |                **Backend**                |                **Backend**                |                **Backend**                |               **Frontend**                |
 
 <br>
 
-## 🤟 팀원 역할
+# 🤟 팀원 역할
 
 -----
 
