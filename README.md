@@ -201,7 +201,7 @@ refactor : 성능 개선
 
 |                  김태호                   |                  박윤지                   |                  서형준                   |                  오윤기                   |                  현종일                   |
 | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: | :---------------------------------------: |
-| ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/132418052.png) | ![004c67bf4](README.assets/004c67bf4.png) |
+| ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/004c67bf4.png) | ![004c67bf4](README.assets/132418053.png) | ![004c67bf4](README.assets/004c67bf4.png) |
 |           **Leader & Frontend**           |                **Backend**                |                **Backend**                |            **Backend , CI/CD**            |               **Frontend**                |
 
 <br>
@@ -232,10 +232,18 @@ refactor : 성능 개선
   - 이더리움 지갑 생성
   - 에러 처리
 
-#### :heavy_check_mark: 오윤기 [한마디 😤]
+#### :heavy_check_mark: 오윤기 [ 배포는 나한테 맡겨! 👍]
 
--
--
+- 포케랜드 주제 제안 및 기획
+- REST API 및 ERD 설계
+- Jenkins pipeline을 활용한 배포 자동화 시스템 구축
+  - Docker와 NGINX 활용
+  - Webhook 발생시 새로운 컨테이너가 자동으로 실행됨
+- Python을 활용한 크롤링 및 NFT 데이터 랜덤 생성
+  - selenium을 활용한 NFT 구성 데이터 수집
+  - 구성요소마다 가중치를 두어 유일한 NFT 메타 데이터 제작
+- ipfs.io 서버에 NFT 메타데이터 저장 작업
+- 회원가입 정보 유효성 검사 및 이메일 인증 구현
 
 #### :heavy_check_mark: 현종일 [ NFT 넌 내꺼야 ! 😎 ]
 
