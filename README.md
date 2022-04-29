@@ -104,7 +104,7 @@
 
 ---
 
-![image](https://user-images.githubusercontent.com/66551646/162985569-8dcdf79f-a8b1-40d6-9ccb-c1e22a45d082.png)
+![architecture](https://user-images.githubusercontent.com/20656314/163299286-79cc65d3-3b7a-42f7-ae19-316c5654b97e.png)
 
 <br>
 
