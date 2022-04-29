@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://j6b208.p.ssafy.io/api/v1';
+const BASE_URL = 'http://k6s2041.p.ssafy.io/api/v1';
 
 export async function getBalance() {
   try {
@@ -111,7 +111,7 @@ export async function writeSupport(address, category, message, title) {
 export async function signupRequest(email,nickname,password) {
   try {
     await axios.post(
-      'https://j6b208.p.ssafy.io/api/v1/users/register',
+      `${BASE_URL}/users/register`,
       { 
         email,
         nickname,
@@ -133,4 +133,22 @@ export async function requestBonus(jwt) {
     }
   );
   return response;
+}
+
+export async function emailCheck(email) {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/check/email/${email}`);
+    return response;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function nicknameCheck(nickname) {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/check/nickname/${nickname}`);
+    return response;
+  } catch (err) {
+    return err;
+  }
 }

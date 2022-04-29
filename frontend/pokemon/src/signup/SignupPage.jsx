@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { signupRequest } from "../api";
+import { signupRequest, emailCheck, nicknameCheck } from "../api";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -105,18 +105,28 @@ export default function SignupPage() {
       alert('이메일 양식을 맞춰주세요.');
       return '';
     }
-    try {
-      const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/email/${email}`);
-      if (response.data.flag === 1) {
-        changeState("isEmailChecked", false);
-        alert('중복된 이메일입니다.');
-      } else {
-        alert('사용가능한 이메일입니다.');
-        changeState("isEmailChecked", true);
-      }
-    } catch (err) {
-      console.log(err);
+
+    const response = await emailCheck(email);
+    if (response.data.flag === 1) {
+      changeState("isEmailChecked", false);
+      alert('중복된 이메일입니다.');
+    } else {
+      alert('사용가능한 이메일입니다.');
+      changeState("isEmailChecked", true);
     }
+
+    // try {
+    //   const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/email/${email}`);
+    //   if (response.data.flag === 1) {
+    //     changeState("isEmailChecked", false);
+    //     alert('중복된 이메일입니다.');
+    //   } else {
+    //     alert('사용가능한 이메일입니다.');
+    //     changeState("isEmailChecked", true);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
   
   async function onClickNicknameCheck() {
@@ -124,18 +134,27 @@ export default function SignupPage() {
       alert('닉네임은 특수문자 제외 \n2글자 이상 10글자 이하여야 합니다.');
       return '';
     }
-    try {
-      const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/nickname/${nickname}`);
-      if (response.data.flag === 1) {
-        changeState("isNicknameChecked", false);
-        alert('중복된 닉네임입니다.');
-      } else {
-        changeState("isNicknameChecked", true);
-        alert('사용가능한 닉네임입니다.');
-      }
-    } catch (err) {
-      console.log(err);
+    const response = await nicknameCheck(nickname);
+    if (response.data.flag === 1) {
+      changeState("isNicknameChecked", false);
+      alert('중복된 닉네임입니다.');
+    } else {
+      changeState("isNicknameChecked", true);
+      alert('사용가능한 닉네임입니다.');
     }
+    
+    // try {
+    //   const response = await axios.get(`https://j6b208.p.ssafy.io/api/v1/users/check/nickname/${nickname}`);
+    //   if (response.data.flag === 1) {
+    //     changeState("isNicknameChecked", false);
+    //     alert('중복된 닉네임입니다.');
+    //   } else {
+    //     changeState("isNicknameChecked", true);
+    //     alert('사용가능한 닉네임입니다.');
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   const onKeyPress = (e) => {
