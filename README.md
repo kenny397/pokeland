@@ -226,15 +226,17 @@ refactor : 성능 개선
 - 포켓몬 뽑기 초기화면 구현
 - 고객센터 구현
 
+#### :heavy_check_mark: 박윤지 [포케랜드 제대로 즐겨보자! 🤗]
 
-
-#### :heavy_check_mark: 박윤지 [한마디 😤]
-
-- 
-
-- 
-
-
+- NFT 도감 구현
+  - JPA 사용
+- 고객센터 구현
+  - 관리자 메일로 사용자 입력 내용 전송
+  - Java Mail Sender 사용
+- REST API 및 ERD 설계
+- 이로치 포켓몬 제작
+- notion 소개 페이지 제작
+- 소개 UCC 제작
 
 #### :heavy_check_mark: 서형준 [ 블록체인을 배워보자 😤 ]
 
