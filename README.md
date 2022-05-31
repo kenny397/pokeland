@@ -201,11 +201,11 @@ refactor : 성능 개선
 
 ---
 
-|               김태호               |              박윤지               |                 서형준                  |              오윤기               |               현종일                |
-| :--------------------------------: | :-------------------------------: | :-------------------------------------: | :-------------------------------: | :---------------------------------: |
-| ![thkim](README.assets/thkim.png)  | ![yunji](README.assets/yunji.png) | ![hyungjun](README.assets/hyungjun.png) | ![yungi](README.assets/yungi.png) | ![jongil](README.assets/jongil.png) |
-|       **Leader & Frontend**        |            **Backend**            |               **Backend**               |        **Backend , CI/CD**        |            **Frontend**             |
-| https://github.com/onys-programmer |  https://github.com/underwater2   |       https://github.com/kenny397       |    https://github.com/Yun-GiOh    |  https://github.com/Leo-SingleDay   |
+|               김태호               |             박윤지             |           서형준            |           오윤기            |              현종일              |
+| :--------------------------------: | :----------------------------: | :-------------------------: | :-------------------------: | :------------------------------: |
+|     ![2](README.assets/2.png)      |   ![4](README.assets/4.png)    |  ![3](README.assets/3.png)  |  ![5](README.assets/5.png)  |    ![1](README.assets/1.png)     |
+|       **Leader & Frontend**        |          **Backend**           |         **Backend**         |     **Backend , CI/CD**     |           **Frontend**           |
+| https://github.com/onys-programmer | https://github.com/underwater2 | https://github.com/kenny397 | https://github.com/Yun-GiOh | https://github.com/Leo-SingleDay |
 
 <br>
 
