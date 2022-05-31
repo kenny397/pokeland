@@ -201,11 +201,19 @@ refactor : 성능 개선
 
 ---
 
-|               김태호               |                박윤지                 |               서형준                |              오윤기               |              현종일              |
-| :--------------------------------: | :-----------------------------------: | :---------------------------------: | :-------------------------------: | :------------------------------: |
-|   ![123](README.assets/123.png)    | ![1234567](README.assets/1234567.png) | ![123456](README.assets/123456.png) | ![12345](README.assets/12345.png) | ![1234](README.assets/1234.png)  |
-|       **Leader & Frontend**        |              **Backend**              |             **Backend**             |        **Backend , CI/CD**        |           **Frontend**           |
-| https://github.com/onys-programmer |    https://github.com/underwater2     |     https://github.com/kenny397     |    https://github.com/Yun-GiOh    | https://github.com/Leo-SingleDay |
+|               김태호               |                박윤지                 |               서형준                |
+| :--------------------------------: | :-----------------------------------: | :---------------------------------: |
+|   ![123](README.assets/123.png)    | ![1234567](README.assets/1234567.png) | ![123456](README.assets/123456.png) |
+|       **Leader & Frontend**        |              **Backend**              |             **Backend**             |
+| https://github.com/onys-programmer |    https://github.com/underwater2     |     https://github.com/kenny397     |
+
+
+
+|              오윤기               |              현종일              |
+| :-------------------------------: | :------------------------------: |
+| ![12345](README.assets/12345.png) | ![1234](README.assets/1234.png)  |
+|        **Backend , CI/CD**        |           **Frontend**           |
+|    https://github.com/Yun-GiOh    | https://github.com/Leo-SingleDay |
 
 <br>
 
