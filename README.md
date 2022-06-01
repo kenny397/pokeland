@@ -178,7 +178,7 @@ refactor : 성능 개선
 
 ---
 
-![production_branch (2)](README.assets/production_branch (2).png)
+![production_branch (2)](README.assets/production_branch.png)
 
 <br>
 
